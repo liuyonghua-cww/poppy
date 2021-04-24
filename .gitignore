@@ -1,8 +1,23 @@
-### Example user template template
-### Example user template
+.DS_Store
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+**/*.log
 
-# IntelliJ project files
+tests/**/coverage/
+tests/e2e/reports
+selenium-debug.log
+
+# Editor directories and files
 .idea
-*.iml
-out
-gen
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.local
+
+package-lock.json
+yarn.lock
