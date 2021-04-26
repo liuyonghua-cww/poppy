@@ -1,0 +1,19 @@
+{
+  "name": "excel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "8888",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "liuyonghua",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.35.1",
+    "xlsx": "^0.16.9"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0"
+  }
+}
