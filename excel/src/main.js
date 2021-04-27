@@ -40,7 +40,36 @@ import * as XLSX from 'xlsx';
     doc.querySelector('#file_input').addEventListener('change', function (e) {
         readExcel(e).then(res => {
             console.log(res);
+            const sheets = res.Sheets;
+            for (const key in sheets) {
+                if (sheets.hasOwnProperty(key)) {
+                    console.log(XLSX.utils.sheet_to_json(sheets[key], {range: "A2:C6"}));
+                }
+            }
         })
+    });
+
+    function generateSheet() {
+        const info_json = [
+            {'姓名': '张三', '性别': '男', '地址': '北京'},
+            {'姓名': '李四', '性别': '男', '地址': '上海'},
+            {'姓名': '王二', '性别': '男', '地址': '长沙'},
+        ]
+        const sheet = XLSX.utils.json_to_sheet(info_json);
+        return sheet;
+    }
+
+    function download(name) {
+        const sheetName = name || 'sheet1';
+        const workbook = {
+            SheetNames: [sheetName],
+            Sheets: {}
+        };
+        workbook.Sheets[sheetName] = generateSheet();
+        XLSX.writeFile(workbook, 'test.xlsx');
+    }
+    doc.querySelector('#download').addEventListener('click', function (){
+        download()
     })
 })(document)
 
