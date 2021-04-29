@@ -2,11 +2,9 @@
     <div class="tab">
         <tab-nav
             :navData="navData"
-            :curIndex="curIndex"
         />
         <tab-content
             :contentData="contentData"
-            :curIndex="curIndex"
         />
     </div>
 </template>

@@ -1,29 +1,42 @@
 <template>
-    <div class="tab-nav">
+    <div
+        class="tab-nav"
+        v-tab-current="{
+            curIndex: tabIndex,
+            className: 'nav-item',
+            currentClassName: 'active'
+        }"
+    >
         <item
             v-for="(item, index) of navData"
             :key="index"
             :index="index"
             :item="item"
-            :curIndex="curIndex"
         />
     </div>
 </template>
 
 <script>
-import Item from './Item'
+import Item from './Item';
+import {mapState} from 'vuex';
+import {tabCurrent} from '@/directives'
 export default {
     components: {
         Item
     },
     props: {
         navData: Array,
-        curIndex: Number
     },
     data() {
         return {
 
         }
+    },
+    computed: {
+        ...mapState(['tabIndex'])
+    },
+    directives: {
+        tabCurrent
     }
 }
 </script>

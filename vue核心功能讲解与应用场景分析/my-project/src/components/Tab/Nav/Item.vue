@@ -1,13 +1,25 @@
 <template>
-    <div :class="['nav-item', {'active': index === curIndex}]">{{item}}</div>
+    <div
+        class="nav-item"
+        @click="changeTabIndex(index)"
+    >
+        {{ item }}
+    </div>
 </template>
 
 <script>
+import {mapState, mapMutations} from 'vuex'
+
 export default {
     props: {
         item: String,
         index: Number,
-        curIndex: Number
+    },
+    computed: {
+        ...mapState(['tabIndex'])
+    },
+    methods: {
+        ...mapMutations(['changeTabIndex'])
     }
 }
 </script>
@@ -19,6 +31,7 @@ export default {
     line-height: inherit;
     text-align: center;
 }
+
 .active {
     background-color: #19498b;
     color: #ffffff;
