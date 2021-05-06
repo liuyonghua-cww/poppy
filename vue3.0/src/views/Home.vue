@@ -1,11 +1,16 @@
 <template>
-  <div class="home">
-      hello
-  </div>
+    <div class="home">
+        <tab />
+    </div>
 </template>
 
 <script>
+import Tab from '@/components/Tab';
+
 export default {
-  name: 'Home',
+    name: 'Home',
+    components: {
+        Tab
+    }
 }
 </script>
