@@ -1,3 +1,4 @@
+defineProperty 劫持数据，给对象进行扩展，属性进行设置
 ```javascript
 // 定义单个属性
 defineProperty(

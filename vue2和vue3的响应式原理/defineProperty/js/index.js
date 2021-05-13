@@ -32,6 +32,8 @@ for (var key in obj) {
 delete obj.a
 console.log(obj); // {a: 1, b: 2} 属性不可删除*/
 
+
+// -------------------------------------------------------------------------------------
 // 配置其他属性
 /*function defineProperty() {
     const _obj = {};
@@ -66,6 +68,8 @@ for (var key in obj) {
 delete obj.a
 console.log(obj); // {b: 2}*/
 
+
+// -------------------------------------------------------------------------------------
 // getter setter
 function defineProperty() {
     var _obj = {};
