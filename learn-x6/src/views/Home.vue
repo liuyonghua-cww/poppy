@@ -1,46 +1,49 @@
 <template>
-    <div class="home" id="x6_container">
+    <div id="main">
+        <!--模板-->
+        <div id="stencil" :style="stencilStyle"></div>
+        <!--画布区域-->
+        <div id="content">
+           <graph-content />
+        </div>
+        <!--配置：节点、画布-->
+        <div id="configuration" :style="configurationStyle"></div>
     </div>
 </template>
 
 <script>
-import { Graph } from '@antv/x6';
-import {data} from '@/assets/data';
+import graphContent from '@/components/Content'
 
 export default {
     name: 'Home',
+    components: {
+        graphContent
+    },
     data() {
         return {
-            graph: null,
-            graphOption: {
-                background: {
-                    color: '#fffbe6', // 设置画布背景颜色
-                },
-                grid: {
-                    size: 10,      // 网格大小 10px
-                    visible: true, // 渲染网格背景
-                },
+            stencilStyle: {
+                width: '200px',
+                height: '100%',
+                backgroundColor: '#d5fcfc'
+            },
+            configurationStyle: {
+                width: '200px',
+                height: '100%',
+                backgroundColor: '#d5fcfc'
             }
-        }
+        };
     },
-    mounted() {
-        this.initGraph().fromJSON(data);
-       setTimeout(() => {
-           console.log(this.graph.toJSON());
-       }, 3000)
-    },
-    components: {},
-    methods: {
-        initGraph() {
-            const graph = new Graph({
-                container: document.getElementById('x6_container'),
-                width: 800,
-                height: 600,
-                ...this.graphOption
-            });
-            this.graph = graph;
-            return graph
-        }
-    }
 };
 </script>
+
+<style scoped lang="scss">
+#main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    > #content {
+        flex: 1;
+        overflow: hidden;
+    }
+}
+</style>
