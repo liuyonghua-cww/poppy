@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import { Graph } from '@antv/x6';
-import { data } from '@/assets/data';
+import { Graph, Shape } from '@antv/x6';
 import { mapMutations } from "vuex";
+import { Mouse } from "@/events/mouse";
 
 export default {
     name: "index",
@@ -13,14 +13,97 @@ export default {
         return {
             graph: null,
             graphOption: {
-                background: {
-                    color: '#fffbe6', // 设置画布背景颜色
-                },
                 grid: {
-                    size: 10,      // 网格大小 10px
-                    visible: true, // 渲染网格背景,
+                    size: 10,
+                    visible: true,
+                    type: 'doubleMesh',
+                    args: [
+                        {
+                            color: '#E7E8EA',
+                            thickness: 1,
+                        },
+                        {
+                            color: '#CBCED3',
+                            thickness: 1,
+                            factor: 5,
+                        },
+                    ],
                 },
+                panning: {
+                    enabled: true,
+                    eventTypes: [ 'leftMouseDown', 'rightMouseDown', 'mouseWheel' ],
+                    modifiers: 'ctrl',
+                },
+                mousewheel: {
+                    enabled: true,
+                    zoomAtMousePosition: true,
+                    modifiers: 'ctrl',
+                    minScale: 0.5,
+                    maxScale: 3,
+                },
+                connecting: {
+                    router: 'manhattan',
+                    connector: {
+                        name: 'rounded',
+                        args: {
+                            radius: 8,
+                        },
+                    },
+                    anchor: 'center',
+                    connectionPoint: 'anchor',
+                    allowBlank: false,
+                    snap: {
+                        radius: 20,
+                    },
+                    createEdge() {
+                        return new Shape.Edge({
+                            attrs: {
+                                line: {
+                                    stroke: '#000',
+                                    strokeWidth: 1,
+                                    targetMarker: {
+                                        name: 'block',
+                                        width: 12,
+                                        height: 8,
+                                    },
+                                },
+                            },
+                            zIndex: 0,
+                        });
+                    },
+                    validateConnection({ targetMagnet }) {
+                        return !!targetMagnet;
+                    },
+                },
+                highlighting: {
+                    magnetAdsorbed: {
+                        name: 'stroke',
+                        args: {
+                            attrs: {
+                                fill: '#D06269',
+                                stroke: '#D06269',
+                            },
+                        },
+                    },
+                },
+                resizing: true,
                 rotating: true,
+                selecting: {
+                    enabled: true,
+                    rubberband: true,
+                    showNodeSelectionBox: true,
+                },
+                snapline: true,
+                keyboard: true,
+                history: true,
+                // minimap: {
+                //     enabled: true,
+                //     container: document.getElementById('minimap'),
+                //     width: 198,
+                //     height: 198,
+                //     padding: 10,
+                // },
+                clipboard: true,
             },
             size: {
                 width: 0,
@@ -33,9 +116,10 @@ export default {
         // this.initGraph().fromJSON(data);
         this.initGraph();
         this.resize();
+        this.initEvent();
     },
     methods: {
-        ...mapMutations('app', ['setGraph']),
+        ...mapMutations('app', [ 'setGraph' ]),
         // init
         initGraph() {
             const graph = new Graph({
@@ -60,7 +144,12 @@ export default {
                 const { width, height } = this.size;
                 console.log(width);
                 this.graph.resize(width, height);
-            })
+            });
+        },
+        initEvent() {
+            const mouse = new Mouse(this.graph);
+            mouse.nodeMouseEnter();
+            mouse.nodeMouseLeave();
         }
     }
 };
