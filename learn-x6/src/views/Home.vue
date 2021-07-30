@@ -1,7 +1,9 @@
 <template>
     <div id="main">
         <!--模板-->
-        <div id="stencil" :style="stencilStyle"></div>
+        <div id="stencil-wrap" :style="stencilStyle">
+            <stencil />
+        </div>
         <!--画布区域-->
         <div id="content">
            <graph-content />
@@ -13,18 +15,19 @@
 
 <script>
 import graphContent from '@/components/Content'
+import stencil from '@/components/Stencil'
 
 export default {
     name: 'Home',
     components: {
-        graphContent
+        graphContent,
+        stencil
     },
     data() {
         return {
             stencilStyle: {
                 width: '200px',
-                height: '100%',
-                backgroundColor: '#d5fcfc'
+                height: '100%'
             },
             configurationStyle: {
                 width: '200px',

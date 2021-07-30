@@ -20,7 +20,7 @@
             <!--</a-menu>-->
         </a-layout-header>
         <a-layout-content :style="{ padding: '0', marginTop: '64px' }">
-            <div :style="{ background: '#fff', padding: '10px', height: '100%' }">
+            <div :style="{ background: '#fff', padding: '0', height: '100%' }">
                 <router-view />
             </div>
         </a-layout-content>

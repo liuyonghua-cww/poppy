@@ -30,7 +30,8 @@ export default {
     },
     mounted() {
         this.getContainerSize();
-        this.initGraph().fromJSON(data);
+        // this.initGraph().fromJSON(data);
+        this.initGraph();
         this.resize();
     },
     methods: {
