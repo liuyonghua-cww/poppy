@@ -5,6 +5,7 @@
 <script>
 import { Graph } from '@antv/x6';
 import { data } from '@/assets/data';
+import { mapMutations } from "vuex";
 
 export default {
     name: "index",
@@ -33,6 +34,8 @@ export default {
         this.resize();
     },
     methods: {
+        ...mapMutations('app', ['setGraph']),
+        // init
         initGraph() {
             const graph = new Graph({
                 container: document.getElementById('x6_container'),
@@ -40,13 +43,16 @@ export default {
                 ...this.graphOption
             });
             this.graph = graph;
+            this.setGraph(graph);
             return graph;
         },
+        // 获取画布区域的宽高
         getContainerSize() {
             const { width, height } = document.querySelector('#content').getBoundingClientRect();
             this.size.width = width;
             this.size.height = height;
         },
+        // 监听窗口变化，画布自适应
         resize() {
             window.addEventListener('resize', () => {
                 this.getContainerSize();
