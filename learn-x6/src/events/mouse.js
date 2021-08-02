@@ -1,6 +1,14 @@
-export class Mouse {
+/**
+ * @file 鼠标事件
+ */
+import { BaseEvent } from "@/events/baseEvent";
+export class Mouse extends BaseEvent{
     constructor(graph) {
-        this.graph = graph;
+        super(graph)
+    }
+    bind() {
+        this.nodeMouseEnter();
+        this.nodeMouseLeave();
     }
     nodeMouseEnter() {
         const { graph } = this;

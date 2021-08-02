@@ -6,6 +6,7 @@
 import { Graph, Shape } from '@antv/x6';
 import { mapMutations } from "vuex";
 import { Mouse } from "@/events/mouse";
+import { Keyboard } from "@/events/keyboard";
 
 export default {
     name: "index",
@@ -149,9 +150,8 @@ export default {
             });
         },
         initEvent() {
-            const mouse = new Mouse(this.graph);
-            mouse.nodeMouseEnter();
-            mouse.nodeMouseLeave();
+            new Mouse(this.graph).bind();
+            new Keyboard(this.graph).bind();
         }
     }
 };
