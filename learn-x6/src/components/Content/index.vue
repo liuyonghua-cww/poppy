@@ -14,21 +14,22 @@ export default {
             graph: null,
             graphOption: {
                 grid: {
-                    size: 10,
+                    size: 10, // 网格大小10px
                     visible: true,
                     type: 'doubleMesh',
                     args: [
                         {
-                            color: '#E7E8EA',
-                            thickness: 1,
+                            color: '#E7E8EA', // 主网格线颜色
+                            thickness: 1, // 主网格线宽度
                         },
                         {
-                            color: '#CBCED3',
-                            thickness: 1,
-                            factor: 5,
+                            color: '#CBCED3', // 次网格线颜色
+                            thickness: 1, // 次网格线宽度
+                            factor: 5, // 主次网格线间隔
                         },
                     ],
                 },
+                // 画布平移
                 panning: {
                     enabled: true,
                     eventTypes: [ 'leftMouseDown', 'rightMouseDown', 'mouseWheel' ],
@@ -41,6 +42,7 @@ export default {
                     minScale: 0.5,
                     maxScale: 3,
                 },
+                // 默认的连线规则
                 connecting: {
                     router: 'manhattan',
                     connector: {
@@ -55,6 +57,7 @@ export default {
                     snap: {
                         radius: 20,
                     },
+                    // 连接的过程中创建新的边
                     createEdge() {
                         return new Shape.Edge({
                             attrs: {
@@ -142,7 +145,6 @@ export default {
             window.addEventListener('resize', () => {
                 this.getContainerSize();
                 const { width, height } = this.size;
-                console.log(width);
                 this.graph.resize(width, height);
             });
         },
