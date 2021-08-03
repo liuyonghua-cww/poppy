@@ -1,5 +1,12 @@
 <template>
     <section>
+        <div class="title">
+            <span
+                v-if="configType === CONFIG_TYPE.GRID"
+            >
+                网格配置
+            </span>
+        </div>
         <grid-option
                 v-if="configType === CONFIG_TYPE.GRID"
         />
@@ -29,8 +36,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 section {
+    > .title {
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 18px;
+        border-bottom: 1px solid #dfe3e8;
+    }
     width: 100%;
     height: 100%;
 }
