@@ -1,7 +1,7 @@
 /**
  * @file 鼠标事件
  */
-const CONFIG_TYPE = {
+export const CONFIG_TYPE = {
     GRID: 0,
     NODE: 1,
     EDGE: 2

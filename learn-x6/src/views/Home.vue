@@ -9,19 +9,23 @@
            <graph-content />
         </div>
         <!--配置：节点、画布-->
-        <div id="configuration" :style="configurationStyle"></div>
+        <div id="configuration" :style="configurationStyle">
+            <settings />
+        </div>
     </div>
 </template>
 
 <script>
 import graphContent from '@/components/Content'
 import stencil from '@/components/Stencil'
+import Settings from '@/components/Settings'
 
 export default {
     name: 'Home',
     components: {
         graphContent,
-        stencil
+        stencil,
+        Settings
     },
     data() {
         return {
@@ -30,9 +34,8 @@ export default {
                 height: '100%'
             },
             configurationStyle: {
-                width: '200px',
+                width: '300px',
                 height: '100%',
-                backgroundColor: '#d5fcfc'
             }
         };
     },

@@ -2,7 +2,7 @@ const state = () => ({
     graph: null,
     cellId: null, // 选中的id
     selectedCell: null, // 选中的对象,
-    configType: null
+    configType: 0
 });
 const mutations = {
     setGraph(state, v) {
