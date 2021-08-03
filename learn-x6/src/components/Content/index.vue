@@ -123,7 +123,12 @@ export default {
         this.initEvent();
     },
     methods: {
-        ...mapMutations('app', [ 'setGraph' ]),
+        ...mapMutations('app', [
+            'setGraph',
+            'setConfigType',
+            'setCellId',
+            'setSelectedCell'
+        ]),
         // init
         initGraph() {
             const graph = new Graph({
@@ -149,10 +154,19 @@ export default {
                 this.graph.resize(width, height);
             });
         },
-        initEvent() {
-            new Mouse(this.graph).bind();
-            new Keyboard(this.graph).bind();
-        }
+        // 初始化事件
+        initEvent: function () {
+            const mouse = new Mouse(this.graph);
+            const keyboard = new Keyboard(this.graph);
+            mouse.bind();
+            keyboard.bind();
+            mouse._click((cellId, selectedCell, configType) => {
+                this.setConfigType(configType);
+                this.setSelectedCell(selectedCell);
+                this.setCellId(cellId);
+            });
+        },
+
     }
 };
 </script>
