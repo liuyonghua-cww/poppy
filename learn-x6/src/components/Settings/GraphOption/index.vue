@@ -6,7 +6,7 @@
                     <grid />
                 </a-tab-pane>
                 <a-tab-pane key="2" tab="背景设置">
-                    Content of Tab Pane 2
+                    <background />
                 </a-tab-pane>
             </a-tabs>
         </div>
@@ -16,12 +16,13 @@
 <script>
 import { mapState } from "vuex";
 import Grid from './Grid'
-
+import Background from './Background'
 
 export default {
     name: "index",
     components: {
-        Grid
+        Grid,
+        Background
     }
 };
 </script>
