@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section id="settings">
         <div class="title">
             <span
                 v-if="configType === CONFIG_TYPE.GRID"
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section {
+#settings {
     > .title {
         height: 50px;
         width: 100%;
@@ -48,5 +48,11 @@ section {
     }
     width: 100%;
     height: 100%;
+    border-left: 1px solid #dfe3e8;
+
+    /deep/ .ant-form-item {
+        margin-bottom: 10px;
+    }
+
 }
 </style>
