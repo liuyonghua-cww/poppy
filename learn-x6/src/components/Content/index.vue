@@ -138,6 +138,7 @@ export default {
             });
             this.graph = graph;
             this.setGraph(graph);
+            console.log(graph);
             return graph;
         },
         // 获取画布区域的宽高

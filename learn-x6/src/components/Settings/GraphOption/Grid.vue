@@ -1,12 +1,12 @@
 <template>
-    <section id="grid_opt">
+    <div id="grid_opt">
         <a-form-model :label-col="{span: 10}" :wrapper-col="{span: 12, offset: 1}">
             <a-form-model-item label="网格类型">
                 <a-select v-model="option.type" placeholder="选择网格类型" @change="onChangeGrid">
                     <a-select-option
-                        v-for="(item, i) in gridType"
-                        :key="i"
-                        :value="item.value">
+                            v-for="(item, i) in gridType"
+                            :key="i"
+                            :value="item.value">
                         {{ item.label }}
                     </a-select-option>
                 </a-select>
@@ -82,14 +82,14 @@
                 </a-form-model-item>
             </template>
         </a-form-model>
-    </section>
+    </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 
 export default {
-    name: "index",
+    name: "Grid",
     data() {
         return {
             gridType: [
@@ -127,7 +127,7 @@ export default {
     },
     computed: {
         ...mapState('app', [
-                'graph'
+            'graph'
         ])
     },
     methods: {
@@ -143,7 +143,6 @@ export default {
                 this.option.secondaryThickness = args[1].thickness || 3;
                 this.option.factor = args[1].factor || 4;
             }
-            console.log(this.option);
         },
         onChangeGridSize() {
             this.graph.setGridSize(this.option.size);
@@ -184,4 +183,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss" src="@/assets/gridOption.scss"></style>
+<style scoped>
+
+</style>

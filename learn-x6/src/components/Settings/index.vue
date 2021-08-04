@@ -4,24 +4,24 @@
             <span
                 v-if="configType === CONFIG_TYPE.GRID"
             >
-                网格配置
+                画布设置
             </span>
         </div>
-        <grid-option
+        <graph-option
                 v-if="configType === CONFIG_TYPE.GRID"
         />
     </section>
 </template>
 
 <script>
-import GridOption from './Grid';
+import GraphOption from './GraphOption';
 import { mapState } from "vuex";
 import { CONFIG_TYPE } from "@/events/mouse";
 
 export default {
     name: "index",
     components: {
-        GridOption
+        GraphOption
     },
     data() {
         return {
