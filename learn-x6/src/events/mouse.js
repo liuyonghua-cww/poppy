@@ -57,6 +57,14 @@ export class Mouse extends BaseEvent {
         });
     }
 
+    // 监听选中节点移动时的实时位置
+    _nodeMoving(callback) {
+        const { graph } = this;
+        graph.on('node:change:position', ({cell, node, current}) => {
+            callback(current);
+        })
+    }
+
     showPorts(ports, show) {
         for (let i = 0, len = ports.length; i < len; i = i + 1) {
             ports[ i ].style.visibility = show ? 'visible' : 'hidden';

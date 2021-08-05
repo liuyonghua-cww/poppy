@@ -2,13 +2,27 @@
     <section id="settings">
         <div class="title">
             <span
-                v-if="configType === CONFIG_TYPE.GRID"
+                    v-if="configType === CONFIG_TYPE.GRID"
             >
                 画布设置
+            </span>
+            <span
+                    v-if="configType === CONFIG_TYPE.NODE"
+            >
+                节点设置
+            </span>
+            <span
+                    v-if="configType === CONFIG_TYPE.EDGE"
+            >
+                边设置
             </span>
         </div>
         <graph-option
                 v-if="configType === CONFIG_TYPE.GRID"
+        />
+        <cell-option
+                v-if="configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE"
+                :configType="configType"
         />
     </section>
 </template>
@@ -17,11 +31,13 @@
 import GraphOption from './GraphOption';
 import { mapState } from "vuex";
 import { CONFIG_TYPE } from "@/events/mouse";
+import CellOption from './Cell'
 
 export default {
     name: "index",
     components: {
-        GraphOption
+        GraphOption,
+        CellOption
     },
     data() {
         return {
@@ -36,7 +52,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 #settings {
     > .title {
         height: 50px;
@@ -46,6 +62,7 @@ export default {
         font-size: 18px;
         border-bottom: 1px solid #dfe3e8;
     }
+
     width: 100%;
     height: 100%;
     border-left: 1px solid #dfe3e8;

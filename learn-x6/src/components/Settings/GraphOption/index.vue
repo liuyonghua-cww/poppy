@@ -27,4 +27,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss" src="@/assets/gridOption.scss"></style>
+<style scoped lang="scss" src="../../../assets/styles/grid-option.scss"></style>

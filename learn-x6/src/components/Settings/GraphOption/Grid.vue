@@ -1,6 +1,9 @@
 <template>
     <div id="grid_opt">
         <a-form-model :label-col="{span: 10}" :wrapper-col="{span: 12, offset: 1}">
+            <a-form-model-item label="显示网格">
+                <a-switch v-model="option.visible" @change="onChangeGridVisible"/>
+            </a-form-model-item>
             <a-form-model-item label="网格类型">
                 <a-select v-model="option.type" placeholder="选择网格类型" @change="onChangeGrid">
                     <a-select-option
