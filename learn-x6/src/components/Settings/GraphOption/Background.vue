@@ -1,6 +1,6 @@
 <template>
     <section id="bg_opt">
-        <a-form-model :label-col="{span: 10}" :wrapper-col="{span: 12, offset: 1}">
+        <a-form-model :label-col="{span: 8}" :wrapper-col="{span: 14, offset: 1}">
             <a-form-model-item label="背景颜色">
                 <a-input
                         v-model="option.color"
@@ -9,7 +9,7 @@
                 />
             </a-form-model-item>
             <a-form-model-item label="展示图片">
-                <a-switch v-model="option.showImage" />
+                <a-switch v-model="option.showImage" @change="changeBackground"/>
             </a-form-model-item>
             <template v-if="option.showImage">
                 <a-form-model-item label="透明度">
@@ -41,6 +41,12 @@
                 <a-form-model-item label="位置">
                     <a-input
                             v-model="option.position"
+                            @blur="changeBackground"
+                    />
+                </a-form-model-item>
+                <a-form-model-item label="大小">
+                    <a-input
+                            v-model="option.size"
                             @blur="changeBackground"
                     />
                 </a-form-model-item>
@@ -79,8 +85,10 @@ export default {
         },
 
         changeBackground() {
+            const { image, ...opt} = this.option;
             this.graph.drawBackground({
-                ...this.option,
+                image: this.option.showImage ? image : '',
+                ...opt
             });
         },
 
