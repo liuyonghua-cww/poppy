@@ -57,12 +57,12 @@ export class Mouse extends BaseEvent {
         });
     }
 
-    // 监听选中节点移动时的实时位置
-    _nodeMoving(callback) {
+    // 监听选中节点的改变
+    _nodeChange(callback) {
         const { graph } = this;
-        graph.on('node:change:position', ({cell, node, current}) => {
-            callback(current);
-        })
+        graph.on('node:change:*', () => {
+            callback();
+        });
     }
 
     showPorts(ports, show) {
