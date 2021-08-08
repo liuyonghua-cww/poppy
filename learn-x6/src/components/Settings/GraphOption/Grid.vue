@@ -1,10 +1,10 @@
 <template>
     <div id="grid_opt">
-        <a-form-model :label-col="{span: 10}" :wrapper-col="{span: 12, offset: 1}">
-            <a-form-model-item label="显示网格">
+        <a-form :label-col="{span: 10}" :wrapper-col="{span: 12, offset: 1}">
+            <a-form-item label="显示网格">
                 <a-switch v-model="option.visible" @change="onChangeGridVisible"/>
-            </a-form-model-item>
-            <a-form-model-item label="网格类型">
+            </a-form-item>
+            <a-form-item label="网格类型">
                 <a-select v-model="option.type" placeholder="选择网格类型" @change="onChangeGrid">
                     <a-select-option
                             v-for="(item, i) in gridType"
@@ -13,8 +13,9 @@
                         {{ item.label }}
                     </a-select-option>
                 </a-select>
-            </a-form-model-item>
-            <a-form-model-item label="网格尺寸">
+            </a-form-item>
+
+            <a-form-item label="网格尺寸">
                 <a-slider
                         :defaultGValue="option.size"
                         :min="1"
@@ -22,16 +23,16 @@
                         @change="onChangeGridSize"
                         v-model="option.size"
                 />
-            </a-form-model-item>
+            </a-form-item>
             <template v-if="option.type !== 'doubleMesh'">
-                <a-form-model-item label="网格线/点颜色">
+                <a-form-item label="网格线/点颜色">
                     <a-input
                             type="color"
                             v-model="option.color"
                             @change="onChangeGrid"
                     />
-                </a-form-model-item>
-                <a-form-model-item label="网格线宽度/点大小">
+                </a-form-item>
+                <a-form-item label="网格线宽度/点大小">
                     <a-slider
                             :defaultGValue="option.thickness"
                             :min="1"
@@ -39,17 +40,17 @@
                             @change="onChangeGrid"
                             v-model="option.thickness"
                     />
-                </a-form-model-item>
+                </a-form-item>
             </template>
             <template v-if="option.type === 'doubleMesh'">
-                <a-form-model-item label="主网格线颜色">
+                <a-form-item label="主网格线颜色">
                     <a-input
                             type="color"
                             v-model="option.color"
                             @change="onChangeGrid"
                     />
-                </a-form-model-item>
-                <a-form-model-item label="主网格线宽度">
+                </a-form-item>
+                <a-form-item label="主网格线宽度">
                     <a-slider
                             :defaultGValue="option.thickness"
                             :min="1"
@@ -57,15 +58,15 @@
                             @change="onChangeGrid"
                             v-model="option.thickness"
                     />
-                </a-form-model-item>
-                <a-form-model-item label="次网格线颜色">
+                </a-form-item>
+                <a-form-item label="次网格线颜色">
                     <a-input
                             type="color"
                             v-model="option.secondaryColor"
                             @change="onChangeGrid"
                     />
-                </a-form-model-item>
-                <a-form-model-item label="次网格线宽度">
+                </a-form-item>
+                <a-form-item label="次网格线宽度">
                     <a-slider
                             :defaultGValue="option.secondaryThickness"
                             :min="1"
@@ -73,8 +74,8 @@
                             @change="onChangeGrid"
                             v-model="option.secondaryThickness"
                     />
-                </a-form-model-item>
-                <a-form-model-item label="主次网格线间隔">
+                </a-form-item>
+                <a-form-item label="主次网格线间隔">
                     <a-slider
                             :defaultGValue="option.factor"
                             :min="1"
@@ -82,9 +83,9 @@
                             @change="onChangeGrid"
                             v-model="option.factor"
                     />
-                </a-form-model-item>
+                </a-form-item>
             </template>
-        </a-form-model>
+        </a-form>
     </div>
 </template>
 

@@ -96,6 +96,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="../../../../assets/styles/node-option.scss">
+<style lang="less" scoped src="../../../../assets/styles/node-option.less">
 
 </style>

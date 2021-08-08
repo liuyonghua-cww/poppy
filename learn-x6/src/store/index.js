@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import app from './modules/app'
+import app from './modules/app';
+import setting from "./modules/setting";
 export default new Vuex.Store({
   state: {
   },
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    app
+    app,
+    setting
   }
 })

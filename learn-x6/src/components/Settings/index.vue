@@ -52,8 +52,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 #settings {
+    background-color: @component-background;
     > .title {
         height: 50px;
         width: 100%;

@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'normalize.css/normalize.css'
-import 'ant-design-vue/dist/antd.css';
+import './theme/index.less'
 import Antd from 'ant-design-vue';
-import './assets/styles/reset.scss'
+import './assets/styles/reset.less'
 
 Vue.use(Antd);
 Vue.config.productionTip = false
