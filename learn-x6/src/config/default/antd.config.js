@@ -39,6 +39,7 @@ const ANTD = {
     },
     light: {
       'layout-body-background': '#f0f2f5',
+      'layout-header-background': '#fff',
       'body-background': '#fff',
       'component-background': '#fff',
       'heading-color': 'rgba(0, 0, 0, 0.85)',
@@ -57,9 +58,12 @@ const ANTD = {
       'menu-dark-highlight-color': '#fefefe',
       'menu-dark-arrow-color': '#fefefe',
       'btn-primary-color': '#fff',
+      'layout-bg-boxShow': '0 8px 24px -2px rgba(0, 0, 0, 0.15)',
+      'border-color-base': '#d9d9d9'
     },
     night: {
       'layout-body-background': '#000',
+      'layout-header-background': '#141414',
       'body-background': '#141414',
       'component-background': '#141414',
       'heading-color': 'rgba(255, 255, 255, 0.85)',
@@ -78,6 +82,8 @@ const ANTD = {
       'menu-dark-highlight-color': '#fefefe',
       'menu-dark-arrow-color': '#fefefe',
       'btn-primary-color': '#141414',
+      'layout-bg-boxShow': '0px 8px 24px -2px rgba(255, 255, 255, 0.1)',
+      'border-color-base': '#434343'
     }
   }
 }

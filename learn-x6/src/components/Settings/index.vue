@@ -61,7 +61,7 @@ export default {
         text-align: center;
         line-height: 50px;
         font-size: 18px;
-        border-bottom: 1px solid #dfe3e8;
+        border-bottom: 1px solid @border-color-base;
     }
 
     width: 100%;

@@ -17,7 +17,6 @@ function getThemeColors(color, $theme) {
     ...replaceColors.functionalColors.warning,
     ...replaceColors.functionalColors.error,
   ]
-  console.log(replaceColors);
   return themeColors
 }
 
@@ -58,7 +57,6 @@ function modifyVars(color) {
     'alert-error-border-color': error[2],
     'processing-color': primary,
     'menu-dark-submenu-bg': menuColors[0],
-    'layout-header-background': menuColors[1],
     'layout-trigger-background': menuColors[2],
     'btn-danger-bg': error[4],
     'btn-danger-border': error[4],
