@@ -140,8 +140,13 @@ export default {
             this.option.visible = visible;
             this.option.type = type || 'dot';
             this.option.size = size || 10;
-            this.option.color = args[0].color || '#aaaaaa';
-            this.option.thickness = args[0].thickness || 1;
+            if (Object.prototype.toString.call(args) === '[object Object]') {
+                this.option.color = args.color || '#aaaaaa';
+                this.option.thickness = args.thickness || 1;
+            } else {
+                this.option.color = args[0].color || '#aaaaaa';
+                this.option.thickness = args[0].thickness || 1;
+            }
             if (args[1]) {
                 this.option.secondaryColor = args[1].color || '#888888';
                 this.option.secondaryThickness = args[1].thickness || 3;
