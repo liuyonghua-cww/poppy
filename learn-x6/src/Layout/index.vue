@@ -30,6 +30,7 @@ export default {
 .components-layout {
     .ant-layout-header {
         box-shadow: @layout-bg-boxShow !important;
+        line-height: unset !important;
     }
 }
 </style>
