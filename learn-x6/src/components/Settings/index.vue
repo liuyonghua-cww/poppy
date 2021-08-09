@@ -66,7 +66,7 @@ export default {
 
     width: 100%;
     height: 100%;
-    border-left: 1px solid #dfe3e8;
+    border-left: 1px solid @border-color-base;
 
     /deep/ .ant-form-item {
         margin-bottom: 10px;

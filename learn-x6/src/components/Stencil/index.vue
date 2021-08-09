@@ -101,11 +101,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 #stencil {
     width: 100%;
     height: 100%;
     position: relative;
-    border-right: 1px solid #dfe3e8;
+    border-right: 1px solid @border-color-base;
 }
 </style>
