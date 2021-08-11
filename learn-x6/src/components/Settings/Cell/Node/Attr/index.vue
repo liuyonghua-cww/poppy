@@ -78,6 +78,11 @@ export default {
             attrPath,
         }
     },
+    watch: {
+        cellId: function () {
+            this.getAttr();
+        }
+    },
     methods: {
         getAttr() {
             for (const key in attrPath) {
