@@ -16,6 +16,8 @@ export class Mouse extends BaseEvent {
     bind() {
         this._nodeMouseEnter();
         this._nodeMouseLeave();
+        this._edgeMouseEnter();
+        this._edgeMouseLeave();
     }
 
     _nodeMouseEnter() {
@@ -63,6 +65,38 @@ export class Mouse extends BaseEvent {
         graph.on('node:change:*', () => {
             callback();
         });
+    }
+
+    _edgeMouseEnter() {
+        this.graph.on('edge:mouseenter', ({ cell }) => {
+            cell.addTools([
+                {
+                    name: 'source-arrowhead',
+                    args: {
+                        attrs: {
+                            fill: '#3cbca3',
+                            'stroke-width': 3,
+                        },
+                    },
+
+                },
+                {
+                    name: 'target-arrowhead',
+                    args: {
+                        attrs: {
+                            fill: '#ff5247',
+                            'stroke-width': 3,
+                        },
+                    },
+                },
+            ])
+        });
+    }
+
+    _edgeMouseLeave() {
+        this.graph.on('edge:mouseleave', ({ cell }) => {
+            cell.removeTools()
+        })
     }
 
     showPorts(ports, show) {

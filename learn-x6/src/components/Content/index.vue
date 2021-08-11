@@ -47,14 +47,14 @@ export default {
                 connecting: {
                     router: 'manhattan',
                     connector: {
-                        name: 'rounded',
-                        args: {
-                            radius: 8,
-                        },
+                        name: 'rounded'
                     },
                     anchor: 'center',
                     connectionPoint: 'anchor',
                     allowBlank: false,
+                    allowLoop: false,
+                    allowNode: false,
+                    highlight: true,
                     snap: {
                         radius: 20,
                     },
@@ -66,7 +66,7 @@ export default {
                                     stroke: '#000',
                                     strokeWidth: 1,
                                     targetMarker: {
-                                        name: 'block',
+                                        name: 'classic',
                                         width: 12,
                                         height: 8,
                                     },
@@ -74,10 +74,7 @@ export default {
                             },
                             zIndex: 0,
                         });
-                    },
-                    validateConnection({ targetMagnet }) {
-                        return !!targetMagnet;
-                    },
+                    }
                 },
                 highlighting: {
                     magnetAdsorbed: {
