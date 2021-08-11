@@ -1,6 +1,8 @@
 /**
  * @file 鼠标事件
  */
+import {Vector} from "@antv/x6";
+
 export const CONFIG_TYPE = {
     GRID: 0,
     NODE: 1,
@@ -18,6 +20,8 @@ export class Mouse extends BaseEvent {
         this._nodeMouseLeave();
         this._edgeMouseEnter();
         this._edgeMouseLeave();
+        this._graphMouseDown();
+        this._diyGraphEvent()
     }
 
     _nodeMouseEnter() {
@@ -96,6 +100,41 @@ export class Mouse extends BaseEvent {
     _edgeMouseLeave() {
         this.graph.on('edge:mouseleave', ({ cell }) => {
             cell.removeTools()
+        })
+    }
+
+    // 自定义画布事件  用于一个点在边上的运动
+    _diyGraphEvent() {
+        const { graph } = this;
+        graph.on('dotMove', (cell) => {
+            if (cell.isEdge()) {
+                const view = graph.findViewByCell(cell);
+                if (view) {
+                    // 创建一个节点
+                    const token = Vector.create('circle', { r: 6, fill: '#feb662' })
+                    const target = cell.getTargetCell()
+                    setTimeout(() => {
+                        view.sendToken(token.node, 1000, () => {
+                            if (target) {
+                                graph.trigger('dotMove', target)
+                            }
+                        })
+                    }, 300)
+                }
+            } else {
+                const edges = graph.model.getConnectedEdges(cell, {
+                    outgoing: true,
+                })
+                edges.forEach((edge) => graph.trigger('dotMove', edge))
+            }
+        })
+    }
+
+    _graphMouseDown() {
+        const { graph } = this;
+        // 点击节点时候触发点在边上的运动
+        graph.on('node:mousedown', ({ cell }) => {
+            graph.trigger('dotMove', cell)
         })
     }
 

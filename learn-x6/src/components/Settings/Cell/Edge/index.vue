@@ -71,7 +71,7 @@ export default {
             this.selectedCell.attr(this.attrPath[key], this.attr[key])
         },
         getConnector() {
-            this.attr.connector = this.selectedCell.getConnector().name;
+            this.attr.connector = this.selectedCell.getConnector() && this.selectedCell.getConnector().name;
         },
         setConnector() {
             this.selectedCell.setConnector(this.attr.connector);
