@@ -1,29 +1,30 @@
 <template>
     <section id="node_opt">
-        <a-form-model :label-col="{span: 6, offset: 1}" :wrapper-col="{span: 16}" layout="inline">
+        <a-divider>节点属性</a-divider>
+        <a-form-model :label-col="{span: 8, offset: 1}" :wrapper-col="{span: 14}" layout="inline">
             <!--节点属性-->
-            <a-form-model-item label="x">
+            <a-form-model-item label="x坐标">
                 <a-input
                         v-model.number="position.x"
                         type="number"
                         @change="setNodePos('position', position)"
                 />
             </a-form-model-item>
-            <a-form-model-item label="y">
+            <a-form-model-item label="y坐标">
                 <a-input
                         v-model.number="position.y"
                         type="number"
                         @change="setNodePos('position', position)"
                 />
             </a-form-model-item>
-            <a-form-model-item label="宽">
+            <a-form-model-item label="宽度">
                 <a-input
                         v-model.number="size.width"
                         @change="setNodeSize"
                         type="number"
                 />
             </a-form-model-item>
-            <a-form-model-item label="高">
+            <a-form-model-item label="高度">
                 <a-input
                         v-model.number="size.height"
                         @change="setNodeSize"
@@ -38,15 +39,20 @@
                 />
             </a-form-model-item>
         </a-form-model>
+        <a-divider>元素属性</a-divider>
+        <Attr />
     </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { Mouse } from "@/events/mouse";
-
+import Attr from './Attr'
 export default {
     name: "index",
+    components: {
+        Attr
+    },
     computed: {
         ...mapState('app', [
             'graph',

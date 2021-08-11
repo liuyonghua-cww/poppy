@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
-    "@antv/x6": "^1.25.0",
+    "@antv/x6": "^1.25.3",
     "ant-design-vue": "^1.7.6",
     "core-js": "^3.6.5",
     "deepmerge": "^4.2.2",
