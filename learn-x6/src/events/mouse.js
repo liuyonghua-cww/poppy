@@ -21,11 +21,13 @@ export class Mouse extends BaseEvent {
         this._edgeMouseEnter();
         this._edgeMouseLeave();
         this._graphMouseDown();
-        this._diyGraphEvent()
+        this._diyGraphEvent();
+        this._selectionChanged();
     }
 
     _nodeMouseEnter() {
         const { graph } = this;
+        // 移入节点显示连接桩
         const container = document.getElementById('x6_container');
         graph.on('node:mouseenter', () => {
             const ports = container.querySelectorAll(
@@ -37,6 +39,7 @@ export class Mouse extends BaseEvent {
 
     _nodeMouseLeave() {
         const { graph } = this;
+        // 移出隐藏连接桩
         const container = document.getElementById('x6_container');
         graph.on('node:mouseleave', () => {
             const ports = container.querySelectorAll(
@@ -71,6 +74,7 @@ export class Mouse extends BaseEvent {
         });
     }
 
+    // 调整箭头
     _edgeMouseEnter() {
         this.graph.on('edge:mouseenter', ({ cell }) => {
             cell.addTools([
@@ -135,6 +139,49 @@ export class Mouse extends BaseEvent {
         // 点击节点时候触发点在边上的运动
         graph.on('node:mousedown', ({ cell }) => {
             graph.trigger('dotMove', cell)
+        })
+    }
+
+    // 监听选中节点/边改变
+    /*
+    * graph.on('selection:changed', (args: {
+    *   added: Cell[]     // 新增被选中的节点/边
+    *   removed: Cell[]   // 被取消选中的节点/边
+    *   selected: Cell[]  // 被选中的节点/边
+    *   options: Model.SetOptions
+    * }) => {
+    *   // code here
+    * })
+    * */
+    _selectionChanged() {
+        const { graph } = this;
+        graph.on('selection:changed', ({added, removed}) => {
+            // 遍历新增的元素 如果是边 则进行相关操作
+            added.forEach(cell => {
+                if (cell.isEdge()) {
+                    cell.attr('line/strokeDasharray', 5); // 设置虚线
+                    cell.attr('line/style/animation', 'ant-line 30s infinite linear') // 设置动画
+                    cell.addTools([
+                        {
+                            name: 'vertices',
+                            args: {
+                                padding: 4,
+                                attrs: {
+                                    strokeWidth: 0.1,
+                                    stroke: '#2d8cf0',
+                                    fill: '#ffffff',
+                                }
+                            },
+                        },
+                    ])
+                }
+            });
+            removed.forEach(cell => {
+                if (cell.isEdge()) {
+                    cell.attr('line/strokeDasharray', 0); // 移除虚线
+                    cell.removeTools()
+                }
+            })
         })
     }
 

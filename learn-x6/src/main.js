@@ -6,6 +6,7 @@ import 'normalize.css/normalize.css'
 import './theme/index.less'
 import Antd from 'ant-design-vue';
 import './assets/styles/reset.less'
+import './assets/styles/animation.less'
 
 Vue.use(Antd);
 Vue.config.productionTip = false
