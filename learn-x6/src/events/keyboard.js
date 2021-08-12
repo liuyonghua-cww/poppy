@@ -88,7 +88,7 @@ export class Keyboard extends BaseEvent {
         graph.bindKey('backspace', () => {
             const cells = graph.getSelectedCells();
             if (cells) {
-                graph.remove(cells);
+                graph.removeCells(cells);
             }
             return false
         })
