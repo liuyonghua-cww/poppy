@@ -16,16 +16,16 @@ export class Mouse extends BaseEvent {
     }
 
     bind() {
-        this._nodeMouseEnter();
-        this._nodeMouseLeave();
-        this._edgeMouseEnter();
-        this._edgeMouseLeave();
+        this._showNodePorts();
+        this._hiddenNodePorts();
+        this._addArrowMoveTool();
+        this._removeEdgeTools();
         this._graphMouseDown();
         this._diyGraphEvent();
         this._selectionChanged();
     }
 
-    _nodeMouseEnter() {
+    _showNodePorts() {
         const { graph } = this;
         // 移入节点显示连接桩
         const container = document.getElementById('x6_container');
@@ -37,7 +37,7 @@ export class Mouse extends BaseEvent {
         });
     }
 
-    _nodeMouseLeave() {
+    _hiddenNodePorts() {
         const { graph } = this;
         // 移出隐藏连接桩
         const container = document.getElementById('x6_container');
@@ -49,7 +49,7 @@ export class Mouse extends BaseEvent {
         });
     }
 
-    _click(callback) {
+    _getClickType(callback) {
         const { graph } = this;
         let cellId = null;
         let selectedCell = null;
@@ -66,7 +66,7 @@ export class Mouse extends BaseEvent {
         });
     }
 
-    // 监听选中节点的改变
+    // 监听选中节点相关属性的改变
     _nodeChange(callback) {
         const { graph } = this;
         graph.on('node:change:*', () => {
@@ -75,7 +75,7 @@ export class Mouse extends BaseEvent {
     }
 
     // 调整箭头
-    _edgeMouseEnter() {
+    _addArrowMoveTool() {
         this.graph.on('edge:mouseenter', ({ edge }) => {
             edge.addTools([
                 {
@@ -111,7 +111,7 @@ export class Mouse extends BaseEvent {
         });
     }
 
-    _edgeMouseLeave() {
+    _removeEdgeTools() {
         this.graph.on('edge:mouseleave', ({ edge }) => {
             edge.removeTools()
         })

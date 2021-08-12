@@ -158,7 +158,7 @@ export default {
             const keyboard = new Keyboard(this.graph);
             mouse.bind();
             keyboard.bind();
-            mouse._click((cellId, selectedCell, configType) => {
+            mouse._getClickType((cellId, selectedCell, configType) => {
                 this.setConfigType(configType);
                 this.setSelectedCell(selectedCell);
                 this.setCellId(cellId);
