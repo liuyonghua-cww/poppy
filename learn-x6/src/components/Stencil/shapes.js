@@ -78,6 +78,10 @@ const ports = {
         },
     ],
 };
+const textWrap = {
+    width: -10,
+    ellipsis: true
+}
 Graph.registerNode('custom-rect', {
     inherit: 'rect',
     width: 30,
@@ -86,6 +90,9 @@ Graph.registerNode('custom-rect', {
         body: {
             strokeWidth: 1,
         },
+        label: {
+            textWrap
+        }
     },
     ports: { ...ports },
 })
@@ -98,6 +105,9 @@ Graph.registerNode('custom-polygon', {
         body: {
             strokeWidth: 1,
         },
+        label: {
+            textWrap
+        }
     },
     ports: { ...ports },
 })
@@ -110,6 +120,9 @@ Graph.registerNode('custom-circle', {
         body: {
             strokeWidth: 1,
         },
+        label: {
+            textWrap
+        }
     },
     ports: { ...ports },
 })

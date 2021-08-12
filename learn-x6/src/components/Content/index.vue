@@ -45,10 +45,6 @@ export default {
                 },
                 // 默认的连线规则
                 connecting: {
-                    router: 'manhattan',
-                    connector: {
-                        name: 'rounded'
-                    },
                     anchor: 'center',
                     connectionPoint: 'anchor',
                     allowBlank: false,
@@ -73,6 +69,10 @@ export default {
                                 },
                             },
                             zIndex: 0,
+                            router: 'manhattan',
+                            connector: {
+                                name: 'rounded'
+                            }
                         });
                     }
                 },

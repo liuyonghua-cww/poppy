@@ -76,8 +76,8 @@ export class Mouse extends BaseEvent {
 
     // 调整箭头
     _edgeMouseEnter() {
-        this.graph.on('edge:mouseenter', ({ cell }) => {
-            cell.addTools([
+        this.graph.on('edge:mouseenter', ({ edge }) => {
+            edge.addTools([
                 {
                     name: 'source-arrowhead',
                     args: {
@@ -97,13 +97,23 @@ export class Mouse extends BaseEvent {
                         },
                     },
                 },
+                // {
+                //     name: 'segments',
+                //     args: {
+                //         snapRadius: 20,
+                //         attrs: {
+                //             fill: '#444',
+                //         },
+                //         precision: 1000000000000000000
+                //     },
+                // }
             ])
         });
     }
 
     _edgeMouseLeave() {
-        this.graph.on('edge:mouseleave', ({ cell }) => {
-            cell.removeTools()
+        this.graph.on('edge:mouseleave', ({ edge }) => {
+            edge.removeTools()
         })
     }
 
@@ -161,25 +171,11 @@ export class Mouse extends BaseEvent {
                 if (cell.isEdge()) {
                     cell.attr('line/strokeDasharray', 5); // 设置虚线
                     cell.attr('line/style/animation', 'ant-line 30s infinite linear') // 设置动画
-                    cell.addTools([
-                        {
-                            name: 'vertices',
-                            args: {
-                                padding: 4,
-                                attrs: {
-                                    strokeWidth: 0.1,
-                                    stroke: '#2d8cf0',
-                                    fill: '#ffffff',
-                                }
-                            },
-                        },
-                    ])
                 }
             });
             removed.forEach(cell => {
                 if (cell.isEdge()) {
                     cell.attr('line/strokeDasharray', 0); // 移除虚线
-                    cell.removeTools()
                 }
             })
         })

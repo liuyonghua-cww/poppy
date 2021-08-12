@@ -80,7 +80,7 @@ export default {
         getNodeProp() {
             this.position = this.selectedCell.prop('position');
             this.size = this.selectedCell.prop('size');
-            this.deg = this.selectedCell.getAngle();
+            this.deg = this.selectedCell.getAngle && this.selectedCell.getAngle();
         },
         setNodePos() {
             const { x, y } = this.position;
