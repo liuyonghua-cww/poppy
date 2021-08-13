@@ -20,9 +20,9 @@ export class Mouse extends BaseEvent {
         this._hiddenNodePorts();
         this._addArrowMoveTool();
         this._removeEdgeTools();
-        this._graphMouseDown();
-        this._diyGraphEvent();
-        this._selectionChanged();
+        this._triggerDotMove();
+        this._dotMoveInEdge();
+        this._setSelectedEdgeStyle();
     }
 
     _showNodePorts() {
@@ -118,7 +118,7 @@ export class Mouse extends BaseEvent {
     }
 
     // 自定义画布事件  用于一个点在边上的运动
-    _diyGraphEvent() {
+    _dotMoveInEdge() {
         const { graph } = this;
         graph.on('dotMove', (cell) => {
             if (cell.isEdge()) {
@@ -144,7 +144,7 @@ export class Mouse extends BaseEvent {
         })
     }
 
-    _graphMouseDown() {
+    _triggerDotMove() {
         const { graph } = this;
         // 点击节点时候触发点在边上的运动
         graph.on('node:mousedown', ({ cell }) => {
@@ -163,7 +163,7 @@ export class Mouse extends BaseEvent {
     *   // code here
     * })
     * */
-    _selectionChanged() {
+    _setSelectedEdgeStyle() {
         const { graph } = this;
         graph.on('selection:changed', ({added, removed}) => {
             // 遍历新增的元素 如果是边 则进行相关操作
