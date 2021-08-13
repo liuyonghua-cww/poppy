@@ -69,7 +69,9 @@ export default {
                                 },
                             },
                             zIndex: 0,
-                            router: 'manhattan',
+                            router: {
+                                name: 'manhattan',
+                            },
                             connector: {
                                 name: 'rounded'
                             }

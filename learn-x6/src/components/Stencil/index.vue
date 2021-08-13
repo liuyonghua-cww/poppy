@@ -8,6 +8,7 @@
 import { Addon } from "@antv/x6";
 import { mapState } from "vuex";
 import './shapes';
+import { ports_data, ports_triangle } from "@/components/Stencil/shapes";
 
 export default {
     name: "index",
@@ -84,11 +85,23 @@ export default {
                         refPoints: '10,0 40,0 30,20 0,20',
                     },
                 },
+                ports: ports_data
             });
             const r5 = graph.createNode({
                 shape: 'custom-circle',
             });
-            this.stencil.load([ r1, r2, r3, r4, r5 ]);
+
+            const r6 = graph.createNode({
+                shape: 'custom-polygon',
+                attrs: {
+                    body: {
+                        refPoints: '10,0 20,10 0,10',
+                    },
+                },
+                ports: ports_triangle
+            });
+
+            this.stencil.load([ r1, r2, r3, r4, r5, r6 ]);
         },
         getStencilSize() {
             const { width: stencilGraphWidth, height: stencilGraphHeight } = document.querySelector('#stencil').getBoundingClientRect();

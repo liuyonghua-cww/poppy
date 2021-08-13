@@ -65,7 +65,7 @@ const ports = {
     },
     items: [
         {
-            group: 'top',
+            group: 'top', // 指定分组名称
         },
         {
             group: 'right',
@@ -126,3 +126,108 @@ Graph.registerNode('custom-circle', {
     },
     ports: { ...ports },
 })
+
+export const absolutePorts=  {
+    groups: {
+        group1: {
+            attrs: {
+                circle: {
+                    r: 4,
+                    magnet: true,
+                    stroke: '#D06269',
+                    strokeWidth: 1,
+                    fill: '#fff',
+                    style: {
+                        visibility: 'hidden',
+                    },
+                },
+            },
+            position: {
+                name: 'absolute',
+            },
+        },
+    },
+}
+// 数据图形的连接桩
+export const ports_data = {
+    ...absolutePorts,
+    items: [
+        {
+            group: 'group1',
+            // 通过 args 指定绝对位置
+            args: {
+                x: 0.5,
+                y: 0,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.5,
+                y: '100%',
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.125,
+                y: 0.5,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.875,
+                y: 0.5,
+            }
+        }
+    ]
+}
+
+export const ports_triangle = {
+    ...absolutePorts,
+    items: [
+        {
+            group: 'group1',
+            args: {
+                x: 0.5,
+                y: 0,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0,
+                y: '100%',
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: '100%',
+                y: '100%',
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.25,
+                y: 0.5,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.75,
+                y: 0.5,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.5,
+                y: '100%',
+            }
+        },
+    ]
+};
