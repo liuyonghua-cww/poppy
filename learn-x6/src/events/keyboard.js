@@ -85,7 +85,8 @@ export class Keyboard extends BaseEvent {
 
     _delete() {
         const { graph } = this;
-        graph.bindKey('backspace', () => {
+        // 监听delete键将进行删除 防止双击输入文本时按下 backspace 把节点给删掉
+        graph.bindKey('delete', () => {
             const cells = graph.getSelectedCells();
             if (cells) {
                 graph.removeCells(cells);

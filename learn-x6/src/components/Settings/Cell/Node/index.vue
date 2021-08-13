@@ -64,7 +64,8 @@ export default {
         return {
             position: { x: 0, y: 0 }, // 节点的位置,
             size: { width: 0, height: 0 },
-            deg: 0
+            deg: 0,
+            text: ''
         };
     },
     mounted() {
@@ -81,6 +82,7 @@ export default {
             this.position = this.selectedCell.prop('position');
             this.size = this.selectedCell.prop('size');
             this.deg = this.selectedCell.getAngle && this.selectedCell.getAngle();
+            // this.text = this.selectedCell.attr('label/textWrap/text')
         },
         setNodePos() {
             const { x, y } = this.position;
@@ -92,7 +94,7 @@ export default {
         setNodeDeg() {
             this.selectedCell.rotate(this.deg, { absolute: true });
         },
-        // 监听当前节点的移动 并获取实时位置
+        // 监听当前节点的change事件，实时获取相关属性
         handleNodeChange() {
             new Mouse(this.graph)._nodeChange(() => {
                 this.getNodeProp();

@@ -4,5 +4,5 @@ export const attrPath = {
     fill: 'body/fill',
     fontSize: 'label/fontSize',
     color: 'label/fill',
-    text: 'label/textWrap/text'
+    // text: 'label/textWrap/text'
 }

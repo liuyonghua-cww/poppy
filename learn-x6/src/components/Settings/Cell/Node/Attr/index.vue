@@ -38,14 +38,14 @@
                     @change="setAttr('color')"
             />
         </a-form-model-item>
-        <a-form-model-item style="width: 100%;" :wrapper-col="{span: 22, offset: 1}">
+        <!--<a-form-model-item style="width: 100%;" :wrapper-col="{span: 22, offset: 1}">
             <a-textarea
                     placeholder="文本内容"
                     :rows="4"
                     v-model="attr.text"
                     @change="setAttr('text')"
             />
-        </a-form-model-item>
+        </a-form-model-item>-->
     </a-form-model>
 </template>
 
@@ -81,12 +81,12 @@ export default {
     watch: {
         cellId: function () {
             this.getAttr();
-        }
+        },
     },
     methods: {
         getAttr() {
-            for (const key in attrPath) {
-                this.attr[key] = this.selectedCell.attr(attrPath[key]);
+            for (const key in this.attrPath) {
+                this.attr[key] = this.selectedCell.attr(this.attrPath[key]);
             }
         },
         setAttr(key) {

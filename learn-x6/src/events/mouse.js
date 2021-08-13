@@ -23,6 +23,7 @@ export class Mouse extends BaseEvent {
         this._triggerDotMove();
         this._dotMoveInEdge();
         this._setSelectedEdgeStyle();
+        this._showCellEditor();
     }
 
     _showNodePorts() {
@@ -77,6 +78,9 @@ export class Mouse extends BaseEvent {
     // 调整箭头
     _addArrowMoveTool() {
         this.graph.on('edge:mouseenter', ({ edge }) => {
+            if (this.isEdit) {
+                return
+            }
             edge.addTools([
                 {
                     name: 'source-arrowhead',
@@ -113,8 +117,20 @@ export class Mouse extends BaseEvent {
 
     _removeEdgeTools() {
         this.graph.on('edge:mouseleave', ({ edge }) => {
-            edge.removeTools()
-        })
+            if (this.isEdit) {
+                // 如果正在编辑，则不往后面执行，页面移除tool重新渲染线条导致输入内容消失的问题
+                return
+            }
+            let tools = [];
+            if (edge.getTools()) {
+                tools = edge.getTools().items;
+            }
+            tools.forEach(tool => {
+                if (tool.name !== "edge-editor") {
+                    edge.removeTool(tool.name);
+                }
+            });
+        });
     }
 
     // 自定义画布事件  用于一个点在边上的运动
@@ -181,9 +197,47 @@ export class Mouse extends BaseEvent {
         })
     }
 
+    // 双击编辑文本内容
+    _showCellEditor() {
+        const { graph } = this;
+        let _cell;
+        graph.on('cell:dblclick', ({ cell, e }) => {
+            // 进入编辑模式
+            this.isEdit = true;
+            _cell = cell;
+            if (cell.isEdge()) {
+                cell.attr('line/strokeDasharray', 0); // 移除虚线，如果虚线正在运动，会到时输入的内容丢失
+            }
+            cell.addTools([
+                {
+                    name: cell.isEdge() ? 'edge-editor' : 'node-editor',
+                    args: {
+                        event: e,
+                    },
+                }
+            ]);
+            const input = document.querySelector('.x6-cell-tool-editor')
+            input && input.addEventListener('blur', () => {
+                // 编辑完成
+                this.isEdit = false;
+                let tools = [];
+                if (_cell.getTools()) {
+                    tools = _cell.getTools().items;
+                }
+                tools.forEach(tool => {
+                    if (tool.name !== "edge-editor") {
+                        _cell.removeTool(tool.name);
+                    }
+                });
+            })
+        });
+    }
+
     showPorts(ports, show) {
         for (let i = 0, len = ports.length; i < len; i = i + 1) {
             ports[ i ].style.visibility = show ? 'visible' : 'hidden';
         }
     }
 }
+// 是否在编辑的标识（用于edge）
+Mouse.prototype.isEdit = false;
