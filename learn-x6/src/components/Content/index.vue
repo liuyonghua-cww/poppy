@@ -68,7 +68,6 @@ export default {
                                     },
                                 },
                             },
-                            zIndex: 0,
                             router: {
                                 name: 'manhattan',
                             },
