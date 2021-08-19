@@ -31,6 +31,7 @@ export default {
     .ant-layout-header {
         box-shadow: @layout-bg-boxShow !important;
         line-height: unset !important;
+        background: linear-gradient(to bottom, @header1, @header2)!important;
     }
 }
 </style>

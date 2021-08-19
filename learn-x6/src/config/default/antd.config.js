@@ -59,7 +59,11 @@ const ANTD = {
       'menu-dark-arrow-color': '#fefefe',
       'btn-primary-color': '#fff',
       'layout-bg-boxShow': '0 8px 24px -2px rgba(0, 0, 0, 0.15)',
-      'border-color-base': '#d9d9d9'
+      'border-color-base': '#d9d9d9',
+      // 'header': 'linear-gradient(to bottom, #ece9e6, #ffffff)',
+      'header1': '#ece9e6',
+      'header2': '#ffffff',
+
     },
     night: {
       'layout-body-background': '#000',
@@ -83,7 +87,10 @@ const ANTD = {
       'menu-dark-arrow-color': '#fefefe',
       'btn-primary-color': '#141414',
       'layout-bg-boxShow': '0px 8px 24px -2px rgba(255, 255, 255, 0.1)',
-      'border-color-base': '#434343'
+      'border-color-base': '#434343',
+      // 'header': 'linear-gradient(to bottom, #232526, #414345)',
+      'header1': '#232526',
+      'header2': '#414345',
     }
   }
 }
