@@ -89,6 +89,8 @@ Graph.registerNode('custom-rect', {
     attrs: {
         body: {
             strokeWidth: 1,
+            stroke: '#ED8A19',
+            fill: 'transparent'
         },
         label: {
             textWrap
@@ -100,10 +102,12 @@ Graph.registerNode('custom-rect', {
 Graph.registerNode('custom-polygon', {
     inherit: 'polygon',
     width: 30,
-    height: 15,
+    height: 20,
     attrs: {
         body: {
             strokeWidth: 1,
+            stroke: '#ED8A19',
+            fill: 'transparent'
         },
         label: {
             textWrap
@@ -114,11 +118,13 @@ Graph.registerNode('custom-polygon', {
 
 Graph.registerNode('custom-circle', {
     inherit: 'circle',
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     attrs: {
         body: {
             strokeWidth: 1,
+            stroke: '#ED8A19',
+            fill: 'transparent'
         },
         label: {
             textWrap
@@ -127,6 +133,22 @@ Graph.registerNode('custom-circle', {
     ports: { ...ports },
 })
 
+Graph.registerNode('custom-path', {
+    inherit: 'path',
+    width: 30,
+    height: 30,
+    attrs: {
+        body: {
+            // fill: '#ED8A19',
+            strokeWidth: 1,
+            stroke: '#ED8A19',
+        },
+        label: {
+            textWrap
+        }
+    },
+    ports: { ...ports },
+})
 export const absolutePorts=  {
     groups: {
         group1: {
@@ -184,6 +206,7 @@ export const ports_data = {
     ]
 }
 
+// 三角形
 export const ports_triangle = {
     ...absolutePorts,
     items: [
@@ -231,3 +254,43 @@ export const ports_triangle = {
         },
     ]
 };
+
+// 五边形
+export const ports_pentagon = {
+    ...absolutePorts,
+    items: [
+        {
+            group: 'group1',
+            args: {
+                x: 0.5,
+                y: 0,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: '100%',
+                y: 0.4,
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0.5,
+                y: '100%',
+            }
+        },
+        {
+            group: 'group1',
+            args: {
+                x: 0,
+                y: 0.4,
+            }
+        },
+    ]
+}
+
+// 六边形
+export const ports_hexagon = {
+    ...absolutePorts
+}
