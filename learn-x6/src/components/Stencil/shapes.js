@@ -139,7 +139,7 @@ Graph.registerNode('custom-path', {
     height: 30,
     attrs: {
         body: {
-            // fill: '#ED8A19',
+            fill: 'transparent',
             strokeWidth: 1,
             stroke: '#ED8A19',
         },
@@ -171,7 +171,7 @@ export const absolutePorts=  {
     },
 }
 // 数据图形的连接桩
-export const ports_data = {
+export const ports_parallelogram = {
     ...absolutePorts,
     items: [
         {
