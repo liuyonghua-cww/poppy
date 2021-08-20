@@ -6,7 +6,8 @@
         </div>
         <!--画布区域-->
         <div id="content">
-           <graph-content />
+            <graph-content />
+            <div id="minimap"></div>
         </div>
         <!--配置：节点、画布-->
         <div id="configuration" :style="configurationStyle">
@@ -50,6 +51,17 @@ export default {
     > #content {
         flex: 1;
         overflow: hidden;
+        position: relative;
+        > #minimap {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid @border-color-base;
+            border-radius: 4px;
+            background-color: @component-background;
+        }
     }
 }
 </style>

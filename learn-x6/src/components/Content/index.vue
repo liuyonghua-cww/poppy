@@ -98,13 +98,6 @@ export default {
                 snapline: true,
                 keyboard: true,
                 history: true,
-                // minimap: {
-                //     enabled: true,
-                //     container: document.getElementById('minimap'),
-                //     width: 198,
-                //     height: 198,
-                //     padding: 10,
-                // },
                 clipboard: true,
             },
             size: {
@@ -132,7 +125,14 @@ export default {
             const graph = new Graph({
                 container: document.getElementById('x6_container'),
                 ...this.size,
-                ...this.graphOption
+                ...this.graphOption,
+                minimap: {
+                    enabled: true,
+                    container: document.getElementById('minimap'),
+                    width: 198,
+                    height: 198,
+                    padding: 10,
+                },
             });
             this.graph = graph;
             this.setGraph(graph);
