@@ -32,8 +32,8 @@ export default {
         },
         addShapes() {
             const _shapes = {  };
-            for (const i of this.selectTypes) {
-                _shapes[i] = shapes[i]
+            for (const item of this.selectTypes) {
+                _shapes[item] = shapes[item]
             }
             this.visible = false;
             this.$emit('addShapes', _shapes)

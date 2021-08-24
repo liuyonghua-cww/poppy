@@ -47,7 +47,7 @@ export default {
                 {
                     name: 'group2',
                     title: '流程图',
-                    graphHeight: 260
+                    graphHeight: 220
                 }
                 // {
                 //     name: 'group2',
@@ -404,21 +404,21 @@ export default {
 
         addShapes(shapes) {
             this.initGroups();
-            for (const i of Object.keys(shapes)) {
+            for (const group of Object.keys(shapes)) {
                 this.groups.push({
-                    name: i,
-                    title: this.getGroupName(i),
+                    name: group,
+                    title: this.getGroupName(group),
                     graphHeight: 300
                 })
             }
             this.initStencil();
             this.initShape();
-            for (const i of Object.keys(shapes)) {
+            for (const group of Object.keys(shapes)) {
                 const arr = []
-                shapes[i].forEach(item => {
-                    arr.push(this.graph.createNode(item));
+                shapes[group].forEach(shape => {
+                    arr.push(this.graph.createNode(shape));
                 })
-                this.stencil.load(arr, i);
+                this.stencil.load(arr, group);
             }
         },
         getGroupName(value) {

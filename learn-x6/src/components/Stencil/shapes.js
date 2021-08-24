@@ -89,7 +89,7 @@ Graph.registerNode('custom-rect', {
     attrs: {
         body: {
             strokeWidth: 1,
-            stroke: '#ED8A19',
+            stroke: '#1890ff',
             fill: 'transparent'
         },
         label: {
@@ -106,7 +106,7 @@ Graph.registerNode('custom-polygon', {
     attrs: {
         body: {
             strokeWidth: 1,
-            stroke: '#ED8A19',
+            stroke: '#1890ff',
             fill: 'transparent'
         },
         label: {
@@ -123,7 +123,7 @@ Graph.registerNode('custom-circle', {
     attrs: {
         body: {
             strokeWidth: 1,
-            stroke: '#ED8A19',
+            stroke: '#1890ff',
             fill: 'transparent'
         },
         label: {
@@ -141,7 +141,7 @@ Graph.registerNode('custom-path', {
         body: {
             fill: 'transparent',
             strokeWidth: 1,
-            stroke: '#ED8A19',
+            stroke: '#1890ff',
         },
         label: {
             textWrap
