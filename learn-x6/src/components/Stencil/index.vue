@@ -1,6 +1,9 @@
 <template>
-    <div id="stencil">
-
+    <div id="stencil-con">
+        <div id="stencil"></div>
+        <more-shapes
+                @addShapes="addShapes"
+        />
     </div>
 </template>
 
@@ -8,13 +11,18 @@
 import { Addon } from "@antv/x6";
 import { mapState } from "vuex";
 import './shapes';
-import { ports_data, ports_parallelogram, ports_pentagon, ports_triangle } from "@/components/Stencil/shapes";
-
+import { ports_parallelogram, ports_pentagon, ports_triangle } from "@/components/Stencil/shapes";
+import MoreShapes from './MoreShapes'
+import { shapes_type } from './MoreShapes/shapes'
 export default {
     name: "index",
+    components: {
+        MoreShapes
+    },
     data() {
         return {
-            stencil: null
+            stencil: null,
+            groups: null
         };
     },
     watch: {},
@@ -23,11 +31,31 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
+            this.initGroups();
             this.initStencil();
             this.initShape();
         });
     },
     methods: {
+        initGroups() {
+            this.groups =  [
+                {
+                    name: 'group1',
+                    title: '基础图形',
+                    graphHeight: 260
+                },
+                {
+                    name: 'group2',
+                    title: '流程图',
+                    graphHeight: 260
+                }
+                // {
+                //     name: 'group2',
+                //     title: 'Group',
+                //     collapsable: false,
+                // },
+            ]
+        },
         // 初始化左侧面板
         initStencil() {
             this.stencil = new Addon.Stencil({
@@ -45,23 +73,7 @@ export default {
                         // color: '#fff'
                     }
                 },
-                groups: [
-                    {
-                        name: 'group1',
-                        title: '基础图形',
-                        graphHeight: 300
-                    },
-                    {
-                        name: 'group2',
-                        title: '流程图',
-                        graphHeight: 300
-                    },
-                    // {
-                    //     name: 'group2',
-                    //     title: 'Group',
-                    //     collapsable: false,
-                    // },
-                ],
+                groups: this.groups,
                 collapsable: true,
                 // 自定义放置到画布上的节点样式
                 getDropNode(node) {
@@ -386,24 +398,67 @@ export default {
             const { width: stencilGraphWidth, height: stencilGraphHeight } = document.querySelector('#stencil').getBoundingClientRect();
             return {
                 stencilGraphWidth,
-                stencilGraphHeight: stencilGraphHeight - 150
+                stencilGraphHeight
             };
+        },
+
+        addShapes(shapes) {
+            this.initGroups();
+            for (const i of Object.keys(shapes)) {
+                this.groups.push({
+                    name: i,
+                    title: this.getGroupName(i),
+                    graphHeight: 300
+                })
+            }
+            this.initStencil();
+            this.initShape();
+            for (const i of Object.keys(shapes)) {
+                const arr = []
+                shapes[i].forEach(item => {
+                    arr.push(this.graph.createNode(item));
+                })
+                this.stencil.load(arr, i);
+            }
+        },
+        getGroupName(value) {
+            for (const i of shapes_type) {
+                if (i.value === value) {
+                    return i.label;
+                }
+            }
         }
     }
 };
 </script>
 
 <style  lang="less">
-#stencil {
+#stencil-con {
     width: 100%;
     height: 100%;
     position: relative;
-    border-right: 1px solid @border-color-base;
-    .x6-widget-stencil {
-        background-color: @component-background;
-        > .x6-widget-stencil-title {
+    #stencil {
+        width: 100%;
+        height: calc(~"100% - 40px");
+        position: relative;
+        border-right: 1px solid @border-color-base;
+        .x6-widget-stencil {
             background-color: @component-background;
+            overflow-x: hidden;
+            > .x6-widget-stencil-title {
+                background-color: @component-background;
+            }
+            > .x6-widget-stencil-content {
+                right: -20px;
+            }
         }
+    }
+    .add-btn {
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
     }
 }
 </style>
