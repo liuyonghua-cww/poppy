@@ -48,7 +48,7 @@ export default {
             this.registerNode();
             // this.initGroups();
             // this.initStencil();
-            this.initShape();
+            !this.shapes && this.initShape();
             this.shapes && this.addShapes(this.shapes);
         }
     },
@@ -426,6 +426,10 @@ export default {
             };
         },
 
+        /**
+         * 用户自定义添加图形组
+         * @param shapes 用户所勾选的图形组
+         */
         addShapes(shapes) {
             this.initGroups();
             for (const group of Object.keys(shapes)) {
