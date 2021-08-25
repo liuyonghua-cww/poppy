@@ -35,7 +35,8 @@ export default {
     data() {
         return {
             stencil: null,
-            groups: null
+            groups: null,
+            shapes: null, // 用户自定义添加的图形组
         };
     },
     watch: {
@@ -48,6 +49,7 @@ export default {
             // this.initGroups();
             // this.initStencil();
             this.initShape();
+            this.shapes && this.addShapes(this.shapes);
         }
     },
     mounted() {
@@ -442,6 +444,7 @@ export default {
                 })
                 this.stencil.load(arr, group);
             }
+            this.shapes = shapes;
         },
         getGroupName(value) {
             for (const i of shapes_type) {
