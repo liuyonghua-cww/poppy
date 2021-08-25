@@ -82,73 +82,83 @@ const textWrap = {
     width: -10,
     ellipsis: true
 }
-Graph.registerNode('custom-rect', {
-    inherit: 'rect',
-    width: 30,
-    height: 15,
-    attrs: {
-        body: {
-            strokeWidth: 1,
-            stroke: '#1890ff',
-            fill: 'transparent'
+export const customType = ['custom-rect', 'custom-polygon', 'custom-circle', 'custom-path']
+export const registerCustomRect = (stroke) => {
+    Graph.registerNode('custom-rect', {
+        inherit: 'rect',
+        width: 30,
+        height: 15,
+        attrs: {
+            body: {
+                strokeWidth: 1,
+                stroke: stroke,
+                fill: 'transparent'
+            },
+            label: {
+                textWrap
+            }
         },
-        label: {
-            textWrap
-        }
-    },
-    ports: { ...ports },
-})
+        ports: { ...ports },
+    })
+}
 
-Graph.registerNode('custom-polygon', {
-    inherit: 'polygon',
-    width: 30,
-    height: 20,
-    attrs: {
-        body: {
-            strokeWidth: 1,
-            stroke: '#1890ff',
-            fill: 'transparent'
+export const registerCustomPolygon = (stroke) => {
+    Graph.registerNode('custom-polygon', {
+        inherit: 'polygon',
+        width: 30,
+        height: 20,
+        attrs: {
+            body: {
+                strokeWidth: 1,
+                stroke: stroke,
+                fill: 'transparent'
+            },
+            label: {
+                textWrap
+            }
         },
-        label: {
-            textWrap
-        }
-    },
-    ports: { ...ports },
-})
+        ports: { ...ports },
+    })
+}
 
-Graph.registerNode('custom-circle', {
-    inherit: 'circle',
-    width: 30,
-    height: 30,
-    attrs: {
-        body: {
-            strokeWidth: 1,
-            stroke: '#1890ff',
-            fill: 'transparent'
+export const registerCustomCircle = (stroke) => {
+    Graph.registerNode('custom-circle', {
+        inherit: 'circle',
+        width: 30,
+        height: 30,
+        attrs: {
+            body: {
+                strokeWidth: 1,
+                stroke: stroke,
+                fill: 'transparent'
+            },
+            label: {
+                textWrap
+            }
         },
-        label: {
-            textWrap
-        }
-    },
-    ports: { ...ports },
-})
+        ports: { ...ports },
+    })
+}
 
-Graph.registerNode('custom-path', {
-    inherit: 'path',
-    width: 30,
-    height: 30,
-    attrs: {
-        body: {
-            fill: 'transparent',
-            strokeWidth: 1,
-            stroke: '#1890ff',
+export const registerCustomPath = (stroke) => {
+    Graph.registerNode('custom-path', {
+        inherit: 'path',
+        width: 30,
+        height: 30,
+        attrs: {
+            body: {
+                fill: 'transparent',
+                strokeWidth: 1,
+                stroke: stroke,
+            },
+            label: {
+                textWrap
+            }
         },
-        label: {
-            textWrap
-        }
-    },
-    ports: { ...ports },
-})
+        ports: { ...ports },
+    })
+}
+
 export const absolutePorts=  {
     groups: {
         group1: {

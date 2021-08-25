@@ -8,10 +8,17 @@
 </template>
 
 <script>
-import { Addon } from "@antv/x6";
+import {Addon, Graph} from "@antv/x6";
 import { mapState } from "vuex";
 import './shapes';
-import { ports_parallelogram, ports_pentagon, ports_triangle } from "@/components/Stencil/shapes";
+import {
+    customType,
+    ports_parallelogram,
+    ports_pentagon,
+    ports_triangle,
+    registerCustomCircle, registerCustomPath, registerCustomPolygon,
+    registerCustomRect
+} from "@/components/Stencil/shapes";
 import MoreShapes from './MoreShapes'
 import { shapes_type } from './MoreShapes/shapes'
 export default {
@@ -19,18 +26,33 @@ export default {
     components: {
         MoreShapes
     },
+    computed: {
+        ...mapState('setting', [
+            'theme'
+        ]),
+        ...mapState('app', [ 'graph' ])
+    },
     data() {
         return {
             stencil: null,
             groups: null
         };
     },
-    watch: {},
-    computed: {
-        ...mapState('app', [ 'graph' ])
+    watch: {
+        // 主题颜色改变时 重新注册节点
+        'theme.color': function(val) {
+            for (const type of customType) {
+                Graph.unregisterNode(type);
+            }
+            this.registerNode();
+            // this.initGroups();
+            // this.initStencil();
+            this.initShape();
+        }
     },
     mounted() {
         this.$nextTick(() => {
+            this.registerNode();
             this.initGroups();
             this.initStencil();
             this.initShape();
@@ -427,6 +449,13 @@ export default {
                     return i.label;
                 }
             }
+        },
+        registerNode() {
+            const color = this.theme.color;
+            registerCustomRect(color);
+            registerCustomCircle(color);
+            registerCustomPolygon(color);
+            registerCustomPath(color);
         }
     }
 };
