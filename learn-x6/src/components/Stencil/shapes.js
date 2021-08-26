@@ -82,6 +82,10 @@ const textWrap = {
     width: -10,
     ellipsis: true
 }
+const font = {
+    fontSize: 16,
+    fontFamily: '微软雅黑'
+}
 export const customType = ['custom-rect', 'custom-polygon', 'custom-circle', 'custom-path']
 export const registerCustomRect = (stroke) => {
     Graph.registerNode('custom-rect', {
@@ -95,7 +99,8 @@ export const registerCustomRect = (stroke) => {
                 fill: 'transparent'
             },
             label: {
-                textWrap
+                textWrap,
+                ...font
             }
         },
         ports: { ...ports },
@@ -114,7 +119,8 @@ export const registerCustomPolygon = (stroke) => {
                 fill: 'transparent'
             },
             label: {
-                textWrap
+                textWrap,
+                ...font
             }
         },
         ports: { ...ports },
@@ -133,7 +139,8 @@ export const registerCustomCircle = (stroke) => {
                 fill: 'transparent'
             },
             label: {
-                textWrap
+                textWrap,
+                ...font
             }
         },
         ports: { ...ports },
@@ -152,7 +159,8 @@ export const registerCustomPath = (stroke) => {
                 stroke: stroke,
             },
             label: {
-                textWrap
+                textWrap,
+                ...font
             }
         },
         ports: { ...ports },

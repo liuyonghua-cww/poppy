@@ -38,6 +38,16 @@
                     @change="setAttr('color')"
             />
         </a-form-model-item>
+        <a-form-model-item label="字体">
+            <a-select v-model="attr.fontFamily" @change="setAttr('fontFamily')">
+                <a-select-option
+                        v-for="(item, i) in fontFamily"
+                        :key="i"
+                        :value="item">
+                    {{ item }}
+                </a-select-option>
+            </a-select>
+        </a-form-model-item>
         <!--<a-form-model-item style="width: 100%;" :wrapper-col="{span: 22, offset: 1}">
             <a-textarea
                     placeholder="文本内容"
@@ -73,9 +83,11 @@ export default {
                 fill: '', // 背景颜色
                 fontSize: 16, // 字体大小
                 color: '', // 字体颜色,
-                text: ''
+                text: '',
+                fontFamily: ''
             },
             attrPath,
+            fontFamily: ['微软雅黑', '仿宋', '楷体', '隶书', '黑体', '宋体', '华文行楷', '华文楷体']
         }
     },
     watch: {
