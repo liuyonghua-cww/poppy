@@ -4,6 +4,15 @@
             <i :class="['iconfont', item.icon]"></i>
             <span>{{ item.label }}</span>
         </div>
+        <a-popover placement="bottom" arrow-point-at-center>
+            <template slot="content">
+                <h1>111</h1>
+            </template>
+            <div>
+                <i :class="['iconfont', 'icon-zhuti']"></i>
+                <span>{{ '主题' }}</span>
+            </div>
+        </a-popover>
     </section>
 </template>
 
