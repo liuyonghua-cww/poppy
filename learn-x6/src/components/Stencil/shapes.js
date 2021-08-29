@@ -84,7 +84,8 @@ const textWrap = {
 }
 const font = {
     fontSize: 16,
-    fontFamily: '微软雅黑'
+    fontFamily: '微软雅黑',
+    fontColor: '#000000'
 }
 export const customType = ['custom-rect', 'custom-polygon', 'custom-circle', 'custom-path']
 export const registerCustomRect = (stroke) => {
@@ -96,7 +97,7 @@ export const registerCustomRect = (stroke) => {
             body: {
                 strokeWidth: 1,
                 stroke: stroke,
-                fill: 'transparent'
+                fill: '#ffffff'
             },
             label: {
                 textWrap,
@@ -116,7 +117,7 @@ export const registerCustomPolygon = (stroke) => {
             body: {
                 strokeWidth: 1,
                 stroke: stroke,
-                fill: 'transparent'
+                fill: '#ffffff'
             },
             label: {
                 textWrap,
@@ -136,7 +137,7 @@ export const registerCustomCircle = (stroke) => {
             body: {
                 strokeWidth: 1,
                 stroke: stroke,
-                fill: 'transparent'
+                fill: '#ffffff'
             },
             label: {
                 textWrap,
@@ -154,7 +155,7 @@ export const registerCustomPath = (stroke) => {
         height: 30,
         attrs: {
             body: {
-                fill: 'transparent',
+                fill: '#ffffff',
                 strokeWidth: 1,
                 stroke: stroke,
             },

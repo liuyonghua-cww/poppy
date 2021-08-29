@@ -6,7 +6,7 @@
         </div>
         <a-popover placement="bottom" arrow-point-at-center>
             <template slot="content">
-                <h1>111</h1>
+                <cell-theme />
             </template>
             <div>
                 <i :class="['iconfont', 'icon-zhuti']"></i>
@@ -19,8 +19,12 @@
 <script>
 import {toolBarOpt} from "./toolBarOpt";
 import { mapState } from "vuex";
+import CellTheme from '../CellTheme'
 export default {
     name: "index",
+    components: {
+        CellTheme
+    },
     computed: {
         ...mapState('app', [
            'graph'

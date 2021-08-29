@@ -1,57 +1,57 @@
 export const options = [
     {
-        stroke: '#000',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#000000',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(91,155,213)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#5B9BD5',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(237,125,29)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#ED7D1D',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(165,165,165)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#A5A5A5',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(255,192,0)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#FFC000',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(68,144,196)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#4490C4',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(122,173,71)',
-        fill: '#fff',
-        color: '#000'
+        stroke: '#7AAD47',
+        fill: '#ffffff',
+        color: '#000000'
     },
     {
-        stroke: 'rgb(0,0,0)',
-        fill: '#000',
-        color: '#fff'
+        stroke: '#000000',
+        fill: '#000000',
+        color: '#ffffff'
     },
     {
-        stroke: 'rgb(65,113,156)',
-        fill: 'rgb(91,155,213)',
-        color: '#fff'
+        stroke: '#41719C',
+        fill: '#5B9BD5',
+        color: '#ffffff'
     },
     {
-        stroke: 'rgb(174,90,33)',
-        fill: 'rgb(237,125,49)',
-        color: '#fff'
+        stroke: '#AE5A21',
+        fill: '#ED7D31',
+        color: '#ffffff'
     },
     {
-        stroke: 'rgb(120,120,120)',
-        fill: 'rgb(165,165,165)',
-        color: '#fff'
+        stroke: '#787878',
+        fill: '#A5A5A5',
+        color: '#ffffff'
     }
 ]

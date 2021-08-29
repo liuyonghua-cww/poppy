@@ -28,7 +28,8 @@ export default {
     },
     computed: {
         ...mapState('setting', [
-            'theme'
+            'theme',
+            'cellTheme'
         ]),
         ...mapState('app', [ 'graph' ])
     },
@@ -82,6 +83,7 @@ export default {
         },
         // 初始化左侧面板
         initStencil() {
+            const _this = this;
             this.stencil = new Addon.Stencil({
                 title: '图形列表',
                 target: this.graph,
@@ -100,12 +102,18 @@ export default {
                 groups: this.groups,
                 collapsable: true,
                 // 自定义放置到画布上的节点样式
-                getDropNode(node) {
+                getDropNode(node, options) {
                     const size = node.size();
-                    return node.clone().size(size.width * 3, size.height * 3);
+                    const _node = node.clone();
+                    // 如果设置了节点的样式，则创建的时候应用此样式
+                    if (_this.cellTheme) {
+                        _node.attr('body/fill', _this.cellTheme.fill);
+                        _node.attr('body/stroke', _this.cellTheme.stroke);
+                        _node.attr('label/fill', _this.cellTheme.color)
+                    }
+                    return _node.size(size.width * 3, size.height * 3);
                 },
                 search(cell, keyword) {
-                    console.log(cell.prop('name'));
                     return cell.prop('name').indexOf(keyword) > -1;
                 },
                 placeholder: '请输入...'
