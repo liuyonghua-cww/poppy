@@ -41,17 +41,21 @@
         </a-form-model>
         <a-divider>元素属性</a-divider>
         <Attr />
+        <a-divider>阴影</a-divider>
+        <drop-show />
     </section>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { Mouse } from "@/events/mouse";
-import Attr from './Attr'
+import Attr from './Attr';
+import DropShow from './DropShadow';
 export default {
     name: "index",
     components: {
-        Attr
+        Attr,
+        DropShow
     },
     computed: {
         ...mapState('app', [
