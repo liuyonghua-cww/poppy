@@ -74,39 +74,56 @@
             />
         </div>
 
-        <div class="font-weight m4">
+        <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.fontWeight === 'bold' && configType === CONFIG_TYPE.NODE}"
                     :disabled="configType !== CONFIG_TYPE.NODE"
                     @click="setAttr('fontWeight')"
             >
-                B
+                <i class="iconfont icon-jiacu-"></i>
             </a-button>
         </div>
-        <div class="font-style font-weight m4">
+        <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.fontStyle === 'italic' && configType === CONFIG_TYPE.NODE}"
                     :disabled="configType !== CONFIG_TYPE.NODE"
                     @click="setAttr('fontStyle')"
             >
-                I
+                <i class="iconfont icon-italic"></i>
             </a-button>
         </div>
-        <div class="text-decoration font-weight m4">
+        <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.textDecoration === 'underline' && configType === CONFIG_TYPE.NODE}"
                     :disabled="configType !== CONFIG_TYPE.NODE"
                     @click="setAttr('textDecoration')"
             >
-                U
+                <i class="iconfont icon-zitixiahuaxian"></i>
             </a-button>
         </div>
-        <div class="font-color font-weight m4">
-            <a-button
+        <div class="font-item m4">
+
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+                <template slot="content">
+                    <sketch
+                        :value="colors"
+                        @input="updateFontColor"
+                    />
+                </template>
+                <a-button
                     :disabled="configType !== CONFIG_TYPE.NODE"
                     :style="{ color: attr.color }"
+                >
+
+                    <i class="iconfont icon-zitiyanse"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                v-else
+                :disabled="configType !== CONFIG_TYPE.NODE"
             >
-                A
+                <i class="iconfont icon-zitiyanse"></i>
             </a-button>
         </div>
     </div>
@@ -116,9 +133,13 @@
 import { mapState } from "vuex";
 import { attrPath } from "./attrPath";
 import { CONFIG_TYPE } from "@/events/mouse";
+import Sketch from 'vue-color/src/components/Sketch'
 
 export default {
     name: "index",
+    components: {
+        Sketch
+    },
     computed: {
         ...mapState('app', [
             'graph',
@@ -126,7 +147,11 @@ export default {
             'cellId',
             'configType'
         ]),
-
+        colors() {
+            return {
+                hex: this.attr.color
+            }
+        }
     },
     watch: {
         cellId: function () {
@@ -187,17 +212,17 @@ export default {
                 }
             }
             this.selectedCell.attr(this.attrPath[ key ], this.attr[ key ]);
+        },
+        updateFontColor(v) {
+            this.attr.color = v.hex;
+            console.log(this.attr.color);
+            this.selectedCell.attr(this.attrPath.color, this.attr.color);
         }
     }
 };
 </script>
 
 <style lang="less" scoped>
-.center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 .node-attr {
     height: 100%;
     display: flex;
@@ -220,23 +245,17 @@ export default {
 
     }
 
-    > .font-weight {
+    > .font-item {
         > .ant-btn {
             width: 32px;
             height: 32px;
-            .center;
-            font-size: 20px;
-        }
-    }
-
-    /deep/ .font-style {
-        span {
-            font-style: italic!important;
-        }
-    }
-    /deep/ .text-decoration {
-        span {
-            text-decoration: underline!important;
+            padding: 0;
+            > i {
+                height: 100%;
+                font-size: 20px;
+                text-align: center;
+                line-height: 30px;
+            }
         }
     }
 }
