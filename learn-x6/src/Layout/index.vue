@@ -1,9 +1,9 @@
 <template>
     <a-layout id="components-layout" class="components-layout" :style="{height: '100%'}">
-        <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
+        <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%', padding: 0, height: '85px' }">
             <header-container />
         </a-layout-header>
-        <a-layout-content :style="{ padding: '0', marginTop: '64px' }">
+        <a-layout-content :style="{ padding: '0', marginTop: '85px' }">
             <div :style="{ background: '#fff', padding: '0', height: '100%' }">
                 <router-view />
             </div>

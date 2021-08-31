@@ -83,7 +83,7 @@ const textWrap = {
     ellipsis: true
 }
 const font = {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: '微软雅黑',
     fontColor: '#000000'
 }

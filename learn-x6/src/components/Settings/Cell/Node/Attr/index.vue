@@ -48,14 +48,6 @@
                 </a-select-option>
             </a-select>
         </a-form-model-item>
-        <!--<a-form-model-item style="width: 100%;" :wrapper-col="{span: 22, offset: 1}">
-            <a-textarea
-                    placeholder="文本内容"
-                    :rows="4"
-                    v-model="attr.text"
-                    @change="setAttr('text')"
-            />
-        </a-form-model-item>-->
     </a-form-model>
 </template>
 
