@@ -50,6 +50,7 @@
     <!--    </a-form-model-item>-->
     <!--</a-form-model>-->
     <div class="node-attr">
+        <!--字体类型-->
         <div class="font-family m4">
             <a-select
                     v-model="attr.fontFamily"
@@ -64,7 +65,7 @@
                 </a-select-option>
             </a-select>
         </div>
-
+        <!--字体大小-->
         <div class="font-size m4">
             <a-input
                     :disabled="configType !== CONFIG_TYPE.NODE"
@@ -73,7 +74,7 @@
                     @change="setAttr('fontSize')"
             />
         </div>
-
+        <!--字体粗细-->
         <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.fontWeight === 'bold' && configType === CONFIG_TYPE.NODE}"
@@ -83,6 +84,7 @@
                 <i class="iconfont icon-jiacu-"></i>
             </a-button>
         </div>
+        <!--斜体-->
         <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.fontStyle === 'italic' && configType === CONFIG_TYPE.NODE}"
@@ -92,6 +94,7 @@
                 <i class="iconfont icon-italic"></i>
             </a-button>
         </div>
+        <!--下划线-->
         <div class="font-item m4">
             <a-button
                     :class="{'selectedBGC': attr.textDecoration === 'underline' && configType === CONFIG_TYPE.NODE}"
@@ -101,8 +104,8 @@
                 <i class="iconfont icon-zitixiahuaxian"></i>
             </a-button>
         </div>
+        <!--字体颜色-->
         <div class="font-item m4">
-
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <sketch
@@ -124,6 +127,35 @@
                 :disabled="configType !== CONFIG_TYPE.NODE"
             >
                 <i class="iconfont icon-zitiyanse"></i>
+            </a-button>
+        </div>
+        <!--字体对齐方式-->
+        <div class="font-item m4">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+                <template slot="content">
+                    <div style="padding: 0 5px">
+                        <i title="左对齐" @click="alignFont('left')" style="font-size: 28px; cursor: pointer" class="iconfont icon-zuoduiqi"></i>
+                        <i title="水平居中" @click="alignFont('horizontalCenter')" style="font-size: 28px; cursor: pointer" class="iconfont icon-juzhongduiqi"></i>
+                        <i title="右对齐" @click="alignFont('right')" style="font-size: 28px; cursor: pointer" class="iconfont icon-youduiqi"></i>
+                        <i title="上对齐" @click="alignFont('top')" style="font-size: 28px; cursor: pointer" class="iconfont icon-shangduiqitop"></i>
+                        <i title="垂直居中" @click="alignFont('verticalCenter')" style="font-size: 28px; cursor: pointer" class="iconfont icon-juzhongduiqimiddle"></i>
+                        <i title="下对齐" @click="alignFont('bottom')" style="font-size: 28px; cursor: pointer" class="iconfont icon-xiaduiqibottom"></i>
+                    </div>
+                </template>
+                <a-button
+                        :disabled="configType !== CONFIG_TYPE.NODE"
+                >
+
+                    <i class="iconfont icon-xiazai"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                    v-else
+                    :disabled="configType !== CONFIG_TYPE.NODE"
+            >
+
+                <i class="iconfont icon-xiazai"></i>
             </a-button>
         </div>
     </div>
@@ -177,7 +209,13 @@ export default {
                 textDecoration: 'none'
             },
             attrPath,
-            fontFamily: [ '微软雅黑', '仿宋', '楷体', '隶书', '黑体', '宋体', '华文行楷', '华文楷体' ]
+            fontFamily: [ '微软雅黑', '仿宋', '楷体', '隶书', '黑体', '宋体', '华文行楷', '华文楷体' ],
+            alignOpt: {
+                refX: 0.5,
+                refY: 0.5,
+                textAnchor: 'middle',
+                textVerticalAnchor: 'middle',
+            }
         };
     },
     methods: {
@@ -217,6 +255,61 @@ export default {
             this.attr.color = v.hex;
             console.log(this.attr.color);
             this.selectedCell.attr(this.attrPath.color, this.attr.color);
+        },
+        alignFont(type) {
+            switch (type) {
+                case 'left':
+                    this.alignOpt = {
+                        refX: 0,
+                        refY: this.alignOpt.refY,
+                        textAnchor: 'start',
+                        textVerticalAnchor: this.alignOpt.textVerticalAnchor,
+                    }
+                    break;
+                case 'horizontalCenter':
+                    this.alignOpt = {
+                        refX: 0.5,
+                        refY: this.alignOpt.refY,
+                        textAnchor: 'middle',
+                        textVerticalAnchor: this.alignOpt.textVerticalAnchor,
+                    }
+                    break;
+                case 'right':
+                    this.alignOpt = {
+                        refX: 0.99,
+                        refY: this.alignOpt.refY,
+                        textAnchor: 'end',
+                        textVerticalAnchor: this.alignOpt.textVerticalAnchor,
+                    }
+                    break;
+                case 'top':
+                    this.alignOpt = {
+                        refX: this.alignOpt.refX,
+                        refY: 0,
+                        textAnchor: this.alignOpt.textAnchor,
+                        textVerticalAnchor: 'top',
+                    }
+                    break;
+                case 'verticalCenter':
+                    this.alignOpt = {
+                        refX: this.alignOpt.refX,
+                        refY: 0.5,
+                        textAnchor: this.alignOpt.textAnchor,
+                        textVerticalAnchor: 'middle',
+                    }
+                    break;
+                case 'bottom':
+                    this.alignOpt = {
+                        refX: this.alignOpt.refX,
+                        refY: 0.99,
+                        textAnchor: this.alignOpt.textAnchor,
+                        textVerticalAnchor: 'bottom',
+                    }
+                    break;
+            }
+            this.selectedCell.attr({
+                label: this.alignOpt
+            })
         }
     }
 };
