@@ -8,15 +8,6 @@
                     @change="setAttr('stroke')"
             />
         </a-form-model-item>
-        <a-form-model-item label="边框宽度">
-            <a-slider
-                    :defaultGValue="attr.strokeWidth"
-                    :min="1"
-                    :max="5"
-                    @change="setAttr('strokeWidth')"
-                    v-model="attr.strokeWidth"
-            />
-        </a-form-model-item>
         <a-form-model-item label="背景颜色">
             <a-input
                     type="color"

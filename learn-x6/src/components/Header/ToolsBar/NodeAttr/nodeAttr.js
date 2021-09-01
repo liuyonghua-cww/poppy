@@ -1,7 +1,8 @@
 import { mapState } from "vuex";
 import { attrPath } from "./attrPath";
 import { CONFIG_TYPE } from "@/events/mouse";
-import Sketch from 'vue-color/src/components/Sketch'
+import Sketch from 'vue-color/src/components/Sketch';
+import {strokeDasharrayIcon} from './strokeDasharrayIcon'
 
 export default {
     name: "index",
@@ -67,8 +68,14 @@ export default {
                 textAnchor: 'middle',
                 textVerticalAnchor: 'middle',
             },
-            strokeDasharrayOpt: ['0', '8', '1', '8, 1'],
-            strokeDasharrayIcon: ['icon-xiantiaoyangshi2', 'icon-xiantiaoyangshi4', 'icon-xiantiaoyangshi3', 'icon-xiantiaoyangshi1']
+            strokeDasharrayType: ['solid', 'dashed', 'dot', 'dasheddot'],
+            strokeDasharrayInit: {
+                solid: '0',
+                dashed: '10, 0',
+                dot: '0,0',
+                dasheddot: '10, 0, 0, 0'
+            },
+            strokeDasharrayIcon: strokeDasharrayIcon
         };
     },
     methods: {
@@ -119,6 +126,29 @@ export default {
         setStrokeWidth(v) {
             this.attr.strokeWidth = v;
             this.selectedCell.attr(this.attrPath.strokeWidth, this.attr.strokeWidth);
+
+            if (!this.selectedCell.getData()) {
+                this.setStrokeDasharray('solid');
+                return;
+            }
+            const strokeDasharrayType = this.selectedCell.getData().strokeDasharrayType;
+            if (!strokeDasharrayType || strokeDasharrayType === 'solid') {
+                this.setStrokeDasharray('solid')
+            } else {
+                this.setStrokeDasharray(strokeDasharrayType)
+            }
+        },
+        setStrokeDasharray(v) {
+            if (v === 'solid') {
+                this.selectedCell.attr('body/stroke-dasharray', 0)
+            } else {
+                this.selectedCell.attr('body/stroke-dasharray', (() => {
+                    return this.strokeDasharrayInit[v].split(',').map(item => +item + this.attr.strokeWidth).join(',');
+                })())
+            }
+            this.selectedCell.setData({
+                strokeDasharrayType: v
+            })
         },
 
         alignFont(type) {
