@@ -193,10 +193,10 @@
                 <template slot="content">
                     <ul class="stroke-dasharray-select">
                         <li
-
-
+                                v-for="(item, i) of strokeDasharrayOpt"
+                                :key="i"
                         >
-
+                            <i :class="['iconfont', strokeDasharrayIcon[i]]"></i>
                         </li>
                     </ul>
                 </template>

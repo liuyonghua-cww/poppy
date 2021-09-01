@@ -66,7 +66,9 @@ export default {
                 refY: 0.5,
                 textAnchor: 'middle',
                 textVerticalAnchor: 'middle',
-            }
+            },
+            strokeDasharrayOpt: ['0', '8', '1', '8, 1'],
+            strokeDasharrayIcon: ['icon-xiantiaoyangshi2', 'icon-xiantiaoyangshi4', 'icon-xiantiaoyangshi3', 'icon-xiantiaoyangshi1']
         };
     },
     methods: {
