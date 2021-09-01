@@ -185,13 +185,21 @@ export class Mouse extends BaseEvent {
             // 遍历新增的元素 如果是边 则进行相关操作
             added.forEach(cell => {
                 if (cell.isEdge()) {
-                    cell.attr('line/strokeDasharray', 5); // 设置虚线
-                    cell.attr('line/style/animation', 'ant-line 30s infinite linear') // 设置动画
+                    const cellView = graph.findViewByCell(cell)
+                    if (cellView) {
+                        cellView.highlight()
+                    }
+                    // cell.attr('line/strokeDasharray', 5); // 设置虚线
+                    // cell.attr('line/style/animation', 'ant-line 30s infinite linear') // 设置动画
                 }
             });
             removed.forEach(cell => {
                 if (cell.isEdge()) {
-                    cell.attr('line/strokeDasharray', 0); // 移除虚线
+                    // cell.attr('line/strokeDasharray', 0); // 移除虚线
+                    const cellView = graph.findViewByCell(cell)
+                    if (cellView) {
+                        cellView.unhighlight()
+                    }
                 }
             })
         })
@@ -200,14 +208,14 @@ export class Mouse extends BaseEvent {
     // 双击编辑文本内容
     _showCellEditor() {
         const { graph } = this;
-        let _cell;
+        // let _cell;
         graph.on('cell:dblclick', ({ cell, e }) => {
             // 进入编辑模式
             this.isEdit = true;
-            _cell = cell;
-            if (cell.isEdge()) {
-                cell.attr('line/strokeDasharray', 0); // 移除虚线，如果虚线正在运动，会到时输入的内容丢失
-            }
+            // _cell = cell;
+            // if (cell.isEdge()) {
+            //     cell.attr('line/strokeDasharray', 0); // 移除虚线，如果虚线正在运动，会到时输入的内容丢失
+            // }
             cell.addTools([
                 {
                     name: cell.isEdge() ? 'edge-editor' : 'node-editor',
@@ -218,16 +226,17 @@ export class Mouse extends BaseEvent {
             ]);
             const input = document.querySelector('.x6-cell-tool-editor')
             input && input.addEventListener('blur', () => {
-                // 编辑完成
+                // 编辑完成，移除工具
                 this.isEdit = false;
                 let tools = [];
-                if (_cell.getTools()) {
-                    tools = _cell.getTools().items;
+                if (cell.getTools()) {
+                    tools = cell.getTools().items;
                 }
                 tools.forEach(tool => {
-                    if (tool.name !== "edge-editor") {
-                        _cell.removeTool(tool.name);
-                    }
+                    cell.removeTool(tool.name);
+                    // if (tool.name !== "edge-editor") {
+                    //     cell.removeTool(tool.name);
+                    // }
                 });
             })
         });
