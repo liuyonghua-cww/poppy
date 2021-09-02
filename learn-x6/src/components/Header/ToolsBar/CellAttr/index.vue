@@ -2,7 +2,7 @@
 <template>
     <div class="node-attr">
         <!--字体类型-->
-        <div class="font-family m4">
+        <div class="font-family">
             <a-select
                     v-model="attr.fontFamily"
                     :disabled="configType === CONFIG_TYPE.GRID"
@@ -16,8 +16,9 @@
                 </a-select-option>
             </a-select>
         </div>
+        <a-divider type="vertical" />
         <!--字体大小-->
-        <div class="font-size m4">
+        <div class="font-size">
             <a-input
                     :disabled="configType === CONFIG_TYPE.GRID"
                     v-model="attr.fontSize"
@@ -25,8 +26,9 @@
                     @change="setAttr('fontSize')"
             />
         </div>
+        <a-divider type="vertical" />
         <!--字体粗细-->
-        <div class="font-item m4">
+        <div class="font-item m4 ml0">
             <a-button
                     :class="{'selectedBGC': attr.fontWeight === 'bold' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
                     :disabled="configType === CONFIG_TYPE.GRID"
@@ -81,7 +83,7 @@
             </a-button>
         </div>
         <!--字体对齐方式-->
-        <div class="font-item m4">
+        <div class="font-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <div style="padding: 0 5px">
@@ -109,8 +111,9 @@
                 <i class="iconfont icon-xiazai"></i>
             </a-button>
         </div>
+        <a-divider type="vertical" />
         <!--填充颜色-->
-        <div class="font-item m4">
+        <div class="font-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <sketch
@@ -188,7 +191,7 @@
             </a-button>
         </div>
         <!--线条样式-->
-        <div class="font-item m4">
+        <div class="font-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <ul class="stroke-dasharray-select">
@@ -216,6 +219,37 @@
                 <i class="iconfont icon-xiantiaoyangshi"></i>
             </a-button>
         </div>
+        <a-divider type="vertical" />
+        <!--连线类型-->
+        <div class="font-item">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
+                <template slot="content">
+                    <ul class="stroke-width-select">
+                        <li
+                                :class="{ 'selectedBGC': attr.strokeWidth === item }"
+                                v-for="(item, i) of 10"
+                                :key="i"
+                                @click="setStrokeWidth(item)"
+                        >
+                            {{ `${item}px` }}
+                        </li>
+                    </ul>
+                </template>
+                <a-button
+                        :disabled="configType !== CONFIG_TYPE.EDGE"
+                >
+
+                    <i class="iconfont icon-xiantiaokuandu"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                    v-else
+                    :disabled="configType !== CONFIG_TYPE.EDGE"
+            >
+                <i class="iconfont icon-xiantiaokuandu"></i>
+            </a-button>
+        </div>
     </div>
 </template>
 
@@ -228,6 +262,7 @@ export default nodeAttr;
 .node-attr {
     height: 100%;
     display: flex;
+    align-items: center;
     > div {
         display: flex;
         align-items: center;
@@ -264,6 +299,12 @@ export default nodeAttr;
 
 .m4 {
     margin: 0 4px;
+}
+.ml0 {
+    margin-left: 0;
+}
+.mr0 {
+    margin-right: 0;
 }
 
 .selectedBGC {

@@ -4,6 +4,7 @@
         <operation-history />
         <a-divider type="vertical" />
         <node-attr />
+        <a-divider type="vertical" />
     </div>
 </template>
 
