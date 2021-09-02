@@ -71,6 +71,11 @@ export default {
                                     stroke: 'transparent',
                                     strokeWidth: 3,
                                 },
+                                text: {
+                                    fontSize: 14,
+                                    fontFamily: '微软雅黑',
+                                    fontColor: '#000000'
+                                }
                             },
                             router: {
                                 name: 'manhattan',

@@ -5,7 +5,7 @@
         <div class="font-family m4">
             <a-select
                     v-model="attr.fontFamily"
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :disabled="configType === CONFIG_TYPE.GRID"
                     @change="setAttr('fontFamily')"
             >
                 <a-select-option
@@ -19,7 +19,7 @@
         <!--字体大小-->
         <div class="font-size m4">
             <a-input
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :disabled="configType === CONFIG_TYPE.GRID"
                     v-model="attr.fontSize"
                     type="number"
                     @change="setAttr('fontSize')"
@@ -28,8 +28,8 @@
         <!--字体粗细-->
         <div class="font-item m4">
             <a-button
-                    :class="{'selectedBGC': attr.fontWeight === 'bold' && configType === CONFIG_TYPE.NODE}"
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :class="{'selectedBGC': attr.fontWeight === 'bold' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
+                    :disabled="configType === CONFIG_TYPE.GRID"
                     @click="setAttr('fontWeight')"
             >
                 <i class="iconfont icon-jiacu-"></i>
@@ -38,8 +38,8 @@
         <!--斜体-->
         <div class="font-item m4">
             <a-button
-                    :class="{'selectedBGC': attr.fontStyle === 'italic' && configType === CONFIG_TYPE.NODE}"
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :class="{'selectedBGC': attr.fontStyle === 'italic' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
+                    :disabled="configType === CONFIG_TYPE.GRID"
                     @click="setAttr('fontStyle')"
             >
                 <i class="iconfont icon-italic"></i>
@@ -48,8 +48,8 @@
         <!--下划线-->
         <div class="font-item m4">
             <a-button
-                    :class="{'selectedBGC': attr.textDecoration === 'underline' && configType === CONFIG_TYPE.NODE}"
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :class="{'selectedBGC': attr.textDecoration === 'underline' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
+                    :disabled="configType === CONFIG_TYPE.GRID"
                     @click="setAttr('textDecoration')"
             >
                 <i class="iconfont icon-zitixiahuaxian"></i>
@@ -57,7 +57,7 @@
         </div>
         <!--字体颜色-->
         <div class="font-item m4">
-            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <sketch
                         :value="colors"
@@ -65,7 +65,7 @@
                     />
                 </template>
                 <a-button
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                        :disabled="configType === CONFIG_TYPE.GRID"
                     :style="{ color: attr.color }"
                 >
 
@@ -75,7 +75,7 @@
 
             <a-button
                 v-else
-                :disabled="configType !== CONFIG_TYPE.NODE"
+                :disabled="configType === CONFIG_TYPE.GRID"
             >
                 <i class="iconfont icon-zitiyanse"></i>
             </a-button>
@@ -135,7 +135,7 @@
         </div>
         <!--线条颜色-->
         <div class="font-item m4">
-            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <sketch
                             :value="strokeColor"
@@ -143,7 +143,7 @@
                     />
                 </template>
                 <a-button
-                        :disabled="configType !== CONFIG_TYPE.NODE"
+                        :disabled="configType === CONFIG_TYPE.GRID"
                 >
 
                     <i class="iconfont icon-xiantiaoyanse"></i>
@@ -152,14 +152,14 @@
 
             <a-button
                     v-else
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :disabled="configType === CONFIG_TYPE.GRID"
             >
                 <i class="iconfont icon-xiantiaoyanse"></i>
             </a-button>
         </div>
         <!--线宽-->
         <div class="font-item m4">
-            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <ul class="stroke-width-select">
                         <li
@@ -173,7 +173,7 @@
                     </ul>
                 </template>
                 <a-button
-                        :disabled="configType !== CONFIG_TYPE.NODE"
+                        :disabled="configType === CONFIG_TYPE.GRID"
                 >
 
                     <i class="iconfont icon-xiantiaokuandu"></i>
@@ -182,14 +182,14 @@
 
             <a-button
                     v-else
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :disabled="configType === CONFIG_TYPE.GRID"
             >
                 <i class="iconfont icon-xiantiaokuandu"></i>
             </a-button>
         </div>
         <!--线条样式-->
         <div class="font-item m4">
-            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <ul class="stroke-dasharray-select">
                         <li
@@ -202,7 +202,7 @@
                     </ul>
                 </template>
                 <a-button
-                        :disabled="configType !== CONFIG_TYPE.NODE"
+                        :disabled="configType === CONFIG_TYPE.GRID"
                 >
 
                     <i class="iconfont icon-xiantiaoyangshi"></i>
@@ -211,7 +211,7 @@
 
             <a-button
                     v-else
-                    :disabled="configType !== CONFIG_TYPE.NODE"
+                    :disabled="configType === CONFIG_TYPE.GRID"
             >
                 <i class="iconfont icon-xiantiaoyangshi"></i>
             </a-button>
@@ -220,7 +220,7 @@
 </template>
 
 <script>
-import nodeAttr from "./nodeAttr";
+import nodeAttr from "./cellAttr";
 export default nodeAttr;
 </script>
 

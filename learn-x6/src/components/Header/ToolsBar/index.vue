@@ -9,7 +9,7 @@
 
 <script>
 import OperationHistory from './OperationHistory';
-import NodeAttr from './NodeAttr';
+import NodeAttr from './CellAttr';
 export default {
     name: "index",
     components: {
