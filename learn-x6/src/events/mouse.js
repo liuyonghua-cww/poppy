@@ -13,6 +13,7 @@ import { BaseEvent } from "@/events/baseEvent";
 export class Mouse extends BaseEvent {
     constructor(graph) {
         super(graph);
+        this.isEdit = false;
     }
 
     bind() {
@@ -126,7 +127,7 @@ export class Mouse extends BaseEvent {
                 tools = edge.getTools().items;
             }
             tools.forEach(tool => {
-                if (tool.name !== "edge-editor") {
+                if (tool.name !== "edge-editor" && tool.name !== 'boundary') {
                     edge.removeTool(tool.name);
                 }
             });
@@ -179,7 +180,7 @@ export class Mouse extends BaseEvent {
     *   // code here
     * })
     * */
-    _setSelectedEdgeStyle() {
+    /*_setSelectedEdgeStyle() {
         const { graph } = this;
         graph.on('selection:changed', ({added, removed}) => {
             // 遍历新增的元素 如果是边 则进行相关操作
@@ -203,6 +204,20 @@ export class Mouse extends BaseEvent {
                 }
             })
         })
+    }*/
+
+    _setSelectedEdgeStyle() {
+        const { graph } = this;
+        graph.on('edge:selected', ({ cell, edge }) => {
+            edge.attr('outline/stroke', '#239edd')
+            edge.attr('outline/strokeWidth', edge.attr('line/strokeWidth') + 2)
+        });
+        graph.on('edge:unselected', ({ cell, edge }) => {
+            if (this.isEdit) {
+                return;
+            }
+            edge.attr('outline/stroke', 'transparent')
+        });
     }
 
     // 双击编辑文本内容
@@ -238,6 +253,9 @@ export class Mouse extends BaseEvent {
                     //     cell.removeTool(tool.name);
                     // }
                 });
+                if (cell.isEdge()) {
+                    cell.attr('outline/stroke', 'transparent')
+                }
             })
         });
     }
@@ -248,5 +266,3 @@ export class Mouse extends BaseEvent {
         }
     }
 }
-// 是否在编辑的标识（用于edge）
-Mouse.prototype.isEdit = false;

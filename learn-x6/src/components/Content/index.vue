@@ -56,7 +56,7 @@ export default {
                     },
                     // 连接的过程中创建新的边
                     createEdge() {
-                        return new Shape.Edge({
+                        return new Shape.DoubleEdge({
                             attrs: {
                                 line: {
                                     stroke: '#000',
@@ -66,6 +66,10 @@ export default {
                                         width: 12,
                                         height: 8,
                                     },
+                                },
+                                outline: {
+                                    stroke: 'transparent',
+                                    strokeWidth: 3,
                                 },
                             },
                             router: {

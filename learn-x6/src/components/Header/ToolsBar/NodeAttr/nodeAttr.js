@@ -71,9 +71,9 @@ export default {
             strokeDasharrayType: ['solid', 'dashed', 'dot', 'dasheddot'],
             strokeDasharrayInit: {
                 solid: '0',
-                dashed: '10, 0',
-                dot: '0,0',
-                dasheddot: '10, 0, 0, 0'
+                dashed: '3, 3',
+                dot: '1,1',
+                dasheddot: '3, 1, 1, 1'
             },
             strokeDasharrayIcon: strokeDasharrayIcon
         };
@@ -143,7 +143,7 @@ export default {
                 this.selectedCell.attr('body/stroke-dasharray', 0)
             } else {
                 this.selectedCell.attr('body/stroke-dasharray', (() => {
-                    return this.strokeDasharrayInit[v].split(',').map(item => +item + this.attr.strokeWidth).join(',');
+                    return this.strokeDasharrayInit[v].split(',').map(item => +item * this.attr.strokeWidth).join(',');
                 })())
             }
             this.selectedCell.setData({
