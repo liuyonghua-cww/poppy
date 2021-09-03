@@ -1,7 +1,7 @@
 /**
  * @file 鼠标事件
  */
-import {Vector} from "@antv/x6";
+import { Vector } from "@antv/x6";
 
 export const CONFIG_TYPE = {
     GRID: 0,
@@ -80,15 +80,17 @@ export class Mouse extends BaseEvent {
     _addArrowMoveTool() {
         this.graph.on('edge:mouseenter', ({ edge }) => {
             if (this.isEdit) {
-                return
+                return;
             }
             edge.addTools([
                 {
                     name: 'source-arrowhead',
                     args: {
+                        tagName: 'circle',
                         attrs: {
-                            fill: '#3cbca3',
-                            'stroke-width': 3,
+                            stroke: '#3cbca3',
+                            fill: '#ffffff',
+                            r: 5
                         },
                     },
 
@@ -96,9 +98,11 @@ export class Mouse extends BaseEvent {
                 {
                     name: 'target-arrowhead',
                     args: {
+                        tagName: 'circle',
                         attrs: {
-                            fill: '#ff5247',
-                            'stroke-width': 3,
+                            stroke: '#3cbca3',
+                            fill: '#ffffff',
+                            r: 5
                         },
                     },
                 },
@@ -112,7 +116,7 @@ export class Mouse extends BaseEvent {
                 //         precision: 1000000000000000000
                 //     },
                 // }
-            ])
+            ]);
         });
     }
 
@@ -120,7 +124,7 @@ export class Mouse extends BaseEvent {
         this.graph.on('edge:mouseleave', ({ edge }) => {
             if (this.isEdit) {
                 // 如果正在编辑，则不往后面执行，页面移除tool重新渲染线条导致输入内容消失的问题
-                return
+                return;
             }
             let tools = [];
             if (edge.getTools()) {
@@ -142,31 +146,31 @@ export class Mouse extends BaseEvent {
                 const view = graph.findViewByCell(cell);
                 if (view) {
                     // 创建一个节点
-                    const token = Vector.create('circle', { r: 6, fill: '#feb662' })
-                    const target = cell.getTargetCell()
+                    const token = Vector.create('circle', { r: 6, fill: '#feb662' });
+                    const target = cell.getTargetCell();
                     setTimeout(() => {
                         view.sendToken(token.node, 1000, () => {
                             if (target) {
-                                graph.trigger('dotMove', target)
+                                graph.trigger('dotMove', target);
                             }
-                        })
-                    }, 300)
+                        });
+                    }, 300);
                 }
             } else {
                 const edges = graph.model.getConnectedEdges(cell, {
                     outgoing: true,
-                })
-                edges.forEach((edge) => graph.trigger('dotMove', edge))
+                });
+                edges.forEach((edge) => graph.trigger('dotMove', edge));
             }
-        })
+        });
     }
 
     _triggerDotMove() {
         const { graph } = this;
         // 点击节点时候触发点在边上的运动
         graph.on('node:mousedown', ({ cell }) => {
-            graph.trigger('dotMove', cell)
-        })
+            graph.trigger('dotMove', cell);
+        });
     }
 
     // 监听选中节点/边改变
@@ -180,6 +184,7 @@ export class Mouse extends BaseEvent {
     *   // code here
     * })
     * */
+
     /*_setSelectedEdgeStyle() {
         const { graph } = this;
         graph.on('selection:changed', ({added, removed}) => {
@@ -209,14 +214,14 @@ export class Mouse extends BaseEvent {
     _setSelectedEdgeStyle() {
         const { graph } = this;
         graph.on('edge:selected', ({ cell, edge }) => {
-            edge.attr('outline/stroke', '#239edd')
-            edge.attr('outline/strokeWidth', edge.attr('line/strokeWidth') + 2)
+            edge.attr('outline/stroke', '#239edd');
+            edge.attr('outline/strokeWidth', edge.attr('line/strokeWidth') + 2);
         });
         graph.on('edge:unselected', ({ cell, edge }) => {
             if (this.isEdit) {
                 return;
             }
-            edge.attr('outline/stroke', 'transparent')
+            edge.attr('outline/stroke', 'transparent');
         });
     }
 
@@ -239,7 +244,7 @@ export class Mouse extends BaseEvent {
                     },
                 }
             ]);
-            const input = document.querySelector('.x6-cell-tool-editor')
+            const input = document.querySelector('.x6-cell-tool-editor');
             input && input.addEventListener('blur', () => {
                 // 编辑完成，移除工具
                 this.isEdit = false;
@@ -254,9 +259,9 @@ export class Mouse extends BaseEvent {
                     // }
                 });
                 if (cell.isEdge()) {
-                    cell.attr('outline/stroke', 'transparent')
+                    cell.attr('outline/stroke', 'transparent');
                 }
-            })
+            });
         });
     }
 
