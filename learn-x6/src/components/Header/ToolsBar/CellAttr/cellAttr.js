@@ -3,11 +3,13 @@ import { attrPath, edgeAttrPath } from "./attrPath";
 import { CONFIG_TYPE } from "@/events/mouse";
 import Sketch from 'vue-color/src/components/Sketch';
 import { strokeDasharrayIcon } from './strokeDasharrayIcon';
+import MarkerSettings from './MarkerSettings';
 
 export default {
     name: "index",
     components: {
-        Sketch
+        Sketch,
+        MarkerSettings
     },
     computed: {
         ...mapState('app', [
@@ -79,11 +81,13 @@ export default {
             },
             strokeDasharrayIcon: strokeDasharrayIcon,
             connectorType: [
-                { label: '简单连接器', value: 'normal'},
-                { label: '平滑连接器', value: 'smooth'},
-                { label: '圆角连接器', value: 'rounded'},
-                { label: '跳线连接器', value: 'jumpover'},
-            ]
+                { label: '简单连接器', value: 'normal' },
+                { label: '平滑连接器', value: 'smooth' },
+                { label: '圆角连接器', value: 'rounded' },
+                { label: '跳线连接器', value: 'jumpover' },
+            ],
+            sourceMarker: null,
+            targetMarker: null,
         };
     },
     methods: {
@@ -112,6 +116,8 @@ export default {
                 }
                 // 获取连接器类型
                 this.attr.connector = this.selectedCell.getConnector() && this.selectedCell.getConnector().name;
+                // 获取marker
+                this.getEdgeMarker();
                 return;
             }
             for (const key in this.attrPath) {
@@ -275,6 +281,52 @@ export default {
         setConnector(type) {
             this.attr.connector = type;
             this.selectedCell.setConnector(type);
+        },
+
+        getEdgeMarker() {
+            const state = {
+                type: '',
+                r: 5,
+                rx: 5,
+                ry: 5,
+                width: 10,
+                height: 10,
+                offset: 0,
+
+                fill: '#000000',
+                stroke: '#000000',
+                strokeWidth: 1,
+            };
+            const sourceMarker = this.selectedCell.attr('line/sourceMarker');
+            const targetMarker = this.selectedCell.attr('line/targetMarker');
+            if (sourceMarker) {
+                const { name, args } = this.selectedCell.attr('line/sourceMarker');
+                this.sourceMarker = { type: name, ...args };
+            } else {
+                this.sourceMarker = state;
+            }
+
+            if (targetMarker) {
+                const { name, args } = this.selectedCell.attr('line/targetMarker');
+                this.targetMarker = { type: name, ...args };
+            } else {
+                this.targetMarker = state;
+            }
+        },
+
+        setSourceMarker({ type, ...args }) {
+            this.selectedCell.attr({
+                line: {
+                    sourceMarker: { args, name: type },
+                },
+            });
+        },
+        setTargetMarker({ type, ...args }) {
+            this.selectedCell.attr({
+                line: {
+                    targetMarker: { args, name: type },
+                },
+            });
         }
     }
 };

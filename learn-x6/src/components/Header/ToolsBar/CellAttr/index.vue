@@ -221,7 +221,7 @@
         </div>
         <a-divider type="vertical" />
         <!--连线类型-->
-        <div class="font-item">
+        <div class="font-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <ul class="connector">
@@ -246,6 +246,53 @@
                     :disabled="configType !== CONFIG_TYPE.EDGE"
             >
                 <i class="iconfont icon-lianxian"></i>
+            </a-button>
+        </div>
+        <!--起点箭头-->
+        <div class="font-item">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
+                <template slot="content">
+                    <marker-settings
+                            @setMarker="setSourceMarker"
+                            :state="sourceMarker"
+                    />
+                </template>
+                <a-button
+                        :disabled="configType !== CONFIG_TYPE.EDGE"
+                >
+                    <i class="iconfont icon-al"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                    v-else
+                    :disabled="configType !== CONFIG_TYPE.EDGE"
+            >
+                <i class="iconfont icon-al"></i>
+            </a-button>
+        </div>
+
+        <!--终点箭头-->
+        <div class="font-item">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
+                <template slot="content">
+                    <marker-settings
+                            @setMarker="setTargetMarker"
+                            :state="targetMarker"
+                    />
+                </template>
+                <a-button
+                        :disabled="configType !== CONFIG_TYPE.EDGE"
+                >
+                    <i class="iconfont icon-arrow-right"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                    v-else
+                    :disabled="configType !== CONFIG_TYPE.EDGE"
+            >
+                <i class="iconfont icon-arrow-right"></i>
             </a-button>
         </div>
     </div>

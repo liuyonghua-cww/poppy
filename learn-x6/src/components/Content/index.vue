@@ -63,8 +63,13 @@ export default {
                                     strokeWidth: 1,
                                     targetMarker: {
                                         name: 'classic',
-                                        width: 12,
-                                        height: 8,
+                                        args: {
+                                            width: 12,
+                                            height: 8,
+                                            stroke: "#000000",
+                                            fill: "#000000",
+                                            strokeWidth: 1
+                                        }
                                     },
                                 },
                                 outline: {
