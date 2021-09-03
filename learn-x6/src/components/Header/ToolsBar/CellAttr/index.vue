@@ -224,22 +224,20 @@
         <div class="font-item">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
-                    <ul class="stroke-width-select">
+                    <ul class="connector">
                         <li
-                                :class="{ 'selectedBGC': attr.strokeWidth === item }"
-                                v-for="(item, i) of 10"
-                                :key="i"
-                                @click="setStrokeWidth(item)"
+                                v-for="(item, i) of connectorType"
+                                :class="{ 'selectedBGC': attr.connector === item.value }"
+                                @click="setConnector(item.value)"
                         >
-                            {{ `${item}px` }}
+                            {{ item.label }}
                         </li>
                     </ul>
                 </template>
                 <a-button
                         :disabled="configType !== CONFIG_TYPE.EDGE"
                 >
-
-                    <i class="iconfont icon-xiantiaokuandu"></i>
+                    <i class="iconfont icon-lianxian"></i>
                 </a-button>
             </a-popover>
 
@@ -247,7 +245,7 @@
                     v-else
                     :disabled="configType !== CONFIG_TYPE.EDGE"
             >
-                <i class="iconfont icon-xiantiaokuandu"></i>
+                <i class="iconfont icon-lianxian"></i>
             </a-button>
         </div>
     </div>

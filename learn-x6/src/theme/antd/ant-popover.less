@@ -4,7 +4,7 @@
 .ant-popover-inner-content {
   padding: 0;
 }
-.ant-popover .stroke-width-select {
+.ant-popover .stroke-width-select, .ant-popover .connector {
   list-style: none;
   padding: 5px 0;
   > li {
@@ -13,6 +13,7 @@
     height: 28px;
     line-height: 28px;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     &:hover {
       color: @primary-color;
     }
@@ -34,5 +35,11 @@
     > svg {
       width: 90px;
     }
+  }
+}
+
+.ant-popover .connector {
+  > li {
+    width: 100px;
   }
 }

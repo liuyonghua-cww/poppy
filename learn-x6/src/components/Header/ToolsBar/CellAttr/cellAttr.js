@@ -37,7 +37,7 @@ export default {
             this.getAttr();
         },
         configType: function (v) {
-            if (v === CONFIG_TYPE.NODE) {
+            if (v === CONFIG_TYPE.NODE || v === CONFIG_TYPE.EDGE) {
                 this.getAttr();
             }
         }
@@ -59,6 +59,7 @@ export default {
                 strokeWidth: 1, // 边框宽度
 
                 fill: '', // 背景颜色
+                connector: ''
             },
             attrPath,
             edgeAttrPath,
@@ -76,7 +77,13 @@ export default {
                 dot: '1,1',
                 dasheddot: '3, 1, 1, 1'
             },
-            strokeDasharrayIcon: strokeDasharrayIcon
+            strokeDasharrayIcon: strokeDasharrayIcon,
+            connectorType: [
+                { label: '简单连接器', value: 'normal'},
+                { label: '平滑连接器', value: 'smooth'},
+                { label: '圆角连接器', value: 'rounded'},
+                { label: '跳线连接器', value: 'jumpover'},
+            ]
         };
     },
     methods: {
@@ -92,16 +99,19 @@ export default {
                 stroke: '', // 边框颜色
                 strokeWidth: 1, // 边框宽度
 
-                fill: '', // 背景颜色
+                fill: '', // 背景颜色,
+                connector: ''
             };
             if (!this.selectedCell) {
                 return;
             }
             // 如果是 edge，获取相关属性的方式需要变化
             if (this.selectedCell.isEdge()) {
-                for (const key in this.attrPath) {
+                for (const key in this.edgeAttrPath) {
                     this.attr[ key ] = this.selectedCell.attr(this.edgeAttrPath[ key ]);
                 }
+                // 获取连接器类型
+                this.attr.connector = this.selectedCell.getConnector() && this.selectedCell.getConnector().name;
                 return;
             }
             for (const key in this.attrPath) {
@@ -259,6 +269,12 @@ export default {
             this.selectedCell.attr({
                 label: this.alignOpt
             });
+        },
+
+        // 设置连接器类型
+        setConnector(type) {
+            this.attr.connector = type;
+            this.selectedCell.setConnector(type);
         }
     }
 };
