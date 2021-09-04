@@ -24,7 +24,7 @@ export default {
 .toolBar {
     width: 100%;
     height: 45px;
-    padding: 0 20px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
 }

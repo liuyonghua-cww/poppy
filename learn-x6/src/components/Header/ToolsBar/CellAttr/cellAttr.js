@@ -3,11 +3,13 @@ import { attrPath, edgeAttrPath } from "./attrPath";
 import { CONFIG_TYPE } from "@/events/mouse";
 import Sketch from 'vue-color/src/components/Sketch';
 import { strokeDasharrayIcon } from './strokeDasharrayIcon';
+import CellTheme from './CellTheme';
 
 export default {
     name: "index",
     components: {
-        Sketch
+        Sketch,
+        CellTheme
     },
     computed: {
         ...mapState('app', [

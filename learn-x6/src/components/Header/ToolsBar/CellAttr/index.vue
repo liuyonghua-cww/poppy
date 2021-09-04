@@ -1,6 +1,18 @@
 <!--元素属性设置-->
 <template>
     <div class="node-attr">
+        <div class="cell-theme">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click">
+                <template slot="content">
+                    <cell-theme />
+                </template>
+                <a-button>
+                    <i class="iconfont icon-fengge"></i>
+                </a-button>
+            </a-popover>
+        </div>
+
+        <a-divider type="vertical" />
         <!--字体类型-->
         <div class="font-family">
             <a-select
@@ -239,7 +251,7 @@
                         :disabled="configType !== CONFIG_TYPE.EDGE"
                 >
 
-                    <i class="iconfont icon-xiantiaokuandu"></i>
+                    <i class="iconfont icon-lianxian"></i>
                 </a-button>
             </a-popover>
 
@@ -247,7 +259,7 @@
                     v-else
                     :disabled="configType !== CONFIG_TYPE.EDGE"
             >
-                <i class="iconfont icon-xiantiaokuandu"></i>
+                <i class="iconfont icon-lianxian"></i>
             </a-button>
         </div>
     </div>
