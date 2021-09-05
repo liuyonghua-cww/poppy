@@ -128,10 +128,11 @@
         <div class="font-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
-                    <sketch
-                            :value="fillColors"
-                            @input="setFillColor"
+                    <fill-color
+                        :fill="attr.fill"
+                        @setFillColor="setFillColor"
                     />
+
                 </template>
                 <a-button
                         :disabled="configType !== CONFIG_TYPE.NODE"
