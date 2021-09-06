@@ -249,7 +249,7 @@
             </a-button>
         </div>
         <!--起点箭头-->
-        <div class="font-item">
+        <div class="font-item m4">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <marker-settings
@@ -273,7 +273,7 @@
         </div>
 
         <!--终点箭头-->
-        <div class="font-item">
+        <div class="font-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <marker-settings
