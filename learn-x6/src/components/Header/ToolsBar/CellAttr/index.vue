@@ -1,6 +1,18 @@
 <!--元素属性设置-->
 <template>
     <div class="node-attr">
+        <div class="cell-theme">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click">
+                <template slot="content">
+                    <cell-theme />
+                </template>
+                <a-button>
+                    <i class="iconfont icon-fengge"></i>
+                </a-button>
+            </a-popover>
+        </div>
+
+        <a-divider type="vertical" />
         <!--字体类型-->
         <div class="font-family">
             <a-select
@@ -116,10 +128,11 @@
         <div class="font-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
-                    <sketch
-                            :value="fillColors"
-                            @input="setFillColor"
+                    <fill-color
+                        :fill="attr.fill"
+                        @setFillColor="setFillColor"
                     />
+
                 </template>
                 <a-button
                         :disabled="configType !== CONFIG_TYPE.NODE"

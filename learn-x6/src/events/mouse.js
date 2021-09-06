@@ -59,6 +59,11 @@ export class Mouse extends BaseEvent {
         graph.on('blank:click', () => {
             configType = CONFIG_TYPE.GRID;
             callback(cellId, selectedCell, configType);
+            const container = document.getElementById('x6_container');
+            const ports = container.querySelectorAll(
+                '.x6-port-body',
+            );
+            this.showPorts(ports, false);
         });
         graph.on('cell:click', ({ cell }) => {
             configType = cell.isNode() ? CONFIG_TYPE.NODE : CONFIG_TYPE.EDGE;

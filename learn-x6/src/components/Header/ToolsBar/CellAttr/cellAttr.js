@@ -3,13 +3,17 @@ import { attrPath, edgeAttrPath } from "./attrPath";
 import { CONFIG_TYPE } from "@/events/mouse";
 import Sketch from 'vue-color/src/components/Sketch';
 import { strokeDasharrayIcon } from './strokeDasharrayIcon';
+import CellTheme from './CellTheme';
+import FillColor from './FillColor'
 import MarkerSettings from './MarkerSettings';
 
 export default {
     name: "index",
     components: {
         Sketch,
-        MarkerSettings
+        MarkerSettings,
+        CellTheme,
+        FillColor
     },
     computed: {
         ...mapState('app', [
@@ -21,11 +25,6 @@ export default {
         colors() {
             return {
                 hex: this.attr.color
-            };
-        },
-        fillColors() {
-            return {
-                hex: this.attr.fill
             };
         },
         strokeColor() {
@@ -163,7 +162,7 @@ export default {
             this.selectedCell.attr(this.attrPath.color, this.attr.color);
         },
         setFillColor(v) {
-            this.attr.fill = v.hex;
+            this.attr.fill = v;
             this.selectedCell.attr(this.attrPath.fill, this.attr.fill);
         },
         setStrokeColor(v) {

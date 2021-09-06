@@ -10,9 +10,9 @@
             <div id="minimap"></div>
         </div>
         <!--配置：节点、画布-->
-        <div id="configuration" :style="configurationStyle">
-            <settings />
-        </div>
+        <!--<div id="configuration" :style="configurationStyle">-->
+        <!--    <settings />-->
+        <!--</div>-->
     </div>
 </template>
 

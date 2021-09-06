@@ -31,6 +31,7 @@ export default {
     width: 100%;
     height: 40px;
     > .ant-menu-horizontal {
+        padding-left: 20px;
         line-height: 40px;
         height: 100%;
     }
