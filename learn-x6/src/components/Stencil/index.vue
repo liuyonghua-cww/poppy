@@ -447,8 +447,8 @@ export default {
                     graphHeight: 300
                 })
             }
-            this.initStencil();
-            this.initShape();
+            this.initStencil(); // 重新初始化拖拽区
+            this.initShape(); // 重新生成相关基础图形
             for (const group of Object.keys(shapes)) {
                 const arr = []
                 shapes[group].forEach(shape => {
