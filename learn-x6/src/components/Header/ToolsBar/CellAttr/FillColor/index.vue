@@ -23,6 +23,18 @@
                     </a-select>
                 </a-form-item>
             </template>
+            <template v-if="type === 'radialGradient'">
+                <a-form-item label="渐变半径">
+                    <a-slider
+                            :default-value="attrs_radialGradient.r"
+                            v-model="attrs_radialGradient.r"
+                            @change="onChange"
+                            :min="0"
+                            :max="1"
+                            :step="0.1"
+                    />
+                </a-form-item>
+            </template>
             <template v-if="type === 'linearGradient' || type === 'radialGradient'">
                <div class="color-range">
                    <a-input
@@ -30,7 +42,7 @@
                            type="color"
                            @change="onChange"
                    />
-                   <a-button @click="exchangeColor">
+                   <a-button @click="exchangeColor" type="primary">
                        <i class="iconfont icon-icon_exchange"></i>
                    </a-button>
                    <a-input
@@ -74,11 +86,11 @@ export default {
     },
     data() {
         return {
-            fillType: [ { label: '纯色背景', value: 'solidColor' }, { label: '线性渐变', value: 'linearGradient' } ],
+            fillType: [ { label: '纯色背景', value: 'solidColor' }, { label: '线性渐变', value: 'linearGradient' }, { label: '径向渐变', value: 'radialGradient' } ],
             type: null,
             stops: [
-                { offset: '0%', color: '#b1d8ff' },
-                { offset: '100%', color: '#759cc3' },
+                { offset: '0%', color: '#5ee7df' },
+                { offset: '100%', color: '#b490ca' },
             ],
             // 定义几个渐变的方向
             linearGradientDirection: [
@@ -104,6 +116,7 @@ export default {
                 rightBottom: { x1: '0', y1: '0', x2: '1', y2: '1' }
             },
             attrs: { x1: '0', y1: '0', x2: '0', y2: '1' },
+            attrs_radialGradient: { r: 0.5 }
         };
     },
     created() {
@@ -125,6 +138,11 @@ export default {
                 this.attrs = this.fill.attrs;
                 this.stops = this.fill.stops;
             }
+            if (isObject(this.fill) && this.fill.type === 'radialGradient') {
+                this.type = 'radialGradient';
+                this.attrs_radialGradient = this.fill.attrs;
+                this.stops = this.fill.stops;
+            }
         },
         onChange() {
             if (this.type === 'solidColor') {
@@ -135,6 +153,13 @@ export default {
                     type: 'linearGradient',
                     stops: this.stops,
                     attrs: this.attrs,
+                });
+            }
+            if (this.type === 'radialGradient') {
+                this.transferColor({
+                    type: 'radialGradient',
+                    stops: this.stops,
+                    attrs: this.attrs_radialGradient,
                 });
             }
         },
@@ -151,6 +176,7 @@ export default {
         },
         // 交换起点、终点的颜色
         exchangeColor() {
+            this.transferColor('transparent'); // 避免有时交换颜色时 节点背景不渲染的问题
             const {color: color1} = this.stops[0];
             const {color: color2} = this.stops[1];
             this.stops[0].color = color2;

@@ -108,6 +108,7 @@ export default {
                     enabled: true,
                     rubberband: true,
                     showNodeSelectionBox: true,
+                    rubberEdge: true
                 },
                 snapline: true,
                 keyboard: true,
