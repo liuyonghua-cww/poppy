@@ -6,6 +6,7 @@ import { strokeDasharrayIcon } from './strokeDasharrayIcon';
 import CellTheme from './CellTheme';
 import FillColor from './FillColor'
 import MarkerSettings from './MarkerSettings';
+import DropShadow from './DropShadow';
 
 export default {
     name: "index",
@@ -13,7 +14,8 @@ export default {
         Sketch,
         MarkerSettings,
         CellTheme,
-        FillColor
+        FillColor,
+        DropShadow
     },
     computed: {
         ...mapState('app', [

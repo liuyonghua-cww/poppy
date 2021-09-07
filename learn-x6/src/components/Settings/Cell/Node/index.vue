@@ -47,7 +47,7 @@
 <script>
 import { mapState } from "vuex";
 import { Mouse } from "@/events/mouse";
-import DropShow from './DropShadow';
+import DropShow from '../../../Header/ToolsBar/CellAttr/DropShadow';
 export default {
     name: "index",
     components: {

@@ -308,6 +308,28 @@
                 <i class="iconfont icon-arrow-right"></i>
             </a-button>
         </div>
+
+        <a-divider type="vertical" />
+        <div class="font-item m4 ml0">
+            <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
+                <template slot="content">
+                    <drop-shadow />
+                </template>
+                <a-button
+                        :disabled="configType !== CONFIG_TYPE.NODE"
+                >
+                    <i class="iconfont icon-yinying"></i>
+                </a-button>
+            </a-popover>
+
+            <a-button
+                    v-else
+                    :disabled="configType !== CONFIG_TYPE.NODE"
+            >
+                <i class="iconfont icon-yinying"></i>
+            </a-button>
+        </div>
+
     </div>
 </template>
 
