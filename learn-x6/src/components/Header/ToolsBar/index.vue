@@ -10,7 +10,7 @@
 
 <script>
 import OperationHistory from './OperationHistory';
-import NodeAttr from './CellAttr';
+import NodeAttr from './CellSettings';
 export default {
     name: "index",
     components: {

@@ -102,7 +102,10 @@ export default {
                         },
                     },
                 },
-                resizing: true,
+                resizing: {
+                    enabled: true,
+                    preserveAspectRatio: node => node.prop('preserveAspectRatio') // 节点设置了锁定宽高比时才进行等比例缩放
+                },
                 rotating: true,
                 selecting: {
                     enabled: true,

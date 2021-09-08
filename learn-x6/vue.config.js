@@ -19,7 +19,8 @@ module.exports = {
                 injectCss: true,
                 resolveCss
             })
-        )
+        );
+        config.devtool = 'source-map'
     },
     css: {
         loaderOptions: {

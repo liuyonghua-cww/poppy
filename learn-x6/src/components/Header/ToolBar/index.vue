@@ -19,7 +19,7 @@
 <script>
 import {toolBarOpt} from "./toolBarOpt";
 import { mapState } from "vuex";
-import CellTheme from '../ToolsBar/CellAttr/CellTheme'
+import CellTheme from '../ToolsBar/CellSettings/CellTheme'
 export default {
     name: "index",
     components: {
