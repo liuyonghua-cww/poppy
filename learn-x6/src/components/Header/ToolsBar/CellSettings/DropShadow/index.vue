@@ -105,7 +105,7 @@ export default {
 
 <style scoped lang="less">
 .dropShadow {
-    width: 100%;
+    width: 240px;
     /deep/ .ant-form-item {
         margin: 0;
         width: 100%!important;

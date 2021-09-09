@@ -20,10 +20,6 @@
         <graph-option
                 v-if="configType === CONFIG_TYPE.GRID"
         />
-        <cell-option
-                v-if="configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE"
-                :configType="configType"
-        />
     </section>
 </template>
 
@@ -31,13 +27,11 @@
 import GraphOption from './GraphOption';
 import { mapState } from "vuex";
 import { CONFIG_TYPE } from "@/events/mouse";
-import CellOption from './Cell'
 
 export default {
     name: "index",
     components: {
         GraphOption,
-        CellOption
     },
     data() {
         return {
