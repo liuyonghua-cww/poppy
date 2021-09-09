@@ -1,6 +1,6 @@
 <!--折线图组件-->
 <template>
-    <div :id="id" class="ehcarts">
+    <div :id="id" class="ehcarts" ref="chart">
     </div>
 </template>
 
@@ -20,8 +20,8 @@ export default {
     },
     mounted() {
         this.$nextTick(() => {
-            const chartDom = document.getElementById(this.id);
-            const myChart = echarts.init(chartDom, null, { renderer: 'svg' });
+            // const chartDom = document.getElementById(this.id);
+            const myChart = echarts.init(this.$refs.chart, null, { renderer: 'svg' });
             myChart.setOption(this.chartOption);
             this.node.on('change:size', () => {
                 myChart.resize();
