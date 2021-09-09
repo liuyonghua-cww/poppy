@@ -1,12 +1,14 @@
 <!--折线图组件-->
 <template>
     <div :id="id" class="ehcarts">
-        1111
     </div>
 </template>
 
 <script>
 import * as echarts from 'echarts';
+import { SVGRenderer, CanvasRenderer } from 'echarts/renderers';
+
+echarts.use([SVGRenderer, CanvasRenderer]);
 
 export default {
     name: "lineChart",
@@ -19,7 +21,7 @@ export default {
     mounted() {
         this.$nextTick(() => {
             const chartDom = document.getElementById(this.id);
-            const myChart = echarts.init(chartDom);
+            const myChart = echarts.init(chartDom, null, { renderer: 'svg' });
             myChart.setOption(this.chartOption);
             this.node.on('change:size', () => {
                 myChart.resize();
