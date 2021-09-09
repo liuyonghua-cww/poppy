@@ -2,15 +2,17 @@
     <div id="stencil-con">
         <div id="stencil"></div>
         <more-shapes
-                @addShapes="addShapes"
+            @addShapes="addShapes"
         />
     </div>
 </template>
 
 <script>
 import {Addon, Graph} from "@antv/x6";
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import './shapes';
+import "@antv/x6-vue-shape";
+import '@/register/charts'
 import {
     customType,
     ports_parallelogram,
@@ -20,7 +22,9 @@ import {
     registerCustomRect
 } from "@/components/Stencil/shapes";
 import MoreShapes from './MoreShapes'
-import { shapes_type } from './MoreShapes/shapes'
+import {shapes_type} from './MoreShapes/shapes'
+import * as echarts from "echarts";
+
 export default {
     name: "index",
     components: {
@@ -31,7 +35,7 @@ export default {
             'theme',
             'cellTheme'
         ]),
-        ...mapState('app', [ 'graph' ])
+        ...mapState('app', ['graph'])
     },
     data() {
         return {
@@ -42,7 +46,7 @@ export default {
     },
     watch: {
         // 主题颜色改变时 重新注册节点
-        'theme.color': function(val) {
+        'theme.color': function (val) {
             for (const type of customType) {
                 Graph.unregisterNode(type);
             }
@@ -63,7 +67,7 @@ export default {
     },
     methods: {
         initGroups() {
-            this.groups =  [
+            this.groups = [
                 {
                     name: 'group1',
                     title: '基础图形',
@@ -73,12 +77,18 @@ export default {
                     name: 'group2',
                     title: '流程图',
                     graphHeight: 220
-                }
-                // {
-                //     name: 'group2',
-                //     title: 'Group',
-                //     collapsable: false,
-                // },
+                },
+                {
+                    name: 'group3',
+                    title: '图表',
+                    graphHeight: 220,
+                    layoutOptions: {
+                        columns: 1,
+                        columnWidth: 190,
+                        rowHeight: 150,
+                        dx: 5
+                    },
+                },
             ]
         },
         // 初始化左侧面板
@@ -124,7 +134,7 @@ export default {
             }
         },
         initShape() {
-            const { graph } = this;
+            const {graph} = this;
             const rect = graph.createNode({
                 shape: 'custom-rect',
                 name: 'rect'
@@ -410,6 +420,103 @@ export default {
                 height: 30,
                 path: 'M 0 0 H -131 V 380 H -1'
             })
+
+            // 图表
+            const lineChart = graph.createNode({
+                name: 'line-chart',
+                shape: "vue-shape",
+                width: 190,
+                height: 150,
+                component: "line-chart",
+                data: {
+                    chartOption: {
+                        color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross',
+                                label: {
+                                    backgroundColor: '#6a7985'
+                                }
+                            }
+                        },
+                        legend: {
+                            data: ['Line 1', 'Line 2']
+                        },
+                        grid: {
+                            top: '15%',
+                            left: '3%',
+                            right: '5%',
+                            bottom: '5%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: 'Line 1',
+                                type: 'line',
+                                stack: '总量',
+                                smooth: true,
+                                lineStyle: {
+                                    width: 0
+                                },
+                                showSymbol: false,
+                                areaStyle: {
+                                    opacity: 0.8,
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(128, 255, 165)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(1, 191, 236)'
+                                    }])
+                                },
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [10, 20, 80, 40, 90, 50, 10]
+                            },
+                            {
+                                name: 'Line 2',
+                                type: 'line',
+                                stack: '总量',
+                                smooth: true,
+                                lineStyle: {
+                                    width: 0
+                                },
+                                showSymbol: false,
+                                areaStyle: {
+                                    opacity: 0.8,
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(0, 221, 255)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(77, 119, 255)'
+                                    }])
+                                },
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [50, 40, 20, 70, 100, 110, 30]
+                            },
+                        ]
+                    }
+                }
+            });
+
+
             this.stencil.load([
                 rect, rounded_rect, diamond, parallelogram, circle,
                 triangle, pentagon, hexagon, octagon, five_pointed_star, cloud,
@@ -425,9 +532,15 @@ export default {
                 annotation
 
             ], 'group2');
+
+            this.stencil.load([lineChart
+            ], 'group3');
         },
         getStencilSize() {
-            const { width: stencilGraphWidth, height: stencilGraphHeight } = document.querySelector('#stencil').getBoundingClientRect();
+            const {
+                width: stencilGraphWidth,
+                height: stencilGraphHeight
+            } = document.querySelector('#stencil').getBoundingClientRect();
             return {
                 stencilGraphWidth,
                 stencilGraphHeight
@@ -476,27 +589,32 @@ export default {
 };
 </script>
 
-<style  lang="less">
+<style lang="less">
 #stencil-con {
     width: 100%;
     height: 100%;
     position: relative;
+
     #stencil {
         width: 100%;
         height: calc(~"100% - 40px");
         position: relative;
         border-right: 1px solid @border-color-base;
+
         .x6-widget-stencil {
             background-color: @component-background;
             overflow-x: hidden;
+
             > .x6-widget-stencil-title {
                 background-color: @component-background;
             }
+
             > .x6-widget-stencil-content {
                 right: -20px;
             }
         }
     }
+
     .add-btn {
         width: 100%;
         height: 40px;

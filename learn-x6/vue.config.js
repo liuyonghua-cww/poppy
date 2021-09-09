@@ -4,6 +4,7 @@ const ThemeColorReplacer = require('webpack-theme-color-replacer');
 const {resolveCss} = require('./src/utils/theme-color-replacer-extend')
 
 module.exports = {
+    runtimeCompiler: true,
     pluginOptions: {
         'style-resources-loader': {
             preProcessor: 'less',
