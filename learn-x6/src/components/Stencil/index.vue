@@ -421,13 +421,34 @@ export default {
                 path: 'M 0 0 H -131 V 380 H -1'
             })
 
-            // 图表
-            const lineChart = graph.createNode({
+
+
+            this.stencil.load([
+                rect, rounded_rect, diamond, parallelogram, circle,
+                triangle, pentagon, hexagon, octagon, five_pointed_star, cloud,
+                dialog_box, apqc, drip, top_arrow, bottom_arrow, left_arrow, right_arrow,
+                corner, left_turn_around, right_turn_around
+            ], 'group1');
+
+
+            this.stencil.load([
+                rect.clone(), diamond.clone(), begin_end, document, parallelogram.clone(), sub_process,
+                stored_data, sequential_data, database, manual_input, card, paper_tape, display,
+                manual_operation, hexagon.clone(), parallel_mode, loop_limit, circle.clone(), off_page_reference,
+                annotation
+
+            ], 'group2');
+
+           this.initChartNodes();
+        },
+        // 图表
+        initChartNodes() {
+            const lineChart = this.graph.createNode({
                 name: 'line-chart',
                 shape: "vue-shape",
                 width: 190,
                 height: 150,
-                component: "line-chart",
+                component: "chart-node",
                 data: {
                     chartOption: {
                         color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
@@ -515,24 +536,6 @@ export default {
                     }
                 }
             });
-
-
-            this.stencil.load([
-                rect, rounded_rect, diamond, parallelogram, circle,
-                triangle, pentagon, hexagon, octagon, five_pointed_star, cloud,
-                dialog_box, apqc, drip, top_arrow, bottom_arrow, left_arrow, right_arrow,
-                corner, left_turn_around, right_turn_around
-            ], 'group1');
-
-
-            this.stencil.load([
-                rect.clone(), diamond.clone(), begin_end, document, parallelogram.clone(), sub_process,
-                stored_data, sequential_data, database, manual_input, card, paper_tape, display,
-                manual_operation, hexagon.clone(), parallel_mode, loop_limit, circle.clone(), off_page_reference,
-                annotation
-
-            ], 'group2');
-
             this.stencil.load([lineChart
             ], 'group3');
         },

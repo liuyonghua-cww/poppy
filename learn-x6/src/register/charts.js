@@ -1,9 +1,9 @@
 import {Graph} from "@antv/x6";
-import LineChart from "@/components/Echarts/lineChart";
+import Chart from "@/components/Echarts";
 
-Graph.registerVueComponent('line-chart', {
-    template: `<line-chart />`,
+Graph.registerVueComponent('chart-node', {
+    template: `<chart />`,
     components: {
-        LineChart
+        Chart
     },
 }, true)

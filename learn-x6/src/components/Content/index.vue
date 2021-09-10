@@ -133,6 +133,7 @@ export default {
     },
     methods: {
         ...mapMutations('app', [
+            'setIsInit',
             'setGraph',
             'setConfigType',
             'setCellId',
@@ -153,6 +154,7 @@ export default {
                 },
             });
             this.graph = graph;
+            this.setIsInit(true);
             this.setGraph(graph);
             console.log(graph);
             return graph;
