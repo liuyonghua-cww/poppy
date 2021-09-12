@@ -3,7 +3,8 @@ const state = () => ({
     graph: null,
     cellId: null, // 选中的id
     selectedCell: null, // 选中的对象,
-    configType: 0
+    configType: 0,
+    contextmenuNode: null // 右键的节点
 });
 const mutations = {
     setIsInit(state, v) {
@@ -20,6 +21,9 @@ const mutations = {
     },
     setConfigType(state, v) {
         state.configType = v;
+    },
+    setContextmenuNode(state, v) {
+        state.contextmenuNode = v;
     }
 };
 const actions = {};

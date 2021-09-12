@@ -130,6 +130,7 @@ export default {
         this.initGraph();
         this.resize();
         this.initEvent();
+        window.graph = this.graph
     },
     methods: {
         ...mapMutations('app', [

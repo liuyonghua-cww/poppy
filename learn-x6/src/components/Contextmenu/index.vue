@@ -41,6 +41,7 @@ export default {
         setData(e) {
             e.stopPropagation();
             e.preventDefault();
+            this.$emit('setEditorVisible', true);
 
         }
     }

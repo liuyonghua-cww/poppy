@@ -16,6 +16,11 @@
         <!--右键菜单-->
         <contextmenu
                 :contextmenuStyle="contextmenuStyle"
+                @setEditorVisible="setEditorVisible"
+        />
+        <monaco-editor
+            @setEditorVisible="setEditorVisible"
+            :editorVisible="editorVisible"
         />
     </div>
 </template>
@@ -25,7 +30,8 @@ import graphContent from '@/components/Content';
 import stencil from '@/components/Stencil';
 import Settings from '@/components/Settings';
 import Contextmenu from '@/components/Contextmenu';
-import { mapState } from "vuex";
+import {mapMutations, mapState} from "vuex";
+import MonacoEditor from "@/components/Editor/MonacoEditor";
 
 export default {
     name: 'Home',
@@ -33,7 +39,8 @@ export default {
         graphContent,
         stencil,
         Settings,
-        Contextmenu
+        Contextmenu,
+        MonacoEditor
     },
     computed: {
         ...mapState('app', [
@@ -62,10 +69,14 @@ export default {
                 width: '300px',
                 height: '100%',
             },
-            contextmenuStyle: {}
+            contextmenuStyle: {},
+            editorVisible: false
         };
     },
     methods: {
+        ...mapMutations('app', [
+            'setContextmenuNode'
+        ]),
         onContextmenu() {
             this.graph.on('node:contextmenu', ({ e, node, x, y }) => {
                 // 右击节点动态改变 右键菜单的位置
@@ -74,11 +85,15 @@ export default {
                     top: top + 10 + 'px',
                     left: left + 10 + 'px'
                 };
+                this.setContextmenuNode(node);
             });
             document.addEventListener('click', () => {
                 this.contextmenuStyle = null;
             });
         },
+        setEditorVisible(v) {
+            this.editorVisible = v;
+        }
     }
 };
 </script>
