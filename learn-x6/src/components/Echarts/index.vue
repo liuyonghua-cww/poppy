@@ -22,9 +22,14 @@ export default {
         this.$nextTick(() => {
             // const chartDom = document.getElementById(this.id);
             const myChart = echarts.init(this.$refs.chart, null, { renderer: 'svg' });
-            myChart.setOption(this.chartOption);
+            myChart.setOption(eval("(" + this.chartOption + ")"));
             this.node.on('change:size', () => {
                 myChart.resize();
+            });
+            this.node.on('change:data', () => {
+               const data = this.node.getData().chartOption;
+                console.log(data);
+                myChart.setOption(data, { notMerge: true });
             })
         })
     },

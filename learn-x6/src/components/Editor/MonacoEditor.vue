@@ -1,15 +1,17 @@
 <template>
-    <a-modal :visible="editorVisible" title="Basic Modal" @cancel="handleModal">
-        <MonacoEditor class="editor" v-model="code" language="javascript" />
+    <a-modal :visible="editorVisible" title="数据编辑" @cancel="handleModal">
+        <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>
     </a-modal>
 </template>
 
 <script>
-import MonacoEditor from 'vue-monaco'
+import Editor from 'vue-monaco';
+import { mapState } from "vuex";
+
 export default {
     name: "MonacoEditor",
     components: {
-        MonacoEditor
+        Editor
     },
     props: {
         editorVisible: {
@@ -17,14 +19,37 @@ export default {
             default: false
         }
     },
+    computed: {
+        ...mapState('app', [ 'contextmenuNode' ])
+    },
+    watch: {
+        contextmenuNode(v) {
+            if (v) {
+                this.getCode();
+            }
+        }
+    },
     data() {
         return {
-            code: 'const noop = () => {}'
-        }
+            code: '{ colkey: "col", colsinfo: "NameList" }'
+        };
+    },
+    mounted() {
     },
     methods: {
         handleModal() {
-            this.$emit('setEditorVisible', false)
+            this.$emit('setEditorVisible', false);
+        },
+        dataChange(v) {
+            this.contextmenuNode.updateData(
+                    {
+                        chartOption: eval("(" + v + ")")
+                    }
+            );
+            console.log(this.contextmenuNode.getData().chartOption);
+        },
+        getCode() {
+            this.code = this.contextmenuNode.getData().chartOption;
         }
     }
 };
@@ -32,7 +57,7 @@ export default {
 
 <style scoped>
 .editor {
-    width: 600px;
-    height: 800px;
+    width: 100%;
+    height: 500px;
 }
 </style>
