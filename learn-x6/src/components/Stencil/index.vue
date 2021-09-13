@@ -23,7 +23,6 @@ import {
 } from "@/components/Stencil/shapes";
 import MoreShapes from './MoreShapes'
 import {shapes_type} from './MoreShapes/shapes'
-import * as echarts from "echarts";
 
 export default {
     name: "index",
@@ -450,19 +449,7 @@ export default {
                 height: 150,
                 component: "chart-node",
                 data: {
-                    chartOption: "{\n" +
-                            "    xAxis: {\n" +
-                            "        type: 'category',\n" +
-                            "        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n" +
-                            "    },\n" +
-                            "    yAxis: {\n" +
-                            "        type: 'value'\n" +
-                            "    },\n" +
-                            "    series: [{\n" +
-                            "        data: [150, 230, 224, 218, 135, 147, 260],\n" +
-                            "        type: 'line'\n" +
-                            "    }]\n" +
-                            "}"
+                    chartOption: window.lineChart
                 }
             });
             this.stencil.load([lineChart

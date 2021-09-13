@@ -41,12 +41,12 @@ export default {
             this.$emit('setEditorVisible', false);
         },
         dataChange(v) {
+            // 实时更新数据
             this.contextmenuNode.updateData(
                     {
-                        chartOption: eval("(" + v + ")")
+                        chartOption: v
                     }
             );
-            console.log(this.contextmenuNode.getData().chartOption);
         },
         getCode() {
             this.code = this.contextmenuNode.getData().chartOption;

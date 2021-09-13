@@ -6,7 +6,8 @@
 
 <script>
 import * as echarts from 'echarts';
-import { SVGRenderer, CanvasRenderer } from 'echarts/renderers';
+window.echarts = echarts;
+import {SVGRenderer, CanvasRenderer} from 'echarts/renderers';
 
 echarts.use([SVGRenderer, CanvasRenderer]);
 
@@ -16,20 +17,16 @@ export default {
     created() {
         this.node = this.getNode();
         this.id = this.node.id;
-        this.chartOption = this.node.getData().chartOption
     },
     mounted() {
         this.$nextTick(() => {
-            // const chartDom = document.getElementById(this.id);
-            const myChart = echarts.init(this.$refs.chart, null, { renderer: 'svg' });
-            myChart.setOption(eval("(" + this.chartOption + ")"));
+            const myChart = echarts.init(this.$refs.chart, null, {renderer: 'svg'});
+            this.setOption(myChart);
             this.node.on('change:size', () => {
                 myChart.resize();
             });
             this.node.on('change:data', () => {
-               const data = this.node.getData().chartOption;
-                console.log(data);
-                myChart.setOption(data, { notMerge: true });
+                this.setOption(myChart);
             })
         })
     },
@@ -38,6 +35,16 @@ export default {
             node: null,
             id: null,
             chartOption: null
+        }
+    },
+    methods: {
+        /**
+         *
+         * @param instance echarts 实例
+         */
+        setOption(instance) {
+            this.chartOption = this.node.getData().chartOption; // 获取配置
+            instance.setOption(eval("(" + this.chartOption + ")"), {notMerge: true}); // eval将字符串转换为对象
         }
     }
 }
