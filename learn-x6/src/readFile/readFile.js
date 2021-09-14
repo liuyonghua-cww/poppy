@@ -3,3 +3,6 @@ import axios from 'axios'
 axios.get('echartsOption/line-chart.js').then(res => {
     window.lineChart = res.data;
 })
+axios.get('echartsOption/bar-chart.js').then(res => {
+    window.barChart = res.data;
+})

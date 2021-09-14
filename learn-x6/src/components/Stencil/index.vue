@@ -80,7 +80,6 @@ export default {
                 {
                     name: 'group3',
                     title: '图表',
-                    graphHeight: 220,
                     layoutOptions: {
                         columns: 1,
                         columnWidth: 190,
@@ -452,7 +451,17 @@ export default {
                     chartOption: window.lineChart
                 }
             });
-            this.stencil.load([lineChart
+            const barChart = this.graph.createNode({
+                name: 'line-chart',
+                shape: "vue-shape",
+                width: 190,
+                height: 150,
+                component: "chart-node",
+                data: {
+                    chartOption: window.barChart
+                }
+            });
+            this.stencil.load([lineChart, barChart
             ], 'group3');
         },
         getStencilSize() {

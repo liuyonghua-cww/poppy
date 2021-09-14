@@ -47,6 +47,9 @@ export default {
             const fn = new Function('return ' + this.chartOption);
             instance.setOption(fn(), {notMerge: true}); // eval将字符串转换为对象
         }
+    },
+    beforeDestory() {
+        console.log(1);
     }
 }
 </script>
