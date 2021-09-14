@@ -1,6 +1,5 @@
 import axios from 'axios'
+// 获取折线图初始化配置
 axios.get('echartsOption/line-chart.js').then(res => {
-    const arr = res.data.split('=')
-    console.log(arr);
-    window[arr[0].replace(/\t|\n|\s/g, '')] = arr[1]
+    window.lineChart = res.data;
 })

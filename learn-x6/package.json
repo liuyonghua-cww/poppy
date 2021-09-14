@@ -19,6 +19,7 @@
     "normalize.css": "^8.0.1",
     "vue": "^2.6.14",
     "vue-color": "^2.8.1",
+    "vue-drag-resize": "^1.5.4",
     "vue-monaco": "^1.2.2",
     "vue-router": "^3.5.2",
     "vuex": "^3.6.2"

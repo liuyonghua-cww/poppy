@@ -1,17 +1,31 @@
 <template>
-    <a-modal :visible="editorVisible" title="数据编辑" @cancel="handleModal">
+    <!--<a-modal :visible="editorVisible" title="数据编辑" @cancel="handleModal" :footer="null">-->
+    <!--    <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>-->
+    <!--</a-modal>-->
+    <a-drawer
+            title="数据编辑"
+            placement="right"
+            :closable="false"
+            :visible="editorVisible"
+            @close="handleModal"
+            :width="600"
+            :maskStyle="{backgroundColor: 'transparent'}"
+            :headerStyle="{height: '5%'}"
+            :bodyStyle="{height: '94%'}"
+    >
         <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>
-    </a-modal>
+    </a-drawer>
 </template>
 
 <script>
 import Editor from 'vue-monaco';
 import { mapState } from "vuex";
-
+import VueDragResize from 'vue-drag-resize'
 export default {
     name: "MonacoEditor",
     components: {
-        Editor
+        Editor,
+        VueDragResize
     },
     props: {
         editorVisible: {
@@ -58,6 +72,6 @@ export default {
 <style scoped>
 .editor {
     width: 100%;
-    height: 500px;
+    height: 100%;
 }
 </style>

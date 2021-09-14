@@ -13,9 +13,9 @@ lineChart = {
         data: ['Line 1', 'Line 2']
     },
     grid: {
-        top: '10%',
+        top: '15%',
         left: '3%',
-        right: '4%',
+        right: '5%',
         bottom: '10%',
         containLabel: true
     },

@@ -1,6 +1,6 @@
 <!--折线图组件-->
 <template>
-    <div :id="id" class="ehcarts" ref="chart">
+    <div :id="id" class="echarts" ref="chart">
     </div>
 </template>
 
@@ -44,14 +44,15 @@ export default {
          */
         setOption(instance) {
             this.chartOption = this.node.getData().chartOption; // 获取配置
-            instance.setOption(eval("(" + this.chartOption + ")"), {notMerge: true}); // eval将字符串转换为对象
+            const fn = new Function('return ' + this.chartOption);
+            instance.setOption(fn(), {notMerge: true}); // eval将字符串转换为对象
         }
     }
 }
 </script>
 
 <style scoped>
-.ehcarts {
+.echarts {
     width: 100%;
     height: 100%;
 }
