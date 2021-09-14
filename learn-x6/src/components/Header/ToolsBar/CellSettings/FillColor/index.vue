@@ -6,6 +6,7 @@
                     <a-select-option
                             v-for="(item, i) of fillType"
                             :value="item.value"
+                            :key="i"
                     >
                         {{ item.label }}
                     </a-select-option>
@@ -17,6 +18,7 @@
                         <a-select-option
                                 v-for="(item, i) of linearGradientDirection"
                                 :value="item.value"
+                                :key="i"
                         >
                             {{ item.label }}
                         </a-select-option>

@@ -6,6 +6,7 @@
                     <a-select-option
                             v-for="(item, i) of markerType"
                             :value="item.value"
+                            :key="i"
                     >
                         {{ item.label }}
                     </a-select-option>
