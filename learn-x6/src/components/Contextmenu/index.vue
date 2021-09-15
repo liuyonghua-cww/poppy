@@ -7,7 +7,12 @@
             <a-card-grid class="grid" @click="down">
                 下移一层
             </a-card-grid>
-            <a-card-grid class="grid" @click="setData">
+            <a-card-grid
+                    class="grid"
+                    @click="setData"
+                    :hoverable="contextmenuNode.prop('name').includes('chart')"
+                    :class="{'contextmenu-disable': !contextmenuNode.prop('name').includes('chart')}"
+            >
                 数据设置
             </a-card-grid>
         </a-card>
@@ -15,6 +20,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     name: "index",
     props: {
@@ -22,6 +29,9 @@ export default {
             type: Object,
             default: null
         }
+    },
+    computed: {
+        ...mapState('app', ['contextmenuNode'])
     },
     data() {
         return {
@@ -60,6 +70,10 @@ export default {
         padding: 8px 8px 8px 20px;
         cursor: pointer;
     }
+}
+.contextmenu-disable {
+    cursor: not-allowed!important;
+    background-color: #f5f5f5;
 }
 
 </style>

@@ -15,6 +15,7 @@
         <!--</div>-->
         <!--右键菜单-->
         <contextmenu
+                v-if="contextmenuNode"
                 :contextmenuStyle="contextmenuStyle"
                 @setContextMenuStyle="setContextMenuStyle"
                 @setEditorVisible="setEditorVisible"
@@ -44,10 +45,7 @@ export default {
         MonacoEditor
     },
     computed: {
-        ...mapState('app', [
-            'graph',
-            'isInit'
-        ]),
+        ...mapState('app', [ 'graph', 'isInit', 'contextmenuNode' ]),
     },
     watch: {
         // 画布初始化完成
@@ -82,11 +80,12 @@ export default {
             this.graph.on('node:contextmenu', ({ e, node, x, y }) => {
                 // 右击节点动态改变 右键菜单的位置
                 const { x: left, y: top } = this.graph.localToPage(x, y);
+                this.setContextmenuNode(node);
                 this.contextmenuStyle = {
                     top: top + 10 + 'px',
                     left: left + 10 + 'px'
                 };
-                this.setContextmenuNode(node);
+                console.log(this.contextmenuNode);
             });
             document.addEventListener('click', () => {
                 this.contextmenuStyle = null;
