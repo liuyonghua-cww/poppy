@@ -16,11 +16,12 @@
         <!--右键菜单-->
         <contextmenu
                 :contextmenuStyle="contextmenuStyle"
+                @setContextMenuStyle="setContextMenuStyle"
                 @setEditorVisible="setEditorVisible"
         />
         <monaco-editor
-            @setEditorVisible="setEditorVisible"
-            :editorVisible="editorVisible"
+                :editorVisible="editorVisible"
+                @setEditorVisible="setEditorVisible"
         />
     </div>
 </template>
@@ -30,7 +31,7 @@ import graphContent from '@/components/Content';
 import stencil from '@/components/Stencil';
 import Settings from '@/components/Settings';
 import Contextmenu from '@/components/Contextmenu';
-import {mapMutations, mapState} from "vuex";
+import { mapMutations, mapState } from "vuex";
 import MonacoEditor from "@/components/Editor/MonacoEditor";
 
 export default {
@@ -93,6 +94,9 @@ export default {
         },
         setEditorVisible(v) {
             this.editorVisible = v;
+        },
+        setContextMenuStyle(v) {
+            this.contextmenuStyle = null;
         }
     }
 };

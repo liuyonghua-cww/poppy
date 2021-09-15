@@ -41,7 +41,8 @@ export default {
         setData(e) {
             e.stopPropagation();
             e.preventDefault();
-            this.$emit('setEditorVisible', true);
+            this.$emit('setEditorVisible', true); // 显示编辑框
+            this.$emit('setContextMenuStyle', null); // 隐藏右键菜单
 
         }
     }

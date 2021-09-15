@@ -48,7 +48,7 @@ export default {
             instance.setOption(fn(), {notMerge: true}); // eval将字符串转换为对象
         }
     },
-    beforeDestory() {
+    beforeDestroy() {
         console.log(1);
     }
 }
