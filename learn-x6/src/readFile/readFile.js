@@ -6,3 +6,6 @@ axios.get('echartsOption/line-chart.js').then(res => {
 axios.get('echartsOption/bar-chart.js').then(res => {
     window.barChart = res.data;
 })
+axios.get('echartsOption/pie-chart.js').then(res => {
+    window.pieChart = res.data;
+})

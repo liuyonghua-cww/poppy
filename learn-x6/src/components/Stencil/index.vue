@@ -439,7 +439,7 @@ export default {
 
            this.initChartNodes();
         },
-        // 图表
+        // 创建图表节点
         initChartNodes() {
             const lineChart = this.graph.createNode({
                 name: 'line-chart',
@@ -451,8 +451,9 @@ export default {
                     chartOption: window.lineChart
                 }
             });
+
             const barChart = this.graph.createNode({
-                name: 'line-chart',
+                name: 'bar-chart',
                 shape: "vue-shape",
                 width: 190,
                 height: 150,
@@ -461,6 +462,15 @@ export default {
                     chartOption: window.barChart
                 }
             });
+
+            const pieChart = this.graph.createNode({
+                name: 'pie-chart',
+                shape: 'vue-shape',
+                width: 190,
+                height: 150,
+                component
+            })
+
             this.stencil.load([lineChart, barChart
             ], 'group3');
         },
