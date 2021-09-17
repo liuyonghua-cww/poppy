@@ -468,10 +468,13 @@ export default {
                 shape: 'vue-shape',
                 width: 190,
                 height: 150,
-                component
+                component: 'chart-node',
+                data: {
+                    chartOption: window.pieChart
+                }
             })
 
-            this.stencil.load([lineChart, barChart
+            this.stencil.load([lineChart, barChart, pieChart
             ], 'group3');
         },
         getStencilSize() {
