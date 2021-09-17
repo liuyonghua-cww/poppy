@@ -6,7 +6,7 @@
             title="数据编辑"
             placement="right"
             :closable="false"
-            :visible="editorVisible"
+            v-if="editorVisible"
             @close="handleModal"
             :width="600"
             :maskStyle="{backgroundColor: 'transparent'}"

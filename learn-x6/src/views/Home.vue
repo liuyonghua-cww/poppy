@@ -21,7 +21,7 @@
                 @setEditorVisible="setEditorVisible"
         />
         <monaco-editor
-                :editorVisible="editorVisible"
+                v-if="editorVisible"
                 @setEditorVisible="setEditorVisible"
         />
     </div>
@@ -85,7 +85,6 @@ export default {
                     top: top + 10 + 'px',
                     left: left + 10 + 'px'
                 };
-                console.log(this.contextmenuNode);
             });
             document.addEventListener('click', () => {
                 this.contextmenuStyle = null;
