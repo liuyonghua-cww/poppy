@@ -14,12 +14,15 @@
                 置底
             </a-card-grid>
             <a-card-grid
-                    :class="{'contextmenu-disable': !contextmenuNode.prop('name').includes('chart')}"
+                    :class="{'contextmenu-disable': contextmenuNode.prop('name') && !contextmenuNode.prop('name').includes('chart')}"
                     :hoverable="contextmenuNode.prop('name').includes('chart')"
                     class="grid"
                     @click="setData"
             >
                 数据设置
+            </a-card-grid>
+            <a-card-grid class="grid" @click.prevent.stop="combine">
+                组合
             </a-card-grid>
         </a-card>
     </div>
@@ -37,7 +40,7 @@ export default {
         }
     },
     computed: {
-        ...mapState('app', [ 'contextmenuNode' ])
+        ...mapState('app', [ 'contextmenuNode', 'graph' ])
     },
     data() {
         return {};
@@ -68,6 +71,35 @@ export default {
         setData(e) {
             this.$emit('setEditorVisible', true); // 显示编辑框
             this.$emit('setContextMenuStyle', null); // 隐藏右键菜单
+        },
+
+        // 组合
+        combine() {
+            // 获取选中的节点
+            const cells = this.graph.getSelectedCells();
+            // 节点须大于 1 才能进行组合
+            if (cells.length < 2) {
+                return this;
+            }
+            // 获取节点包围框的大小，动态创建一个与之相同的 node
+            debugger
+            const { width, height, x, y } = document.querySelector('.x6-widget-selection-inner').getBoundingClientRect();
+            // 转成页面本地坐标
+            const rect = this.graph.pageToLocal(x, y, width, height);
+            const parentNode = this.graph.addNode({
+               ...rect,
+                attrs: {
+                   body: {
+                       stroke: 'none',
+                       fill: 'transparent',
+                   }
+                }
+            });
+            // 把选中的子节点添加到其中
+            cells.forEach(cell => {
+                parentNode.addChild(cell);
+                cell.toFront();
+            });
         }
     }
 };
