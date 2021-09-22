@@ -14,8 +14,8 @@
                 置底
             </a-card-grid>
             <a-card-grid
-                    :class="{'contextmenu-disable': contextmenuNode.prop('name') && !contextmenuNode.prop('name').includes('chart')}"
-                    :hoverable="contextmenuNode.prop('name').includes('chart')"
+                    :class="{'contextmenu-disable': !isChartNode(contextmenuNode)}"
+                    :hoverable="isChartNode(contextmenuNode)"
                     class="grid"
                     @click="setData"
             >
@@ -30,6 +30,8 @@
 
 <script>
 import { mapState } from "vuex";
+
+const PADDING = 10;
 
 export default {
     name: "index",
@@ -82,17 +84,17 @@ export default {
                 return this;
             }
             // 获取节点包围框的大小，动态创建一个与之相同的 node
-            debugger
             const { width, height, x, y } = document.querySelector('.x6-widget-selection-inner').getBoundingClientRect();
             // 转成页面本地坐标
-            const rect = this.graph.pageToLocal(x, y, width, height);
+            const rect = this.graph.pageToLocal(x - PADDING, y - PADDING, width + 2 * PADDING, height + 2 * PADDING);
             const parentNode = this.graph.addNode({
-               ...rect,
+                ...rect,
                 attrs: {
-                   body: {
-                       stroke: 'none',
-                       fill: 'transparent',
-                   }
+                    body: {
+                        stroke: 'none',
+                        strokeWidth: 1,
+                        fill: 'transparent',
+                    }
                 }
             });
             // 把选中的子节点添加到其中
@@ -100,6 +102,107 @@ export default {
                 parentNode.addChild(cell);
                 cell.toFront();
             });
+            this.$emit('setContextMenuStyle', null); // 隐藏右键菜单
+            this.onChildSizeAndPos();
+            this.highlightParent();
+        },
+        onChildSizeAndPos() {
+            // 监听子节点位置的改变
+            graph.on('node:change:position', ({ node }) => {
+                this.handleParentSizeAndPos(node);
+            });
+            // 监听子节点大小的改变
+            graph.on('node:change:size', ({ node }) => {
+                this.handleParentSizeAndPos(node);
+            });
+        },
+        /**
+         * 设置父节点
+         * @param node 子节点
+         */
+        handleParentSizeAndPos(node) {
+            //
+            const parent = node.getParent();
+            if (parent && parent.isNode()) {
+                let hasChange = false;
+                let x = 0;
+                let y = 0;
+                let cornerX = 0;
+                let cornerY = 0;
+
+                const children = parent.getChildren();
+                if (children) {
+                    for (let i = 0; i < children.length; i++) {
+                        const child = children[ i ];
+                        const bbox = child.getBBox();
+                        const corner = bbox.getCorner();
+                        if (i === 0) {
+                            x = bbox.x;
+                            y = bbox.y;
+                            cornerX = corner.x;
+                            cornerY = corner.y;
+                            continue;
+                        }
+
+                        if (bbox.x < x) {
+                            x = bbox.x;
+                            hasChange = true;
+                        }
+
+                        if (bbox.y < y) {
+                            y = bbox.y;
+                            hasChange = true;
+                        }
+
+                        if (corner.x > cornerX) {
+                            cornerX = corner.x;
+                            hasChange = true;
+                        }
+
+                        if (corner.y > cornerY) {
+                            cornerY = corner.y;
+                            hasChange = true;
+                        }
+                    }
+                }
+
+                // 设置父节点的位置和大小
+                if (hasChange) {
+                    parent.prop(
+                            {
+                                position: { x: x - PADDING, y: y - PADDING },
+                                size: { width: cornerX - x + 2 * PADDING, height: cornerY - y + 2 * PADDING },
+                            }
+                    );
+                }
+            }
+        },
+
+        highlightParent() {
+            const { graph } = this;
+            // 鼠标按下子节点 高亮显示父节点
+            graph.on('node:mousedown', ({ node }) => {
+                const parent  = node.getParent();
+                if (parent && parent.isNode()) {
+                    parent.attr('body/stroke', '#239edd')
+                }
+            })
+            // 鼠标抬起子节点 取消高亮显示父节点
+            graph.on('node:mouseup', ({ node }) => {
+                const parent  = node.getParent();
+                if (parent && parent.isNode()) {
+                    parent.attr('body/stroke', 'node')
+                }
+            })
+        },
+
+
+        // 是否是图表节点
+        isChartNode(node) {
+            if (node.prop('name')) {
+                return node.prop('name').includes('chart');
+            }
+            return false;
         }
     }
 };
