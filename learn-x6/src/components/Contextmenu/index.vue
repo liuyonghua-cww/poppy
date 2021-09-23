@@ -1,30 +1,49 @@
 <template>
     <div :style="contextmenuStyle" class="contextmenu">
-        <a-card>
-            <a-card-grid class="grid" @click.prevent.stop="up">
-                上移一层
-            </a-card-grid>
-            <a-card-grid class="grid" @click.prevent.stop="down">
-                下移一层
-            </a-card-grid>
-            <a-card-grid class="grid" @click.prevent.stop="toFront">
-                置顶
-            </a-card-grid>
-            <a-card-grid class="grid" @click.prevent.stop="toBack">
-                置底
-            </a-card-grid>
-            <a-card-grid
-                    :class="{'contextmenu-disable': !isChartNode(contextmenuNode)}"
-                    :hoverable="isChartNode(contextmenuNode)"
-                    class="grid"
-                    @click="setData"
-            >
-                数据设置
-            </a-card-grid>
-            <a-card-grid class="grid" @click.prevent.stop="combine">
-                组合
-            </a-card-grid>
-        </a-card>
+        <!--<a-card>-->
+        <!--    <a-card-grid class="grid" @click.prevent.stop="up">-->
+        <!--        上移一层-->
+        <!--    </a-card-grid>-->
+        <!--    <a-card-grid class="grid" @click.prevent.stop="down">-->
+        <!--        下移一层-->
+        <!--    </a-card-grid>-->
+        <!--    <a-card-grid class="grid" @click.prevent.stop="toFront">-->
+        <!--        置顶-->
+        <!--    </a-card-grid>-->
+        <!--    <a-card-grid class="grid" @click.prevent.stop="toBack">-->
+        <!--        置底-->
+        <!--    </a-card-grid>-->
+        <!--    <a-card-grid-->
+        <!--            :class="{'contextmenu-disable': !isChartNode(contextmenuNode)}"-->
+        <!--            :hoverable="isChartNode(contextmenuNode)"-->
+        <!--            class="grid"-->
+        <!--            @click="setData"-->
+        <!--    >-->
+        <!--        数据设置-->
+        <!--    </a-card-grid>-->
+        <!--    <a-card-grid class="grid" @click.prevent.stop="combine">-->
+        <!--        组合-->
+        <!--    </a-card-grid>-->
+        <!--</a-card>-->
+        <ul :style="contextmenuStyle" class="contextmenu">
+            <li class="operate" @click.prevent.stop="up">
+                <span>上移一层</span>
+                <span>Ctrl+Shift+F</span>
+            </li>
+            <li class="operate" @click.prevent.stop="down">
+                <span>下移一层</span>
+                <span>Ctrl+Shift+B</span>
+            </li>
+            <li class="split"></li>
+            <li class="operate" @click.prevent.stop="toFront">
+                <span>置于顶层</span>
+                <span>Ctrl+Shift+F</span>
+            </li>
+            <li class="operate" @click.prevent.stop="toBack">
+                <span>置于底层</span>
+                <span>Ctrl+Shift+F</span>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -212,14 +231,50 @@ export default {
 .contextmenu {
     position: fixed;
     left: -99999px;
-    width: 150px;
-    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.15) !important;
+    width: 250px;
+    list-style: none;
+    padding: 3px;
 
-    .grid {
+    box-shadow: 0 2px 6px 2px rgba(60, 64, 67, .15);
+    border-radius: 4px;
+    background-color: #fff;
+
+    > .operate {
+        height: 30px;
         width: 100%;
-        padding: 8px 8px 8px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 25px;
+        padding-right: 5px;
+        font-size: 14px;
+        color: #000;
         cursor: pointer;
+        transition: all .1s ease-in-out;
+        &:hover {
+            background-color: #eeeeee;
+        }
     }
+    > .split {
+        width: 100%;
+        height: 6px;
+        position: relative;
+        &::after {
+            display: block;
+            content: '';
+            width: 100%;
+            height: 1px;
+            background-color: #cccccc;
+            position: absolute;
+            top: 2px;
+        }
+    }
+    //
+    //.grid {
+    //    width: 100%;
+    //    padding: 8px 8px 8px 20px;
+    //    cursor: pointer;
+    //}
 }
 
 .contextmenu-disable {
