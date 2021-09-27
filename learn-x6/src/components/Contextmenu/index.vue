@@ -28,11 +28,11 @@
         <ul :style="contextmenuStyle" class="contextmenu">
             <li class="operate" @click.prevent.stop="up">
                 <span>上移一层</span>
-                <span>Ctrl+Shift+F</span>
+                <span>Ctrl+F</span>
             </li>
             <li class="operate" @click.prevent.stop="down">
                 <span>下移一层</span>
-                <span>Ctrl+Shift+B</span>
+                <span>Ctrl+B</span>
             </li>
             <li class="split"></li>
             <li class="operate" @click.prevent.stop="toFront">
@@ -42,6 +42,17 @@
             <li class="operate" @click.prevent.stop="toBack">
                 <span>置于底层</span>
                 <span>Ctrl+Shift+F</span>
+            </li>
+            <li class="split"></li>
+            <li class="operate" @click.prevent.stop="cancelCombine"
+                v-if="contextmenuNode.getParent() || contextmenuNode.getChildren()"
+            >
+                <span>取消组合</span>
+                <span>Ctrl+Shift+G</span>
+            </li>
+            <li v-else class="operate" @click.prevent.stop="combine">
+                <span>组合</span>
+                <span>Ctrl+G</span>
             </li>
         </ul>
     </div>
@@ -98,6 +109,24 @@ export default {
         combine() {
             // 获取选中的节点
             const cells = this.graph.getSelectedCells();
+            // 处理选中的节点 如果选中的节点中已经是一个组合 则移出子节点并删掉父节点
+            const parent = [];
+            cells.forEach((cell, index) => {
+                const children = cell.getChildren();
+                if (children) {
+                    parent.push(cell.id);
+                    children.forEach(child => cell.unembed(child));
+                    this.graph.removeCells([cell]);
+                }
+            });
+            // 需要组合的节点中的父节点删除
+            parent.forEach(cellId => {
+                cells.forEach((cell, index) => {
+                    if (cell.id === cellId) {
+                        cells.splice(index, 1);
+                    }
+                })
+            });
             // 节点须大于 1 才能进行组合
             if (cells.length < 2) {
                 return this;
@@ -215,6 +244,24 @@ export default {
             })
         },
 
+        // 取消组合
+        cancelCombine() {
+            let children = [];
+            let parent = null;
+            // 如果右击的是子节点 则先获取到父节点 再获取全部子节点
+            if (this.contextmenuNode.getParent()) {
+                parent = this.contextmenuNode.getParent();
+            }
+            // 如果右击的是父节点
+            if (this.contextmenuNode.getChildren()) {
+                parent = this.contextmenuNode;
+            }
+            children = parent.getChildren();
+            children.forEach(child => parent.unembed(child));
+            this.graph.removeCells([parent]);
+
+            this.$emit('setContextMenuStyle', null); // 隐藏右键菜单
+        },
 
         // 是否是图表节点
         isChartNode(node) {

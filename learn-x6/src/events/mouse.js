@@ -25,6 +25,7 @@ export class Mouse extends BaseEvent {
         this._dotMoveInEdge();
         this._setSelectedEdgeStyle();
         this._showCellEditor();
+        // this._onEdgeConnected();
     }
 
     _showNodePorts() {
@@ -269,6 +270,16 @@ export class Mouse extends BaseEvent {
             });
         });
     }
+
+    // // 监听边连接完成事件
+    // _onEdgeConnected() {
+    //     this.graph.on('edge:connected', ({ isNew, edge }) => {
+    //             const source = edge.getSourceCell()
+    //             const target = edge.getTargetCell();
+    //             edge.setSource(source);
+    //             edge.setTarget(target);
+    //     })
+    // }
 
     showPorts(ports, show) {
         for (let i = 0, len = ports.length; i < len; i = i + 1) {
