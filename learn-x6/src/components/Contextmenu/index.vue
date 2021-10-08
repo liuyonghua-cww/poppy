@@ -1,30 +1,5 @@
 <template>
     <div :style="contextmenuStyle" class="contextmenu">
-        <!--<a-card>-->
-        <!--    <a-card-grid class="grid" @click.prevent.stop="up">-->
-        <!--        上移一层-->
-        <!--    </a-card-grid>-->
-        <!--    <a-card-grid class="grid" @click.prevent.stop="down">-->
-        <!--        下移一层-->
-        <!--    </a-card-grid>-->
-        <!--    <a-card-grid class="grid" @click.prevent.stop="toFront">-->
-        <!--        置顶-->
-        <!--    </a-card-grid>-->
-        <!--    <a-card-grid class="grid" @click.prevent.stop="toBack">-->
-        <!--        置底-->
-        <!--    </a-card-grid>-->
-        <!--    <a-card-grid-->
-        <!--            :class="{'contextmenu-disable': !isChartNode(contextmenuNode)}"-->
-        <!--            :hoverable="isChartNode(contextmenuNode)"-->
-        <!--            class="grid"-->
-        <!--            @click="setData"-->
-        <!--    >-->
-        <!--        数据设置-->
-        <!--    </a-card-grid>-->
-        <!--    <a-card-grid class="grid" @click.prevent.stop="combine">-->
-        <!--        组合-->
-        <!--    </a-card-grid>-->
-        <!--</a-card>-->
         <ul :style="contextmenuStyle" class="contextmenu">
             <li class="operate" @click.prevent.stop="up">
                 <span>上移一层</span>
@@ -44,8 +19,8 @@
                 <span>Ctrl+Shift+F</span>
             </li>
             <li class="split"></li>
-            <li class="operate" @click.prevent.stop="cancelCombine"
-                v-if="contextmenuNode.getParent() || contextmenuNode.getChildren()"
+            <li v-if="contextmenuNode.getParent() || contextmenuNode.getChildren()" class="operate"
+                @click.prevent.stop="cancelCombine"
             >
                 <span>取消组合</span>
                 <span>Ctrl+Shift+G</span>
@@ -54,6 +29,15 @@
                 <span>组合</span>
                 <span>Ctrl+G</span>
             </li>
+            <template v-if="isChartNode(contextmenuNode)">
+                <li class="split"></li>
+                <li class="operate"
+                    @click="setData"
+                >
+                    <span>数据设置</span>
+                    <span></span>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
@@ -116,7 +100,7 @@ export default {
                 if (children) {
                     parent.push(cell.id);
                     children.forEach(child => cell.unembed(child));
-                    this.graph.removeCells([cell]);
+                    this.graph.removeCells([ cell ]);
                 }
             });
             // 需要组合的节点中的父节点删除
@@ -125,7 +109,7 @@ export default {
                     if (cell.id === cellId) {
                         cells.splice(index, 1);
                     }
-                })
+                });
             });
             // 节点须大于 1 才能进行组合
             if (cells.length < 2) {
@@ -230,18 +214,18 @@ export default {
             const { graph } = this;
             // 鼠标按下子节点 高亮显示父节点
             graph.on('node:mousedown', ({ node }) => {
-                const parent  = node.getParent();
+                const parent = node.getParent();
                 if (parent && parent.isNode()) {
-                    parent.attr('body/stroke', '#239edd')
+                    parent.attr('body/stroke', '#239edd');
                 }
-            })
+            });
             // 鼠标抬起子节点 取消高亮显示父节点
             graph.on('node:mouseup', ({ node }) => {
-                const parent  = node.getParent();
+                const parent = node.getParent();
                 if (parent && parent.isNode()) {
-                    parent.attr('body/stroke', 'node')
+                    parent.attr('body/stroke', 'node');
                 }
-            })
+            });
         },
 
         // 取消组合
@@ -258,7 +242,7 @@ export default {
             }
             children = parent.getChildren();
             children.forEach(child => parent.unembed(child));
-            this.graph.removeCells([parent]);
+            this.graph.removeCells([ parent ]);
 
             this.$emit('setContextMenuStyle', null); // 隐藏右键菜单
         },
@@ -298,14 +282,17 @@ export default {
         color: #000;
         cursor: pointer;
         transition: all .1s ease-in-out;
+
         &:hover {
             background-color: #eeeeee;
         }
     }
+
     > .split {
         width: 100%;
         height: 6px;
         position: relative;
+
         &::after {
             display: block;
             content: '';
@@ -316,6 +303,7 @@ export default {
             top: 2px;
         }
     }
+
     //
     //.grid {
     //    width: 100%;
