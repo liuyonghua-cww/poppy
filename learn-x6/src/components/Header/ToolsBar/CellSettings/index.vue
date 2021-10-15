@@ -40,7 +40,7 @@
         </div>
         <a-divider type="vertical" />
         <!--字体粗细-->
-        <div class="font-item m4 ml0">
+        <div class="btn-item m4 ml0">
             <a-button
                     :class="{'selectedBGC': attr.fontWeight === 'bold' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
                     :disabled="configType === CONFIG_TYPE.GRID"
@@ -50,7 +50,7 @@
             </a-button>
         </div>
         <!--斜体-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-button
                     :class="{'selectedBGC': attr.fontStyle === 'italic' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
                     :disabled="configType === CONFIG_TYPE.GRID"
@@ -60,7 +60,7 @@
             </a-button>
         </div>
         <!--下划线-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-button
                     :class="{'selectedBGC': attr.textDecoration === 'underline' && (configType === CONFIG_TYPE.NODE || configType === CONFIG_TYPE.EDGE)}"
                     :disabled="configType === CONFIG_TYPE.GRID"
@@ -70,7 +70,7 @@
             </a-button>
         </div>
         <!--字体颜色-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <sketch
@@ -95,7 +95,7 @@
             </a-button>
         </div>
         <!--字体对齐方式-->
-        <div class="font-item m4 mr0">
+        <div class="btn-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <div style="padding: 0 5px">
@@ -125,7 +125,7 @@
         </div>
         <a-divider type="vertical" />
         <!--填充颜色-->
-        <div class="font-item m4 ml0">
+        <div class="btn-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <fill-color
@@ -150,7 +150,7 @@
             </a-button>
         </div>
         <!--线条颜色-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <sketch
@@ -174,7 +174,7 @@
             </a-button>
         </div>
         <!--线宽-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <ul class="stroke-width-select">
@@ -204,7 +204,7 @@
             </a-button>
         </div>
         <!--线条样式-->
-        <div class="font-item m4 mr0">
+        <div class="btn-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType !== CONFIG_TYPE.GRID">
                 <template slot="content">
                     <ul class="stroke-dasharray-select">
@@ -234,7 +234,7 @@
         </div>
         <a-divider type="vertical" />
         <!--连线类型-->
-        <div class="font-item m4 ml0">
+        <div class="btn-item m4 ml0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <ul class="connector">
@@ -262,7 +262,7 @@
             </a-button>
         </div>
         <!--起点箭头-->
-        <div class="font-item m4">
+        <div class="btn-item m4">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <marker-settings
@@ -286,7 +286,7 @@
         </div>
 
         <!--终点箭头-->
-        <div class="font-item m4 mr0">
+        <div class="btn-item m4 mr0">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.EDGE">
                 <template slot="content">
                     <marker-settings
@@ -311,7 +311,7 @@
 
         <a-divider type="vertical" />
         <!--阴影-->
-        <div class="font-item">
+        <div class="btn-item">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <drop-shadow />
@@ -332,7 +332,7 @@
         </div>
         <a-divider type="vertical" />
         <!--位置、宽高-->
-        <div class="font-item">
+        <div class="btn-item">
             <a-popover placement="bottom" arrow-point-at-center trigger="click" v-if="configType === CONFIG_TYPE.NODE">
                 <template slot="content">
                     <properties />
@@ -351,6 +351,8 @@
                 <i class="iconfont icon-jihe"></i>
             </a-button>
         </div>
+        <a-divider type="vertical" />
+        <drawn />
     </div>
 </template>
 
@@ -383,7 +385,7 @@ export default nodeAttr;
 
     }
 
-    > .font-item {
+    > .btn-item {
         > .ant-btn {
             width: 32px;
             height: 32px;

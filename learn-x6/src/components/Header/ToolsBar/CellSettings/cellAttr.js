@@ -8,6 +8,7 @@ import FillColor from './FillColor'
 import MarkerSettings from './MarkerSettings';
 import DropShadow from './DropShadow';
 import Properties from './Properties'
+import Drawn from './Drawn'
 
 export default {
     name: "index",
@@ -17,7 +18,8 @@ export default {
         CellTheme,
         FillColor,
         DropShadow,
-        Properties
+        Properties,
+        Drawn
     },
     computed: {
         ...mapState('app', [
