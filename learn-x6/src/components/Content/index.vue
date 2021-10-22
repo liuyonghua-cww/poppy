@@ -15,8 +15,8 @@ export default {
             graph: null,
             graphOption: {
                 grid: {
-                    size: 10, // 网格大小10px
-                    visible: true,
+                    size: 1, // 网格大小10px
+                    visible: false,
                     type: 'doubleMesh',
                     args: [
                         {
