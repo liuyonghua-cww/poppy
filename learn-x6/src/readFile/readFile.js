@@ -8,4 +8,7 @@ axios.get('echartsOption/bar-chart.js').then(res => {
 })
 axios.get('echartsOption/pie-chart.js').then(res => {
     window.pieChart = res.data;
+});
+axios.get('echartsOption/liquid-fill.js').then(res => {
+    window.liquidFill = res.data;
 })

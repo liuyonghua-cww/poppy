@@ -472,10 +472,19 @@ export default {
                 data: {
                     chartOption: window.pieChart
                 }
+            });
+            const liquidFill = this.graph.createNode({
+                name: 'liquid-fill-chart',
+                shape: 'vue-shape',
+                width: 190,
+                height: 150,
+                component: 'chart-node',
+                data: {
+                    chartOption: window.liquidFill
+                }
             })
 
-            this.stencil.load([lineChart, barChart, pieChart
-            ], 'group3');
+            this.stencil.load([lineChart, barChart, pieChart, liquidFill ], 'group3');
         },
         getStencilSize() {
             const {

@@ -21,7 +21,7 @@
                 @setEditorVisible="setEditorVisible"
         />
         <monaco-editor
-                v-if="editorVisible"
+                :editor-visible="editorVisible"
                 @setEditorVisible="setEditorVisible"
         />
     </div>

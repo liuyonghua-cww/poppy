@@ -1,4 +1,4 @@
-lineChart = {
+option = {
     color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
     tooltip: {
         trigger: 'axis',
@@ -82,3 +82,5 @@ lineChart = {
         }
     ]
 }
+
+return option;

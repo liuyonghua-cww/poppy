@@ -2,19 +2,21 @@
     <!--<a-modal :visible="editorVisible" title="数据编辑" @cancel="handleModal" :footer="null">-->
     <!--    <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>-->
     <!--</a-modal>-->
-    <a-drawer
-            title="数据编辑"
-            placement="right"
-            :closable="false"
-            v-if="editorVisible"
-            @close="handleModal"
-            :width="600"
-            :maskStyle="{backgroundColor: 'transparent'}"
-            :headerStyle="{height: '5%'}"
-            :bodyStyle="{height: '94%'}"
-    >
-        <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>
-    </a-drawer>
+
+        <a-drawer
+                title="数据编辑"
+                placement="right"
+                :closable="false"
+                @close="handleModal"
+                :width="600"
+                :maskStyle="{backgroundColor: 'transparent'}"
+                :headerStyle="{height: '5%'}"
+                :bodyStyle="{height: '94%'}"
+                :visible="editorVisible"
+        >
+            <Editor v-model="code" class="editor" language="JavaScript" @change="dataChange"/>
+        </a-drawer>
+
 </template>
 
 <script>
@@ -45,7 +47,7 @@ export default {
     },
     data() {
         return {
-            code: '{ colkey: "col", colsinfo: "NameList" }'
+            code: ''
         };
     },
     mounted() {

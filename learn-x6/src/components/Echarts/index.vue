@@ -6,6 +6,7 @@
 
 <script>
 import * as echarts from 'echarts';
+import 'echarts-liquidfill'
 window.echarts = echarts;
 import {SVGRenderer, CanvasRenderer} from 'echarts/renderers';
 
@@ -44,7 +45,7 @@ export default {
          */
         setOption(instance) {
             this.chartOption = this.node.getData().chartOption; // 获取配置
-            const fn = new Function('return ' + this.chartOption);
+            const fn = new Function(this.chartOption);
             instance.setOption(fn(), {notMerge: true}); // eval将字符串转换为对象
         }
     },

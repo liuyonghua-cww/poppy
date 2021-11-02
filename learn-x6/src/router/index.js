@@ -38,7 +38,7 @@ const router = new VueRouter({
 // 路由拦截
 router.beforeEach((to, from, next) => {
     window.scrollTo(0, 0);
-    if (JSON.parse(sessionStorage.isLogined)) {
+    if (sessionStorage.isLogined && JSON.parse(sessionStorage.isLogined)) {
         // 已经登录
         next();
     } else {
