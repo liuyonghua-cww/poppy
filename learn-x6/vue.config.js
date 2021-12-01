@@ -5,6 +5,7 @@ const {resolveCss} = require('./src/utils/theme-color-replacer-extend')
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
 
 module.exports = {
+    publicPath: './',
     runtimeCompiler: true,
     pluginOptions: {
         'style-resources-loader': {
