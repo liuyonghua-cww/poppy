@@ -8,6 +8,7 @@ import Antd from 'ant-design-vue';
 import './assets/styles/reset.less'
 import './assets/styles/animation.less'
 import '@/readFile/readFile'
+import '@/font/Source Han Sans CN/font.css'
 
 Vue.use(Antd);
 Vue.config.productionTip = false
