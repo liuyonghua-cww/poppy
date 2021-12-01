@@ -99,7 +99,7 @@ export default {
                 this.cancelDrawn();
             });
             document.addEventListener("keydown", (e) => {
-                if (e.keyCode === 27) {
+                if (e.code === 'Escape') {
                     console.log('esc click');
                     this.graph.container.style.cursor = "grab";
                     this.cancelDrawn();

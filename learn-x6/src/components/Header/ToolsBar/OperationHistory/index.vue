@@ -8,6 +8,10 @@
                class="iconfont icon-redo"
                @click="redo"
        ></i>
+        <i
+                class="iconfont icon-clear"
+                @click="clear"
+        ></i>
     </div>
 </template>
 
@@ -27,6 +31,9 @@ export default {
         },
         redo() {
             this.graph.history.redo();
+        },
+        clear() {
+            this.graph.clearCells();
         }
     }
 };
@@ -34,13 +41,13 @@ export default {
 
 <style scoped lang="less">
 .operation-history {
+    flex-shrink: 0;
     > i {
         font-size: 20px;
         cursor: pointer;
         display: inline-block;
-        &:first-child {
-            margin-left: 0;
-            margin-right: 16px;
+        &:nth-child(2) {
+            margin: 0 16px;
         }
     }
 }

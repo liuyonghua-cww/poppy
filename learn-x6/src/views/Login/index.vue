@@ -111,8 +111,8 @@ export default {
     methods: {
         login() {
             if (this.username === 'admin' && this.password === 'admin') {
-                this.$router.push({path: '/index'});
                 sessionStorage.isLogined = JSON.stringify(true);
+                this.$router.push({path: '/index'});
             } else {
                 this.$message.error('用户名或密码错误！')
             }
