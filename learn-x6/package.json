@@ -17,6 +17,7 @@
     "echarts": "^5.2.1",
     "monaco-editor-webpack-plugin": "^1.9.1",
     "normalize.css": "^8.0.1",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.14",
     "vue-color": "^2.8.1",
     "vue-drag-resize": "^1.5.4",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-pwa": "^4.5.15",
     "@vue/cli-plugin-router": "~4.5.13",
     "@vue/cli-plugin-vuex": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
