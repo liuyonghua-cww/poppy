@@ -20,6 +20,7 @@ export class Mouse extends BaseEvent {
         this._showNodePorts();
         this._hiddenNodePorts();
         this._addArrowMoveTool();
+        this._addEdgeSegments();
         this._removeEdgeTools();
         this._triggerDotMove();
         this._dotMoveInEdge();
@@ -111,18 +112,28 @@ export class Mouse extends BaseEvent {
                             r: 5
                         },
                     },
-                },
-                // {
-                //     name: 'segments',
-                //     args: {
-                //         snapRadius: 20,
-                //         attrs: {
-                //             fill: '#444',
-                //         },
-                //         precision: 1000000000000000000
-                //     },
-                // }
+                }
             ]);
+        });
+    }
+
+    // 线段工具
+    _addEdgeSegments() {
+        this.graph.on('edge:mouseenter', ({ edge }) => {
+            if (this.isEdit) {
+                return;
+            }
+            edge.addTools(
+                {
+                    name: 'segments',
+                    args: {
+                        snapRadius: 20,
+                        attrs: {
+                            fill: '#444',
+                        },
+                    },
+                }
+            );
         });
     }
 
