@@ -46,11 +46,11 @@ export default {
         setOption(instance) {
             this.chartOption = this.node.getData().chartOption; // 获取配置
             const fn = new Function(this.chartOption);
-            instance.setOption(fn(), {notMerge: true}); // eval将字符串转换为对象
+            instance.setOption(fn(), {notMerge: true});
         }
     },
     beforeDestroy() {
-        console.log(1);
+
     }
 }
 </script>

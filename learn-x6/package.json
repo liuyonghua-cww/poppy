@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
+    "@antv/layout": "^0.1.22",
     "@antv/x6": "^1.28.1",
     "@antv/x6-vue-shape": "^1.2.10",
     "ant-design-vue": "^1.7.8",

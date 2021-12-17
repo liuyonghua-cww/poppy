@@ -85,7 +85,7 @@ export default {
                         columnWidth: 190,
                         rowHeight: 150,
                         dx: 5
-                    },
+                    }
                 },
             ]
         },
